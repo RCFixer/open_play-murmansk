@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block news %}
+    {% for news in news_list %}
+        <div>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="eBlock0">
+             <tbody>
+                <tr>
+                   <td style="padding:3px;">
+                      <div class="cDate" style="float:right;font:7pt;"><span title="12:55">{{ news.created_at }}</span></div>
+                      <div class="eTitle" style="text-align:left;">{{ news.title }}</div>
+                      <div class="eMessage" style="clear:both;padding-top:7px;padding-bottom:2px;">
+                         <img src="{{ news.image }}" border="none" width="200" style="margin: 0px 7px 5px 0px" align="left" <="" a="">
+                          {{ news.content }}
+                      </div>
+                      <div class="eDetails" style="clear:both;">
+                         <a class="userblack" href="20110828124907/http://games.compulenta.ru/630665/">{{ news.source }}</a>
+                         | <a href="20110828124907/http://play-murmansk.ru/news/2011-08-26-1774#comments">Оставляем комментарии</a>
+                      </div>
+                   </td>
+                </tr>
+             </tbody>
+            </table>
+            <br>
+            </div>
+    {% endfor %}
+{% endblock %}
