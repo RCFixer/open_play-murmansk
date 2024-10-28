@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Продам Куплю Обменяю - PLAYSTATION и XBOX в Мурманске{% endblock %}
+
+{% block content %}
+<td valign="top" style="padding:0px 10px 0px 10px;"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td width="80%"><a class="m" href="https://web.archive.org/web/20100907080651/http://play-murmansk.ru/">Главная</a> » Доска объявлений (<b>119</b>)</td>
+<td align="right" style="white-space: nowrap;"></td>
+</tr>
+</tbody></table>
+<hr>
+    <table border="0" cellspacing="1" cellpadding="0" width="100%" class="catsTable">
+   <tbody>
+   {% for category_ad in ad_category_list %}
+      <tr>
+         <td style="width:100%" class="catsTd" id="cid1" valign="top"><a href="https://web.archive.org/web/20100907080651/http://play-murmansk.ru/board/1" class="catName">{{ category_ad.1 }}</a> <span class="catNumData" style="unicode-bidi:embed;">[59]</span></td>
+      </tr>
+   {% endfor %}
+   </tbody>
+</table>
+<hr>
+<span class="pagesBlockuz1"><b class="swchItemA"><span>1</span></b> <a class="swchItem" href="javascript://" rel="nofollow" onclick="spages('2');return false;"><span>2</span></a> <a class="swchItem" href="javascript://" rel="nofollow" onclick="spages('3');return false;"><span>3</span></a>  <a class="swchItem" href="javascript://" rel="nofollow" onclick="spages('2');return false;"><span>»</span></a></span>
+<hr>
+<div id="myGrid" style="display:none;"><div style="position:fixed;width:100%;text-align:center;padding-top:250px;"><img alt="" src="https://web.archive.org/web/20100907080651im_/http://s28.ucoz.net/img/ma/m/i3.gif" border="0" width="220" height="19"></div></div>
+    <script type="text/javascript">function spages(p){if (1){document.location.href='https://web.archive.org/web/20100907080651/http://play-murmansk.ru/board/0-'+p; return;}try{document.getElementById('myGrid').style.cssText = 'position:absolute; z-index:8; top:0;left:0; display:normal; background: url(\'http://s28.ucoz.net/img/fr/g.gif\'); text-align:center; width:'+document.body.scrollWidth+'px; height:'+document.body.scrollHeight+'px;';}catch(e){}_uPostForm('',{url:'https://web.archive.org/web/20100907080651/http://play-murmansk.ru/board/0-'+p+'-'+Math.floor(Math.random()*1e8) });}</script>
+    <div id="allEntries">
+        {% for ads in ad_list %}
+        <div><table border="0" cellpadding="0" cellspacing="0" width="100%" class="eBlock"><tbody><tr><td style="padding:3px;">
+
+        <div class="eTitle" style="text-align:left;"><a href="https://web.archive.org/web/20100907080651/http://play-murmansk.ru/board/1-1-0-1327">{{ ads.title }}</a></div>
+        <div class="eMessage" style="text-align:left;clear:both;padding-top:2px;padding-bottom:2px;">
+
+        <a href="https://web.archive.org/web/20100907080651/http://img.game.co.uk/ml/3/4/8/6/348626ps.gif"><img src="https://web.archive.org/web/20100907080651im_/http://img.game.co.uk/ml/3/4/8/6/348626ps.gif" border="none" width="150" style="margin: 2px 7px 5px 0px" align="left"></a>
+
+        {{ ads.content }}
+        <br>
+
+        </div> <div class="eDetails" style="clear:both;">
+        <a href="https://web.archive.org/web/20100907080651/http://play-murmansk.ru/board/1">{{ ads.category }}</a> |
+        Просмотров: {{ ads.views }} |
+        Дата: {{ ads.created_at }}
+
+        | <a href="https://web.archive.org/web/20100907080651/http://play-murmansk.ru/board/1-1-0-1327#comments">Комментарии (1)</a> | Чтобы связаться с автором объявления, просмотрите его, нажав на заголовок.
+        </div></td></tr></tbody></table><br></div>
+    {% endfor %}
+    </div>
+    <hr>
+<span class="pagesBlockuz1"><b class="swchItemA"><span>1</span></b> <a class="swchItem" href="javascript://" rel="nofollow" onclick="spages('2');return false;"><span>2</span></a> <a class="swchItem" href="javascript://" rel="nofollow" onclick="spages('3');return false;"><span>3</span></a>  <a class="swchItem" href="javascript://" rel="nofollow" onclick="spages('2');return false;"><span>»</span></a></span>
+<hr>
+</td>
+{% endblock %}

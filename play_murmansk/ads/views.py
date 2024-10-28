@@ -1,10 +1,14 @@
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Ad, AdComment
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
+from .models import Ad, AdComment, AdCategory
 
-class AdListView(ListView):
-    model = Ad
+class AdListView(TemplateView):
     template_name = 'ads/ad_list.html'
-    context_object_name = 'ad_list'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['ad_list'] = Ad.objects.all()
+        context['ad_category_list'] = AdCategory.choices
+        return context
 
 class AdDetailView(DetailView):
     model = Ad
