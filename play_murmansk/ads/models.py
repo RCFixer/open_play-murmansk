@@ -1,14 +1,13 @@
 from django.db import models
 from django.conf import settings
 
-from core.models import BaseComment
 
 class AdCategory(models.TextChoices):
-    SELL = 'sell', 'Продам'
-    BUY = 'buy', 'Куплю'
-    EXCHANGE = 'exchange', 'Обменяю'
-    VARIOUS = 'various', 'Разное'
-    SERVICES = 'services', 'Услуги'
+    SELL = 'ПРОДАМ'
+    BUY = 'КУПЛЮ'
+    EXCHANGE = 'ОБМЕНЯЮ'
+    VARIOUS = 'РАЗНОЕ'
+    SERVICES = 'УСЛУГИ'
 
 class Ad(models.Model):
     title = models.CharField(max_length=255)
@@ -21,9 +20,3 @@ class Ad(models.Model):
 
     def __str__(self):
         return self.title
-
-class AdComment(BaseComment):
-    ad = models.ForeignKey(Ad, on_delete=models.CASCADE, related_name='comments')
-
-    def __str__(self):
-        return f"Comment by {self.author.username} on {self.ad.title}"

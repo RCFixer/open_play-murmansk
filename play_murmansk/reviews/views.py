@@ -1,5 +1,5 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Review, ReviewComment
+from .models import Review
 
 class ReviewListView(ListView):
     model = Review
@@ -28,24 +28,4 @@ class ReviewUpdateView(UpdateView):
 class ReviewDeleteView(DeleteView):
     model = Review
     template_name = 'reviews/review_confirm_delete.html'
-    success_url = '/reviews/'
-
-class ReviewCommentCreateView(CreateView):
-    model = ReviewComment
-    fields = ['content']
-    template_name = 'reviews/review_comment_form.html'
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        form.instance.review_id = self.kwargs['pk']
-        return super().form_valid(form)
-
-class ReviewCommentUpdateView(UpdateView):
-    model = ReviewComment
-    fields = ['content']
-    template_name = 'reviews/review_comment_form.html'
-
-class ReviewCommentDeleteView(DeleteView):
-    model = ReviewComment
-    template_name = 'reviews/review_comment_confirm_delete.html'
     success_url = '/reviews/'

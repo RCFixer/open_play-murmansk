@@ -1,5 +1,5 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-from .models import Ad, AdComment, AdCategory
+from .models import Ad, AdCategory
 
 class AdListView(TemplateView):
     template_name = 'ads/ad_list.html'
@@ -32,24 +32,4 @@ class AdUpdateView(UpdateView):
 class AdDeleteView(DeleteView):
     model = Ad
     template_name = 'ads/ad_confirm_delete.html'
-    success_url = '/ads/'
-
-class AdCommentCreateView(CreateView):
-    model = AdComment
-    fields = ['content']
-    template_name = 'ads/ad_comment_form.html'
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        form.instance.ad_id = self.kwargs['pk']
-        return super().form_valid(form)
-
-class AdCommentUpdateView(UpdateView):
-    model = AdComment
-    fields = ['content']
-    template_name = 'ads/ad_comment_form.html'
-
-class AdCommentDeleteView(DeleteView):
-    model = AdComment
-    template_name = 'ads/ad_comment_confirm_delete.html'
     success_url = '/ads/'
