@@ -7,11 +7,12 @@ django.setup()
 
 from django.contrib.auth.models import Group, Permission
 from django.contrib.auth import get_user_model
-from ads.models import Ad, AdComment, AdCategory
+from ads.models import Ad, AdCategory
 from core.models import OnlineUser, Guest
 from forum.models import ForumSection, ForumSubsection, ForumTopic, ForumMessage
-from news.models import News, NewsComment
-from reviews.models import Review, ReviewComment
+from news.models import News
+from reviews.models import Review
+from core.models import CommonComment
 
 User = get_user_model()
 
@@ -42,12 +43,6 @@ ad3 = Ad.objects.create(
     image='ads/xboxs.jpg',
     category=AdCategory.SELL,
     author=user1
-)
-
-AdComment.objects.create(
-    ad=ad1,
-    author=user2,
-    content='Сколько стоит?'
 )
 
 # Создаем объекты для модуля core
@@ -85,12 +80,6 @@ news3 = News.objects.create(
     author=user1
 )
 
-NewsComment.objects.create(
-    news=news1,
-    author=user2,
-    content='Комментарий к новости 1'
-)
-
 # Создаем объекты для модуля reviews
 review1 = Review.objects.create(
     title='Обзор 1',
@@ -113,10 +102,15 @@ review3 = Review.objects.create(
     author=user1
 )
 
-ReviewComment.objects.create(
-    review=review1,
-    author=user2,
-    content='Комментарий к обзору 1'
-)
+
+comment_ads_1 = CommonComment.objects.create(content_object=ad1, author=user2, content="Сколько стоит плойка?")
+comment_ads_2 = CommonComment.objects.create(content_object=ad2, author=user2, content="Сколько стоит бокс?")
+comment_ads_3 = CommonComment.objects.create(content_object=ad3, author=user2, content="Азаза, кому нужен этот обрубок?")
+comment_news_1 = CommonComment.objects.create(content_object=news1, author=user2, content="Вот это новости!")
+comment_news_2 = CommonComment.objects.create(content_object=news2, author=user2, content="Сони уже не те!")
+comment_news_3 = CommonComment.objects.create(content_object=news3, author=user2, content="Майкрософт уже не те!")
+comment_review_1 = CommonComment.objects.create(content_object=review1, author=user2, content='Классный обзор!')
+comment_review_2 = CommonComment.objects.create(content_object=review2, author=user2, content='Не согласен, игра крутая!')
+comment_review_3 = CommonComment.objects.create(content_object=review3, author=user2, content='Супер, прочёл на одном дыхании!')
 
 print("База данных успешно наполнена тестовыми данными.")
