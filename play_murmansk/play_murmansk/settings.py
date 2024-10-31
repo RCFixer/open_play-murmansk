@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'forum',
     'core',
     'django_summernote',
+    'django_prose_editor',
 ]
 
 MIDDLEWARE = [
