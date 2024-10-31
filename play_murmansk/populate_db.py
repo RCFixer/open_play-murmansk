@@ -83,21 +83,24 @@ news3 = News.objects.create(
 # Создаем объекты для модуля reviews
 review1 = Review.objects.create(
     title='Обзор 1',
-    content='Содержание обзора 1',
+    short_content='Содержание обзора 1',
+    content='Большое содержание обзора 1',
     image='reviews/review1.jpg',
     author=user1
 )
 
 review2 = Review.objects.create(
     title='Обзор 2',
-    content='Содержание обзора 2',
+    short_content='Содержание обзора 2',
+    content='Большое содержание обзора 2',
     image='reviews/review1.jpg',
     author=user1
 )
 
 review3 = Review.objects.create(
     title='Обзор 3',
-    content='Содержание обзора 3',
+    short_content='Содержание обзора 3',
+    content='Большое содержание обзора 3',
     image='reviews/review1.jpg',
     author=user1
 )
