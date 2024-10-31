@@ -2,7 +2,7 @@ from django.views.generic import TemplateView
 from django.utils import timezone
 from django.db.models import Count
 from news.models import News, NewsComment
-from ads.models import Ad
+from board.models import Ad
 from reviews.models import Review
 from forum.models import ForumTopic, ForumMessage
 from .models import OnlineUser, Guest
@@ -29,7 +29,7 @@ class HomeView(TemplateView):
             ReviewComment.objects.all()
         ).order_by('-created_at')[:20]
 
-        # Latest 10 ads
+        # Latest 10 board
         context['latest_ads'] = Ad.objects.order_by('-created_at')[:10]
 
         # Latest 7 reviews

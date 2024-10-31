@@ -1,7 +1,7 @@
 from core.models import CommonComment
 from forum.models import ForumTopic
 from reviews.models import Review
-from ads.models import Ad
+from board.models import Ad
 
 def latest_comments(request):
     latest_comments_list = CommonComment.objects.order_by('-id')[:10]

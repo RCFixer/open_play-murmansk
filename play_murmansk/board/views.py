@@ -2,7 +2,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Ad, AdCategory
 
 class AdListView(TemplateView):
-    template_name = 'ads/ad_list.html'
+    template_name = 'board/ad_list.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -12,13 +12,13 @@ class AdListView(TemplateView):
 
 class AdDetailView(DetailView):
     model = Ad
-    template_name = 'ads/ad_detail.html'
+    template_name = 'board/ad_detail.html'
     context_object_name = 'ad'
 
 class AdCreateView(CreateView):
     model = Ad
     fields = ['title', 'content', 'image', 'category']
-    template_name = 'ads/ad_form.html'
+    template_name = 'board/ad_form.html'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -27,9 +27,9 @@ class AdCreateView(CreateView):
 class AdUpdateView(UpdateView):
     model = Ad
     fields = ['title', 'content', 'image', 'category']
-    template_name = 'ads/ad_form.html'
+    template_name = 'board/ad_form.html'
 
 class AdDeleteView(DeleteView):
     model = Ad
-    template_name = 'ads/ad_confirm_delete.html'
-    success_url = '/ads/'
+    template_name = 'board/ad_confirm_delete.html'
+    success_url = '/board/'

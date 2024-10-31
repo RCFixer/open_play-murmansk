@@ -22,5 +22,5 @@ from news.views import NewsListView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', NewsListView.as_view(), name='index'),
-    path('board/', include('ads.urls')),
+    path('board/', include('board.urls')),
 ]

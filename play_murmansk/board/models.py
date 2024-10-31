@@ -12,7 +12,7 @@ class AdCategory(models.TextChoices):
 class Ad(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
-    image = models.ImageField(upload_to='ads/')
+    image = models.ImageField(upload_to='board/')
     category = models.CharField(max_length=10, choices=AdCategory.choices)
     views = models.PositiveIntegerField(default=0)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

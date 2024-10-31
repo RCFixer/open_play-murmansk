@@ -7,7 +7,7 @@ django.setup()
 
 from django.contrib.auth.models import Group, Permission
 from django.contrib.auth import get_user_model
-from ads.models import Ad, AdCategory
+from board.models import Ad, AdCategory
 from core.models import OnlineUser, Guest
 from forum.models import ForumSection, ForumSubsection, ForumTopic, ForumMessage
 from news.models import News
@@ -20,11 +20,11 @@ User = get_user_model()
 user1 = User.objects.create_user(username='user1', password='password1', email='user1@example.com')
 user2 = User.objects.create_user(username='user2', password='password2', email='user2@example.com')
 
-# Создаем объекты для модуля ads
+# Создаем объекты для модуля board
 ad1 = Ad.objects.create(
     title='Продам PS5',
     content='Продам PS5 в отличном состоянии.',
-    image='ads/ps5.jpg',
+    image='board/ps5.jpg',
     category=AdCategory.SELL,
     author=user1
 )
@@ -32,7 +32,7 @@ ad1 = Ad.objects.create(
 ad2 = Ad.objects.create(
     title='Продам Xbox Series X',
     content='Продам Xbox в отличном состоянии.',
-    image='ads/xbox.jpg',
+    image='board/xbox.jpg',
     category=AdCategory.SELL,
     author=user1
 )
@@ -40,7 +40,7 @@ ad2 = Ad.objects.create(
 ad3 = Ad.objects.create(
     title='Продам Xbox Series S',
     content='Продам Xbox S в отличном состоянии.',
-    image='ads/xboxs.jpg',
+    image='board/xboxs.jpg',
     category=AdCategory.SELL,
     author=user1
 )
