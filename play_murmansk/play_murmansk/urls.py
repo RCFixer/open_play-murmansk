@@ -27,6 +27,7 @@ urlpatterns = [
     path('', NewsListView.as_view(), name='index'),
     path('board/', include('board.urls')),
     path('blog/', include('reviews.urls')),
+    path('news/', include('news.urls')),
 ]
 
 if settings.DEBUG:
