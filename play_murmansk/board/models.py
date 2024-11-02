@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django_prose_editor.sanitized import SanitizedProseEditorField
 
 
 class AdCategory(models.TextChoices):
@@ -11,7 +12,10 @@ class AdCategory(models.TextChoices):
 
 class Ad(models.Model):
     title = models.CharField(max_length=255)
-    content = models.TextField()
+    content = SanitizedProseEditorField(config = {"types": ["strong", "em", "sub", "sup", "link", "underline",
+                                                            "strikethrough"],
+                                                  "history": True,
+                                                  "typographic": True,})
     image = models.ImageField(upload_to='board/')
     category = models.CharField(max_length=10, choices=AdCategory.choices)
     views = models.PositiveIntegerField(default=0)

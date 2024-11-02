@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django_prose_editor.sanitized import SanitizedProseEditorField
 
 class ForumSection(models.Model):
     title = models.CharField(max_length=255)
@@ -28,7 +29,10 @@ class ForumTopic(models.Model):
 class ForumMessage(models.Model):
     topic = models.ForeignKey(ForumTopic, on_delete=models.CASCADE, related_name='messages')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    content = models.TextField()
+    content = SanitizedProseEditorField(config = {"types": ["strong", "em", "sub", "sup", "link", "underline",
+                                                            "strikethrough"],
+                                                  "history": True,
+                                                  "typographic": True,})
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
