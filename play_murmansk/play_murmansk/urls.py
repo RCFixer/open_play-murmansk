@@ -28,6 +28,7 @@ urlpatterns = [
     path('board/', include('board.urls')),
     path('blog/', include('reviews.urls')),
     path('news/', include('news.urls')),
+    path('forum/', include('forum.urls')),
 ]
 
 if settings.DEBUG:
