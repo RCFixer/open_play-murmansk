@@ -1,5 +1,6 @@
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from .models import News
+from core.views import get_comments_for_object
 
 class NewsListView(ListView):
     model = News
@@ -10,6 +11,15 @@ class NewsDetailView(DetailView):
     model = News
     template_name = 'news/news_detail.html'
     context_object_name = 'news'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        news_item = self.object
+
+        comments = get_comments_for_object(News, news_item.id)
+        context['comments'] = comments
+
+        return context
 
 class NewsCreateView(CreateView):
     model = News

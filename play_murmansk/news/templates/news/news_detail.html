@@ -27,20 +27,26 @@
 
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <tbody><tr><td width="60%" height="25">Всего комментариев: <b>8</b></td><td align="right" height="25"></td></tr>
-    <tr><td colspan="2"><script type="text/javascript">function ban_item(id){if (confirm('Вы действительно хотите активировать данный материал?')){var img=document.getElementById('bi'+id);img.src='https://web.archive.org/web/20100907171046/http://s28.ucoz.net/img/fr/EmnAjax.gif';_uPostForm('',{url:'https://web.archive.org/web/20100907171046/http://play-murmansk.ru/index/86-'+id+'-1'});}}function del_item(id){if (confirm('Вы подтверждаете удаление?')){var img=document.getElementById('di'+id);img.src='https://web.archive.org/web/20100907171046/http://s28.ucoz.net/img/fr/EmnAjax.gif';_uPostForm('',{url:'https://web.archive.org/web/20100907171046/http://play-murmansk.ru/index/38-'+id});}}</script><div id="myGrid" style="display:none;"><div style="position:fixed;width:100%;text-align:center;padding-top:250px;"><img alt="" src="https://web.archive.org/web/20100907171046im_/http://s28.ucoz.net/img/ma/m/i3.gif" style="border:0;width:220px;height:19px;"></div></div><script type="text/javascript">function spages(p){if (1){document.location.href='/news/2010-9-4-1377-0-'+p; return;}try{document.getElementById('myGrid').style.cssText = 'position:absolute; z-index:8; top:0;left:0; display:normal; background: url(\'http://s28.ucoz.net/img/fr/g.gif\'); text-align:center; width:'+document.body.scrollWidth+'px; height:'+document.body.scrollHeight+'px;';}catch(e){}_uPostForm('',{url:'/news/2010-9-4-1377-987-'+p+'-'+Math.floor(Math.random()*1e8)});}</script><a name="comments"></a><div id="newEntryT"></div><div id="allEntries"><div id="comEnt7480"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="cBlock1"><tbody><tr><td style="padding:3px;">
-    <div class="cDate" style="float:right;font:7pt;"><span title="11:40">04-09-2010</span> </div>
+
+    <tr><td colspan="2"><a name="comments"></a><div id="newEntryT"></div>
+        <div id="allEntries">
+
+            {% for comment in comments %}
+            <div id="comEnt{{ comment.id }}"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="cBlock1"><tbody><tr><td style="padding:3px;">
+    <div class="cDate" style="float:right;font:7pt;"><span>{{ comment.created_at }}</span> </div>
     <div class="cTop" style="text-align:left;">
-    <b><a class="userblack" style="padding-left:10px;" href="https://web.archive.org/web/20100907171046/http://play-murmansk.ru/index/8-106" target="_blank">AtaMan</a></b> 04-09-2010, 11:40
-
-
+        <b><span style="padding-left:10px; color: black;" >{{ comment.author }}</span></b> {{ comment.created_at }}
 
     </div>
-    <div class="cMessage" style="color:black;text-align:left;clear:both;padding-left:10px;padding-top:0px;padding-bottom:2px; ">Все получившие дюка плохо заканчивают, мб карма...</div>
+    <div class="cMessage" style="color:black;text-align:left;clear:both;padding-left:10px;padding-top:0px;padding-bottom:2px; ">{{ comment.content|safe }}</div>
+
+
+    </td></tr></tbody></table><br></div>
+            {% endfor %}
 
 
 
-
-    </td></tr></tbody></table><br></div></div><div id="newEntryB"></div></td></tr>
+        </div><div id="newEntryB"></div></td></tr>
     <tr><td colspan="2" align="center"></td></tr>
     <tr><td colspan="2" height="10"></td></tr>
     </tbody></table>
