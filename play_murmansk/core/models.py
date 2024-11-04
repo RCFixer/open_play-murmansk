@@ -35,3 +35,27 @@ class CommonComment(models.Model):
 
     def __str__(self):
         return f"Comment by {self.author.username}"
+
+class Advertisement(models.Model):
+    image = models.ImageField(upload_to='advertisements/', verbose_name='Картинка')
+    link = models.URLField(verbose_name='Ссылка')
+    text = models.TextField(blank=True, null=True, verbose_name='Текст')
+
+    def __str__(self):
+        return f"Advertisement #{self.id}"
+
+    class Meta:
+        verbose_name = 'Реклама'
+        verbose_name_plural = 'Рекламы'
+
+class UpcomingGame(models.Model):
+    image = models.ImageField(upload_to='upcoming_games/', verbose_name='Картинка')
+    game_title = models.CharField(max_length=40, verbose_name='Название игры')
+    release_date = models.DateField(verbose_name='Дата выхода')
+
+    def __str__(self):
+        return f"Upcoming Game #{self.id}"
+
+    class Meta:
+        verbose_name = 'Ждем и Верим'
+        verbose_name_plural = 'Ждем и Верим'

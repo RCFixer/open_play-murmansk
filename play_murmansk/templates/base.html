@@ -153,10 +153,10 @@
                               <tr>
                                  <td class="boxContent">
                                     <div class="boxText">
-                                       <a href="20110828124907/http://play-murmansk.ru/forum/5-312-1"><img src="{% static 'images/alpha_logo.jpg' %}" border="none" width="200"></a><br>
+                                       {% for advertisement in advertisements %}
+                                       <a href="{{ advertisement.link }}"><img src="{{ advertisement.image.url }}" border="none" width="200"></a><br>
                                        <br>
-                                       <a href="20110828124907/http://play-murmansk.ru/index/0-9"><img src="{% static 'images/a8bfcefc8e87.jpg' %}" border="none" width="200"></a>
-                                       <br>
+                                       {% endfor %}
                                     </div>
                                  </td>
                               </tr>
@@ -190,7 +190,7 @@
                               </tr>
                               <tr>
                                  <td class="boxContent">
-                                    <div class="boxText" align="center"><img src="20110828124907im_/http://s59.radikal.ru/i165/1105/31/d4de32798b70.jpg"><br><br><b><span style="color:#CC6600">Call of Duty: Modern Warfare 3</span></b><br>8 ноября 2011 </div>
+                                    <div class="boxText" align="center"><img src="{{ latest_upcoming_game.image.url }}" style="width: 200px"><br><br><b><span style="color:#CC6600">{{ latest_upcoming_game.title }}</span></b><br>{{ latest_upcoming_game.release_date }} </div>
                                  </td>
                               </tr>
                            </tbody>
@@ -235,13 +235,13 @@
                               <tr>
                                  <td class="boxContent">
                                     <div class="boxText">
-                                       {% for ad in latest_ads %}
+                                       {% for board in latest_boards %}
                                        <ul class="uz">
                                           <li class="menus2">
                                              <table border="0" cellpadding="2" cellspacing="1" width="100%" class="infTable">
                                                 <tbody>
                                                    <tr>
-                                                      <td class="infTitle" colspan="2"> <span style="font-size: 7pt" ;=""> {{ ad.category }} от {{ ad.author }} </span>  <br> <a class="ma" href="20110828124907/http://play-murmansk.ru/board/">{{ ad.title }}</a></td>
+                                                      <td class="infTitle" colspan="2"> <span style="font-size: 7pt" ;=""> {{ board.category }} от {{ board.author }} </span>  <br> <a class="ma" href="20110828124907/http://play-murmansk.ru/board/">{{ board.title }}</a></td>
                                                    </tr>
                                                 </tbody>
                                              </table>
