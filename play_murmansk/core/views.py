@@ -12,3 +12,12 @@ def get_comments_for_object(model_object ,object_id):
     )
 
     return comments
+
+class ViewsCount:
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+
+        obj.views += 1
+        obj.save()
+
+        return obj

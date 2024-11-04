@@ -1,5 +1,6 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from .models import Ad, AdCategory
+from core.views import ViewsCount
 
 class BoardListView(TemplateView):
     template_name = 'board/board_list.html'
@@ -10,7 +11,7 @@ class BoardListView(TemplateView):
         context['board_category_list'] = AdCategory.choices
         return context
 
-class BoardDetailView(DetailView):
+class BoardDetailView(ViewsCount, DetailView):
     model = Ad
     template_name = 'board/board_detail.html'
     context_object_name = 'board'
