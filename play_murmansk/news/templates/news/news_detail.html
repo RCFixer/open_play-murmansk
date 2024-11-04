@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load custom_filters %}
 
 {% block title %}{{news.title}} - PLAYSTATION и XBOX в Мурманске{% endblock %}
 
@@ -38,7 +39,7 @@
         <b><span style="padding-left:10px; color: black;" >{{ comment.author }}</span></b> {{ comment.created_at }}
 
     </div>
-    <div class="cMessage" style="color:black;text-align:left;clear:both;padding-left:10px;padding-top:0px;padding-bottom:2px; ">{{ comment.content|safe }}</div>
+    <div class="cMessage" style="color:black;text-align:left;clear:both;padding-left:10px;padding-top:0px;padding-bottom:2px; ">{{ comment.content|strip_p_tags|safe}}</div>
 
 
     </td></tr></tbody></table><br></div>
