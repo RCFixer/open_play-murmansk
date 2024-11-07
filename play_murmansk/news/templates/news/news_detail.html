@@ -12,7 +12,7 @@
 
     <img src="https://web.archive.org/web/20100907171046im_/http://s60.radikal.ru/i167/1009/66/ada10d5294b7.jpg" border="none" width="200" style="margin: 2px 7px 5px 0px" align="left" <="" a="">
 
-        {{ news.content }}
+        {{ news.content|safe }}
     </td></tr>
     <tr><td colspan="2" class="eDetails">
 
@@ -53,6 +53,16 @@
     </tbody></table>
 
 
-    <div align="center" class="commReg">Добавлять комментарии могут только зарегистрированные пользователи.<br>[ <a class="m" href="https://web.archive.org/web/20100907171046/http://play-murmansk.ru/index/3">Регистрация</a> | <a class="m" href="javascript://" rel="nofollow" onclick="new _uWnd('LF',' ',-250,-110,{autosize:0,closeonesc:1,resize:1},{url:'/index/40'});return false;">Вход</a> ]</div>
-
+    {% if user.is_authenticated %}
+        <h2>Оставить комментарий</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.errors }} {# Always makes sense #}
+            {{ form.media }}  {# This is the important line! #}
+            {{ form.as_div }}
+            <button type="submit" class="commSbmFl">Отправить</button>
+        </form>
+    {% else %}
+        <div align="center" class="commReg">Добавлять комментарии могут только зарегистрированные пользователи.<br>[ <a class="m" href="https://web.archive.org/web/20100907171046/http://play-murmansk.ru/index/3">Регистрация</a> | <a class="m" href="javascript://" rel="nofollow" onclick="new _uWnd('LF',' ',-250,-110,{autosize:0,closeonesc:1,resize:1},{url:'/index/40'});return false;">Вход</a> ]</div>
+    {% endif %}
 {% endblock %}

@@ -1,24 +1,23 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from .models import News
-from core.views import get_comments_for_object
-from core.views import ViewsCount
+from core.views import ViewsCount, PostInfoSaturation, PostMethodCommentForm
+
 
 class NewsListView(ListView):
     model = News
     template_name = 'news/news_list.html'
     context_object_name = 'news_list'
 
-class NewsDetailView(ViewsCount, DetailView):
+class NewsDetailView(ViewsCount, DetailView, PostMethodCommentForm):
     model = News
     template_name = 'news/news_detail.html'
     context_object_name = 'news'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        news_item = self.object
 
-        comments = get_comments_for_object(News, news_item.id)
-        context['comments'] = comments
+        post = PostInfoSaturation(self.object, self.request)
+        context.update(post.get_context_data())
 
         return context
 

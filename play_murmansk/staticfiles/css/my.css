@@ -363,6 +363,7 @@
  /* ----------------------- */
  /* Post Form */
  .pollBut, .loginButton, .searchSbmFl, .commSbmFl, .signButton {font-size:7pt;background: #333333;color:#FFFFFF;border:1px outset #333333;}
+ .commSbmFl {font-size:30pt;}
  .codeButtons {font-size:7pt;background: #333333;color:#FFFFFF;border:1px outset #333333;}
  .codeCloseAll {font-size:7pt;background: #333333;color:#FFFFFF;border:1px outset #333333;font-weight:bold;}
  .postNameFl,.postDescrFl {background:#FFFFFF;border:1px solid #555555;width:400px}
