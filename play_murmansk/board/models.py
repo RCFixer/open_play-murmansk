@@ -1,6 +1,9 @@
 from django.db import models
 from django.conf import settings
 from django_prose_editor.sanitized import SanitizedProseEditorField
+from django.contrib.contenttypes.fields import GenericRelation
+
+from core.models import CommonComment
 
 
 class AdCategory(models.TextChoices):
@@ -21,6 +24,8 @@ class Ad(models.Model):
     views = models.PositiveIntegerField(default=0)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    comments = GenericRelation(CommonComment)
 
     def __str__(self):
         return self.title

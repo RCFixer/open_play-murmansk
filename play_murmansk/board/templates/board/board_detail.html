@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+
+{% block title %}{{board.title}} - PLAYSTATION и XBOX в Мурманске{% endblock %}
+
+{% block content %}
+    <hr>
+    <table border="0" width="100%" cellspacing="1" cellpadding="2" class="eBlock">
+    <tbody><tr><td width="90%"><div class="eTitle">{{ board.title }}</div></td><td align="right" style="white-space: nowrap;font:9px;">{{ board.created_at }} </td></tr>
+    <tr>
+    <td colspan="2" class="eMessage">
+
+    <img src="https://web.archive.org/web/20100907171046im_/http://s60.radikal.ru/i167/1009/66/ada10d5294b7.jpg" border="none" width="200" style="margin: 2px 7px 5px 0px" align="left" <="" a="">
+
+        {{ board.content|safe }}
+    </td></tr>
+    <tr><td class="eDetails1" colspan="2">  Автор: <a href="https://web.archive.org/web/20100308114913/http://www.play-murmansk.ru/index/8-11" target="_blank">{{ board.author }}</a>  | Чтобы связаться с автором объявления, нажмите на его ник.
+    </td></tr>
+    <tr><td class="eDetails2" colspan="2">
+      Добавлено: {{ board.created_at }}
+      | Просмотров: <b>{{ board.views }}</b>
+   </td></tr>
+    </tbody></table>
+
+    {% include "comments.html" %}
+{% endblock %}

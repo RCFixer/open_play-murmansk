@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+
+{% block title %}{{review.title}} - PLAYSTATION и XBOX в Мурманске{% endblock %}
+
+{% block content %}
+    <hr>
+    <table border="0" width="100%" cellspacing="1" cellpadding="2" class="eBlock">
+    <tbody><tr><td width="90%"><div class="eTitle">{{ review.title }}</div></td><td align="right" style="white-space: nowrap;font:9px;">{{ review.created_at }} </td></tr>
+    <tr>
+    <td colspan="2" class="eMessage">
+        {{ review.content|safe }}
+    </td></tr>
+    <tr><td colspan="2" class="eDetails">
+
+    Просмотров: {{ review.views }} |
+    Добавил: <a class="userblack" href="https://web.archive.org/web/20100907171046/http://play-murmansk.ru/index/8-1" target="_blank">{{ review.author }}</a>
+
+     </td></tr>
+    </tbody></table>
+
+    {% include "comments.html" %}
+{% endblock %}

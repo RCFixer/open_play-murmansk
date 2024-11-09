@@ -41,12 +41,12 @@
         Просмотров: {{ boards.views }} |
         Дата: {{ boards.created_at }}
 
-        | <a href="https://web.archive.org/web/20100907080651/http://play-murmansk.ru/board/1-1-0-1327#comments">Комментарии (1)</a> | Чтобы связаться с автором объявления, просмотрите его, нажав на заголовок.
+        | <a href="{% url 'board_detail' boards.id %}">Комментарии ({{ boards.comments_count }})</a> | Чтобы связаться с автором объявления, просмотрите его, нажав на заголовок.
         </div></td></tr></tbody></table><br></div>
     {% endfor %}
     </div>
     <hr>
-<span class="pagesBlockuz1"><b class="swchItemA"><span>1</span></b> <a class="swchItem" href="javascript://" rel="nofollow" onclick="spages('2');return false;"><span>2</span></a> <a class="swchItem" href="javascript://" rel="nofollow" onclick="spages('3');return false;"><span>3</span></a>  <a class="swchItem" href="javascript://" rel="nofollow" onclick="spages('2');return false;"><span>»</span></a></span>
+    {% include "pagination.html" %}
 <hr>
 </td>
 {% endblock %}

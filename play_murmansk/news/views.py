@@ -1,6 +1,5 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
-from django.db.models import Count, Q
-from django.contrib.contenttypes.models import ContentType
+from django.db.models import Count
 from .models import News
 from core.views import ViewsCount, PostInfoSaturation, PostMethodCommentForm
 
@@ -31,7 +30,7 @@ class NewsDetailView(ViewsCount, DetailView, PostMethodCommentForm):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        post = PostInfoSaturation(self.object, self.request)
+        post = PostInfoSaturation(self.object, self.request, News)
         context.update(post.get_context_data())
 
         return context

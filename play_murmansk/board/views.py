@@ -1,20 +1,37 @@
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-from .models import Ad, AdCategory
-from core.views import ViewsCount
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.db.models import Count
 
-class BoardListView(TemplateView):
+from .models import Ad, AdCategory
+from core.views import ViewsCount, PostInfoSaturation, PostMethodCommentForm
+
+class BoardListView(ListView):
+    model = Ad
     template_name = 'board/board_list.html'
+    context_object_name = 'board_list'
+
+    def get_queryset(self):
+        queryset = Ad.objects.annotate(
+            comments_count=Count('comments')
+        ).order_by('-id')
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['board_list'] = Ad.objects.all()
         context['board_category_list'] = AdCategory.choices
         return context
 
-class BoardDetailView(ViewsCount, DetailView):
+class BoardDetailView(ViewsCount, DetailView, PostMethodCommentForm):
     model = Ad
     template_name = 'board/board_detail.html'
     context_object_name = 'board'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        post = PostInfoSaturation(self.object, self.request, Ad)
+        context.update(post.get_context_data())
+
+        return context
 
 class BoardCreateView(CreateView):
     model = Ad
