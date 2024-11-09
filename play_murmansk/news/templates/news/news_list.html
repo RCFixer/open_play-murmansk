@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load custom_filters %}
 
 {% block title %}PLAYSTATION и XBOX в Мурманске - Главная страница{% endblock %}
 
@@ -20,11 +21,11 @@
                        <div class="eTitle" style="text-align:left;"><a href="{% url 'news_detail' news.id %}">{{ news.title }}</a></div>
                       <div class="eMessage" style="clear:both;padding-top:7px;padding-bottom:2px;">
                          <img src="{{ news.image }}" border="none" width="200" style="margin: 0px 7px 5px 0px" align="left" <="" a="">
-                          {{ news.content|safe }}
+                          {{ news.content|strip_p_tags_for_news_list|safe }}
                       </div>
                       <div class="eDetails" style="clear:both;">
-                         <a class="userblack" href="20110828124907/http://games.compulenta.ru/630665/">{{ news.source }}</a>
-                         | <a href="20110828124907/http://play-murmansk.ru/news/2011-08-26-1774#comments">Оставляем комментарии</a>
+                         <a class="userblack" href="{{ news.source }}">Источник</a>
+                         | <a href="{% url 'news_detail' news.id %}">Оставляем комментарии ({{ news.comments_count }})</a>
                       </div>
                    </td>
                 </tr>
@@ -34,13 +35,31 @@
             </div>
     {% endfor %}
 
-       <div class="catPages1" align="center" style="clear:both;" id="pagesBlock1"><b class="swchItemA"><span>1</span></b> <a class="swchItem" href="20110828124907/http://play-murmansk.ru/news/2" onclick="spages('2');return false;"><span>2</span></a> <a class="swchItem" href="20110828124907/http://play-murmansk.ru/news/3" onclick="spages('3');return false;"><span>3</span></a> <span class="swchItemDots"><span>...</span></span> <a class="swchItem" href="20110828124907/http://play-murmansk.ru/news/144" onclick="spages('144');return false;"><span>144</span></a> <a class="swchItem" href="20110828124907/http://play-murmansk.ru/news/145" onclick="spages('145');return false;"><span>145</span></a>  <a class="swchItem" href="20110828124907/http://play-murmansk.ru/news/2" onclick="spages('2');return false;"><span>»</span></a></div>
+        <!-- Пагинация -->
+        {% if is_paginated %}
+            <div class="catPages1" align="center" style="clear: both;" id="pagesBlock1">
+                    {% if page_obj.has_previous %}
+                        <a class="swchItem" href="?page={{ page_obj.previous_page_number }}"><span>«</span></a>
+                        <a class="swchItem" href="?page=1">1</a>
+                        <span class="swchItemDots"><span>...</span></span>
+                {% endif %}
+
+                    <span class="current">
+                        <b class="swchItemA"><span>{{ page_obj.number }}</span></b>
+                    </span>
+
+
+                    {% if page_obj.has_next %}
+                        <span class="swchItemDots"><span>...</span></span>
+                        <a class="swchItem" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+                        {% if page_obj.next_page_number < page_obj.paginator.num_pages %}
+                            <a class="swchItem" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+                        {% endif %}
+                        <a class="swchItem" href="?page={{ page_obj.next_page_number }}"><span>»</span></a>
+                    {% endif %}
+            </div>
+        {% endif %}
     </div>
-    <div align="center">
-       <span style="font-size:10pt;">
-       <span style="color:#39FF39">
-       </span>
-       </span>
-    </div>
+
 
 {% endblock %}

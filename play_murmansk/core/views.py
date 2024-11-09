@@ -6,6 +6,15 @@ from core.forms import CommonCommentForm
 from news.models import News
 
 
+def get_comments_count_for_object(model_object, object_id):
+    news_content_type = ContentType.objects.get_for_model(model_object)
+    news_item = model_object.objects.get(id=object_id)
+    comments_count = CommonComment.objects.filter(
+        content_type=news_content_type,
+        object_id=news_item.id
+    ).count()
+    return comments_count
+
 class ViewsCount:
     def get_object(self, queryset=None):
         obj = super().get_object(queryset)
@@ -25,7 +34,7 @@ class PostInfoSaturation:
         news_item = self.object
         return CommonCommentForm(author=self.request.user, content_object=news_item)
 
-    def get_comments_for_object(srlf, model_object, object_id):
+    def get_comments_for_object(self, model_object, object_id):
         news_content_type = ContentType.objects.get_for_model(model_object)
         news_item = model_object.objects.get(id=object_id)
         comments = CommonComment.objects.filter(
