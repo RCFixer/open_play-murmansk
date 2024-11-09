@@ -25,44 +25,5 @@
      </td></tr>
     </tbody></table>
 
-
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-    <tbody><tr><td width="60%" height="25">Всего комментариев: <b>8</b></td><td align="right" height="25"></td></tr>
-
-    <tr><td colspan="2"><a name="comments"></a><div id="newEntryT"></div>
-        <div id="allEntries">
-
-            {% for comment in comments %}
-            <div id="comEnt{{ comment.id }}"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="cBlock1"><tbody><tr><td style="padding:3px;">
-    <div class="cDate" style="float:right;font:7pt;"><span>{{ comment.created_at }}</span> </div>
-    <div class="cTop" style="text-align:left;">
-        <b><span style="padding-left:10px; color: black;" >{{ comment.author }}</span></b> {{ comment.created_at }}
-
-    </div>
-    <div class="cMessage" style="color:black;text-align:left;clear:both;padding-left:10px;padding-top:0px;padding-bottom:2px; ">{{ comment.content|strip_p_tags|safe}}</div>
-
-
-    </td></tr></tbody></table><br></div>
-            {% endfor %}
-
-
-
-        </div><div id="newEntryB"></div></td></tr>
-    <tr><td colspan="2" align="center"></td></tr>
-    <tr><td colspan="2" height="10"></td></tr>
-    </tbody></table>
-
-
-    {% if user.is_authenticated %}
-        <h2>Оставить комментарий</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.errors }} {# Always makes sense #}
-            {{ form.media }}  {# This is the important line! #}
-            {{ form.as_div }}
-            <button type="submit" class="commSbmFl">Отправить</button>
-        </form>
-    {% else %}
-        <div align="center" class="commReg">Добавлять комментарии могут только зарегистрированные пользователи.<br>[ <a class="m" href="https://web.archive.org/web/20100907171046/http://play-murmansk.ru/index/3">Регистрация</a> | <a class="m" href="javascript://" rel="nofollow" onclick="new _uWnd('LF',' ',-250,-110,{autosize:0,closeonesc:1,resize:1},{url:'/index/40'});return false;">Вход</a> ]</div>
-    {% endif %}
+    {% include "comments.html" %}
 {% endblock %}

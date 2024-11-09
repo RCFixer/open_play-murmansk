@@ -20,7 +20,9 @@
                       <div class="cDate" style="float:right;font:7pt;"><span title="12:55">{{ news.created_at }}</span></div>
                        <div class="eTitle" style="text-align:left;"><a href="{% url 'news_detail' news.id %}">{{ news.title }}</a></div>
                       <div class="eMessage" style="clear:both;padding-top:7px;padding-bottom:2px;">
-                         <img src="{{ news.image }}" border="none" width="200" style="margin: 0px 7px 5px 0px" align="left" <="" a="">
+                          {% if news.image %}
+                            <img src="{{ news.image }}" border="none" width="200" style="margin: 0px 7px 5px 0px" align="left" <="" a="">
+                          {% endif %}
                           {{ news.content|strip_p_tags_for_news_list|safe }}
                       </div>
                       <div class="eDetails" style="clear:both;">
@@ -35,30 +37,7 @@
             </div>
     {% endfor %}
 
-        <!-- Пагинация -->
-        {% if is_paginated %}
-            <div class="catPages1" align="center" style="clear: both;" id="pagesBlock1">
-                    {% if page_obj.has_previous %}
-                        <a class="swchItem" href="?page={{ page_obj.previous_page_number }}"><span>«</span></a>
-                        <a class="swchItem" href="?page=1">1</a>
-                        <span class="swchItemDots"><span>...</span></span>
-                {% endif %}
-
-                    <span class="current">
-                        <b class="swchItemA"><span>{{ page_obj.number }}</span></b>
-                    </span>
-
-
-                    {% if page_obj.has_next %}
-                        <span class="swchItemDots"><span>...</span></span>
-                        <a class="swchItem" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
-                        {% if page_obj.next_page_number < page_obj.paginator.num_pages %}
-                            <a class="swchItem" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
-                        {% endif %}
-                        <a class="swchItem" href="?page={{ page_obj.next_page_number }}"><span>»</span></a>
-                    {% endif %}
-            </div>
-        {% endif %}
+        {% include "pagination.html" %}
     </div>
 
 
