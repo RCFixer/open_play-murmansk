@@ -22,7 +22,7 @@ class ForumSectionListView(ListView):
             last_message_created_at=Subquery(last_message_subquery.values('created_at')),
             last_message_topic_title=Subquery(last_message_subquery.values('topic__title')),
             last_message_author_username=Subquery(last_message_subquery.values('author__username')),
-        )
+        ) # Todo переделать всё на один подзапрос!
 
         # Получаем все ForumSection с подсекциями и последним сообщением
         queryset = ForumSection.objects.prefetch_related(
