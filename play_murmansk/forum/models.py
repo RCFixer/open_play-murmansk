@@ -11,6 +11,7 @@ class ForumSection(models.Model):
 class ForumSubsection(models.Model):
     section = models.ForeignKey(ForumSection, on_delete=models.CASCADE, related_name='subsections')
     title = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, blank=True, null=True)
     topic_count = models.PositiveIntegerField(default=0)
     message_count = models.PositiveIntegerField(default=0)
 

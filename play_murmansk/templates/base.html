@@ -1,82 +1,7 @@
+{% extends "index.html" %}
 {% load static %}
-<html>
-   <head>
-      <link rel="stylesheet" type="text/css" href="{% static 'css/banner-styles.css' %}">
-      <link rel="stylesheet" type="text/css" href="{% static 'css/iconochive.css' %}">
-      <link rel="stylesheet" type="text/css" href="{% static 'css/layer3.css' %}">
-      <link rel="stylesheet" type="text/css" href="{% static 'css/my.css' %}">
-      <title>{% block title %}{% endblock %}</title>
-   </head>
-   <body>
-      <div id="contanier">
-         <div id="topBlock">
-            <table border="0" cellpadding="0" cellspacing="0" id="topTable" align="center">
-               <tbody>
-                  <tr>
-                     <td class="dataBar"></td>
-                  </tr>
-                  <tr>
-                     <td>
-                        <div class="logoBar">
-                           <a href="20110828124907/http://play-murmansk.ru/">
-                           <img src="{% static 'images/1px.gif' %}" width="1000" height="150" border="0" title="Содружество пользователей игровых консолей" alt="Содружество пользователей игровых консолей"></a>
-                        </div>
-                     </td>
-                  </tr>
-                  <!-- -->
-                  <tr>
-                     <td class="navBar">
-                        <style>
-                           /* common styling */
-                           .menu {font: "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, arial, sans-serif; width:975px; height:29px; position:relative; font-size:11px; font-weight:bold; z-index:100;}
-                           .menu ul li a, .menu ul li a:visited {display:block; text-decoration:none; color:#000; width:161px; height:27px; text-align:center; color:#ccc;
-                           border-left:0px solid #000;
-                           border-right:0px solid #000;
-                           border-bottom:3px solid #BF3A00;
-                           background:none; line-height:25px; font-size:11px; overflow:hidden;}
-                           .menu ul {padding:0; margin:0; list-style: none;}
-                           .menu ul li {float:left; position:relative;}
-                           .menu ul li ul {display: none;}
-                           /* specific to non IE browsers */
-                           .menu ul li:hover a {color:#fff; background:#BF3A00;}
-                           .menu ul li:hover ul {display:block; position:absolute; top:30px; left:0; width:160px;}
-                           .menu ul li:hover ul li a.hide {background:#6a3; color:#fff;}
-                           .menu ul li:hover ul li:hover a.hide {background:#6fc; color:#000;}
-                           .menu ul li:hover ul li ul {display: none;}
-                           .menu ul li:hover ul li a {display:block; background:#ddd; color:#000;}
-                           .menu ul li:hover ul li a:hover {background:#BF3A00; color:#000;}
-                           .menu ul li:hover ul li:hover ul {display:block; position:absolute; left:105px; top:0;}
-                           .menu ul li:hover ul li:hover ul.left {left:-105px;}
-                        </style>
-                        <div align="center">
-                           <div class="menu">
-                              <ul>
-                                 <li><a href="{% url 'index' %}" target="_self">Главная</a></li>
-                                 <li><a href="{% url 'forum_section_list' %}" target="_self">Форум</a></li>
-                                 <li><a href="{% url 'boards' %}" target="_self">Объявления</a></li>
-                                 <li><a href="{% url 'review_list' %}" target="_self">Отзывы Об Играх</a></li>
-                                 <li>
-                                    <a>Кое-что Еще...</a>
-                                    <ul>
-                                       <li><a href="/web/20110828124907/http://play-murmansk.ru/photo/" target="_self">Фотоальбом</a></li>
-                                       <li><a href="/web/20110828124907/http://play-murmansk.ru/dir/" target="_self">Полезные Ссылки</a></li>
-                                       <li><a href="/web/20110828124907/http://play-murmansk.ru/publ/" target="_self">Полезные Статьи</a></li>
-                                    </ul>
-                                 </li>
-                                 <li><a href="20110828124907/http://play-murmansk.ru/index/3">Регистрация</a></li>
-                              </ul>
-                           </div>
-                        </div>
-                     </td>
-                  </tr>
-                  <!--
-                     -->
-               </tbody>
-            </table>
-            <!--/U1AHEADER1Z-->
-            <!-- /Header -->
-         </div>
-         <div id="centerBlock1">
+{% block center %}
+<div id="centerBlock1">
             <!-- Body -->
             <table border="0" cellpadding="0" cellspacing="0" width="1000px" align="center">
                <tbody>
@@ -320,19 +245,4 @@
             </table>
             <!-- /Body -->
          </div>
-         <!-- Footer -->
-         <!--U1BFOOTER1Z-->
-         <table border="0" cellpadding="10px" cellspacing="0" width="100%" id="footer">
-            <tbody>
-               <tr>
-                  <td align="right" valign="bottom"><img src="{% static 'images/liveinternet.gif' %}"></td>
-                  <td width="780" align="center" valign="center"><a class="m" href="">-</a> © <a class="m" href="20110828124907/http://play-murmansk.ru/">play-murmansk.ru</a> 2009-2024 | <a class="m" href="20110828124907/http://play-murmansk.ru/index/0-2">Связь с владельцем ресурса</a> -</td>
-                  <td align="left" valign="bottom">
-                     <!-- "' --><span class="pboCYPVr"><a href=""><img style="margin:0;padding:0;border:0;width:80px;height:15px;" src="{% static 'images/21.gif' %}" alt="Создать сайт бесплатно" title="Создать сайт бесплатно"></a></span>
-                  </td>
-               </tr>
-            </tbody>
-         </table>
-      </div>
-   </body>
-</html>
+{% endblock %}

@@ -1,10 +1,35 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.db.models import OuterRef, Subquery
+from django.db import models
+
 from .models import ForumSection, ForumSubsection, ForumTopic, ForumMessage
 
 class ForumSectionListView(ListView):
     model = ForumSection
     template_name = 'forum/section_list.html'
     context_object_name = 'section_list'
+
+    def get_queryset(self):
+        # Получаем последнее сообщение в каждой ForumSubsection
+        last_message_subquery = ForumMessage.objects.filter(
+            topic__subsection=OuterRef('pk')
+        ).order_by('-created_at').values(
+            'created_at', 'topic__title', 'author__username'
+        )[:1]
+
+        # Получаем все ForumSubsection с последним сообщением
+        subsections = ForumSubsection.objects.annotate(
+            last_message_created_at=Subquery(last_message_subquery.values('created_at')),
+            last_message_topic_title=Subquery(last_message_subquery.values('topic__title')),
+            last_message_author_username=Subquery(last_message_subquery.values('author__username')),
+        )
+
+        # Получаем все ForumSection с подсекциями и последним сообщением
+        queryset = ForumSection.objects.prefetch_related(
+            models.Prefetch('subsections', queryset=subsections)
+        )
+
+        return queryset
 
 class ForumSubsectionListView(ListView):
     model = ForumSubsection
