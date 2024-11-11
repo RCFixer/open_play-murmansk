@@ -19,7 +19,7 @@
                                         <tr>
                                             <td class="gTableTop" colspan="5">
                                                 <div style="float: right;" class="gTopCornerRight"></div>
-                                                <a class="catLink" href="https://web.archive.org/web/20100908055530/http://play-murmansk.ru/forum/1">{{ section.title }}</a>
+                                                {{ section.title }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -34,7 +34,7 @@
                                                 <td class="forumIcoTd" align="center">
                                                 </td>
                                                 <td class="forumNameTd">
-                                                    <a class="forum" href="https://web.archive.org/web/20100908055530/http://play-murmansk.ru/forum/2">{{ subsection.title }}</a>
+                                                    <a class="forum" href="{% url 'forum_topic_list' subsection.id %}">{{ subsection.title }}</a>
                                                     {% if subsection.description %}
                                                         <div class="forumDescr">{{ subsection.description }}</div>
                                                     {% endif %}

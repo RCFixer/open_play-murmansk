@@ -1,5 +1,5 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.db.models import OuterRef, Subquery
+from django.db.models import OuterRef, Subquery, Count
 from django.db import models
 
 from .models import ForumSection, ForumSubsection, ForumTopic, ForumMessage
@@ -31,15 +31,51 @@ class ForumSectionListView(ListView):
 
         return queryset
 
-class ForumSubsectionListView(ListView):
-    model = ForumSubsection
-    template_name = 'forum/subsection_list.html'
-    context_object_name = 'subsection_list'
-
 class ForumTopicListView(ListView):
     model = ForumTopic
     template_name = 'forum/topic_list.html'
     context_object_name = 'topic_list'
+    paginate_by = 5
+
+    def get_queryset(self):
+        subsection_id = self.kwargs.get('subsection_id')
+
+        # Фильтруем темы по subsection_id
+        queryset = ForumTopic.objects.filter(subsection_id=subsection_id)
+
+        # Добавляем количество сообщений в каждой теме
+        queryset = queryset.annotate(
+            message_count=Count('messages')
+        )
+
+        # Добавляем информацию о последнем сообщении в каждой теме
+        last_message_subquery = ForumMessage.objects.filter(
+            topic=OuterRef('pk')
+        ).order_by('-created_at').values('author__username', 'created_at')[:1]
+
+        queryset = queryset.annotate(
+            last_message_author=Subquery(last_message_subquery.values('author__username')),
+            last_message_time=Subquery(last_message_subquery.values('created_at'))
+        ).order_by('-id')
+
+        # Разделяем queryset на две части
+        pinned_topics = queryset.filter(is_pinned=True).order_by('-id')
+        unpinned_topics = queryset.filter(is_pinned=False).order_by('-id')
+
+        # Сохраняем pinned_topics для передачи в контекст
+        self.pinned_topics = pinned_topics
+
+        return unpinned_topics
+
+        # return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['subsection_id'] = self.kwargs.get('subsection_id')
+        context['pinned_topics'] = self.pinned_topics
+        context['current_topics'] = len(self.pinned_topics) + len(context['topic_list'])
+        context['all_topics'] = len(self.pinned_topics) + len(self.object_list)
+        return context
 
 class ForumTopicDetailView(DetailView):
     model = ForumTopic

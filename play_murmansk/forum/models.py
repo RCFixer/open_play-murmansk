@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.template.defaultfilters import default
 from django_prose_editor.sanitized import SanitizedProseEditorField
 
 class ForumSection(models.Model):
@@ -21,8 +22,10 @@ class ForumSubsection(models.Model):
 class ForumTopic(models.Model):
     subsection = models.ForeignKey(ForumSubsection, on_delete=models.CASCADE, related_name='topics')
     title = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, blank=True, null=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+    is_pinned = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
