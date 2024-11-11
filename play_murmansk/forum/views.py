@@ -35,7 +35,7 @@ class ForumTopicListView(ListView):
     model = ForumTopic
     template_name = 'forum/topic_list.html'
     context_object_name = 'topic_list'
-    paginate_by = 5
+    paginate_by = 51
 
     def get_queryset(self):
         subsection_id = self.kwargs.get('subsection_id')
