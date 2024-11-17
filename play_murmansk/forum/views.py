@@ -1,8 +1,28 @@
+from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.db.models import OuterRef, Subquery, Count
 from django.db import models
+from django.core.paginator import Paginator
 
 from .models import ForumSection, ForumSubsection, ForumTopic, ForumMessage
+from .forms import ForumMessageForm
+
+
+class PostMethodCommentForm:
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        object_item = self.object
+
+        form = ForumMessageForm(request.POST, author=request.user, topic_object=object_item)
+        if form.is_valid():
+            form.save()
+            return redirect('forum_topic_detail', pk=object_item.id)  # Перенаправление на ту же страницу
+
+        context = self.get_context_data(object=object_item)
+        context['form'] = form
+        return self.render_to_response(context)
+
 
 class ForumSectionListView(ListView):
     model = ForumSection
@@ -67,8 +87,6 @@ class ForumTopicListView(ListView):
 
         return unpinned_topics
 
-        # return queryset
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['subsection_id'] = self.kwargs.get('subsection_id')
@@ -77,20 +95,30 @@ class ForumTopicListView(ListView):
         context['all_topics'] = len(self.pinned_topics) + len(self.object_list)
         return context
 
-class ForumTopicDetailView(DetailView):
+
+class ForumTopicDetailView(DetailView, PostMethodCommentForm):
     model = ForumTopic
     template_name = 'forum/topic_detail.html'
     context_object_name = 'topic'
+    paginate_by = 30  # Количество сообщений на странице
 
-class ForumMessageCreateView(CreateView):
-    model = ForumMessage
-    fields = ['content']
-    template_name = 'forum/message_form.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        form.instance.topic_id = self.kwargs['pk']
-        return super().form_valid(form)
+        # Получаем все сообщения, связанные с топиком
+        topic = self.get_object()
+        messages = topic.messages.all().order_by('created_at')  # сортируем по дате создания
+
+        # Пагинация
+        paginator = Paginator(messages, self.paginate_by)
+        page_number = self.request.GET.get('page', 1)
+        page_obj = paginator.get_page(page_number)
+
+        # Добавляем page_obj в контекст
+        context['page_obj'] = page_obj
+        context['form'] = ForumMessageForm(author=self.request.user, topic_object=self.object)
+        context['messages'] = page_obj.object_list  # Сообщения для текущей страницы
+        return context
 
 class ForumMessageUpdateView(UpdateView):
     model = ForumMessage

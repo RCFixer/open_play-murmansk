@@ -12,17 +12,6 @@
     <tr>
         <td valign="top" style="padding: 0px 5px 0px 5px;">
             {% include "forum_pagination.html" %}
-            <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                <tbody>
-                    <tr>
-                        <td class="forumNamesBar" style="padding-top: 3px; padding-bottom: 5px;">
-                            <a class="forumBar" href="https://web.archive.org/web/20101031191705/http://play-murmansk.ru/forum/">Форум</a> »
-                            <a class="forumBar" href="https://web.archive.org/web/20101031191705/http://play-murmansk.ru/forum/1">Игровые консоли в Мурманске</a> »
-                            <a class="forumBarA" href="https://web.archive.org/web/20101031191705/http://play-murmansk.ru/forum/2">ИГРЫ, общие для всех консолей</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
             <div class="gDivLeft">
                 <div class="gDivRight">
                     <table border="0" width="100%" bgcolor="#FFFFFF" cellspacing="1" cellpadding="0" class="gTable">
@@ -36,17 +25,16 @@
                             <tr>
                                 <td width="8%" colspan="2" class="gTableSubTop">&nbsp;</td>
                                 <td class="gTableSubTop" align="left">
-                                    <a href="javascript://" rel="nofollow" onclick="window.location.href='https://web.archive.org/web/20101031191705/http://play-murmansk.ru/forum/2-0-1-0-1';return false;" class="topSortLink">Тема</a>
+                                    <span rel="nofollow" class="topSortLink">Тема</span>
                                 </td>
                                 <td width="7%" class="gTableSubTop" align="center">
-                                    <a href="javascript://" rel="nofollow" onclick="window.location.href='https://web.archive.org/web/20101031191705/http://play-murmansk.ru/forum/2-0-1-0-4';return false;" class="topSortLink">Ответы</a>
+                                    <span rel="nofollow" class="topSortLink">Ответы</span>
                                 </td>
                                 <td width="14%" class="gTableSubTop" align="center">
-                                    <a href="javascript://" rel="nofollow" onclick="window.location.href='https://web.archive.org/web/20101031191705/http://play-murmansk.ru/forum/2-0-1-0-7';return false;" class="topSortLink">Автор темы</a>
+                                    <span rel="nofollow" class="topSortLink">Автор темы</span>
                                 </td>
                                 <td width="21%" class="gTableSubTop" align="left">
-                                    <a href="javascript://" rel="nofollow" onclick="window.location.href='https://web.archive.org/web/20101031191705/http://play-murmansk.ru/forum/2-0-1-0-9';return false;" class="topSortLink">Обновления</a>
-                                    <span class="sortArrDown">↓</span>
+                                    <span rel="nofollow" class="topSortLink">Обновления</span>
                                 </td>
                             </tr>
                             {% if pinned_topics %}
@@ -62,7 +50,7 @@
                                         <img alt="" style="margin: 0; padding: 0; vertical-align: middle; border: 0;" src="{% static 'images/pinned.gif' %}" title="Важная тема" />
                                     </td>
                                     <td class="threadNametd">
-                                        <a class="threadPinnedLink" href="https://web.archive.org/web/20101031191705/http://play-murmansk.ru/forum/2-113-1">{{ pinned_topic.title }}</a>
+                                        <a class="threadPinnedLink" href="{% url 'forum_topic_detail' pinned_topic.id %}">{{ pinned_topic.title }}</a>
                                         {% if pinned_topic.description  %}
                                             <div class="threadDescr">{{ pinned_topic.description }}</div>
                                         {% endif %}
@@ -93,7 +81,7 @@
                                         {% endif %}
                                     </td>
                                     <td class="threadNametd">
-                                        <a class="threadLink" href="https://web.archive.org/web/20101031191705/http://play-murmansk.ru/forum/2-236-1">{{ topic.title }}</a>
+                                        <a class="threadLink" href="{% url 'forum_topic_detail' topic.id %}">{{ topic.title }}</a>
                                         {% if topic.description  %}
                                             <div class="threadDescr">{{ topic.description }}</div>
                                         {% endif %}
