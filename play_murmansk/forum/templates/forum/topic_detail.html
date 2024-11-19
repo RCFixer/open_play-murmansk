@@ -38,11 +38,20 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="postTdInfo" valign="top">
-    <!--                                                            <img title="play" class="userAvatar" border="0" src="https://web.archive.org/web/20101031165939im_/http://play-murmansk.ru/avatar/74/711319.jpg" />-->
-    <!--                                                            <div class="postUserGroup">Администратор</div>-->
-
-    <!--                                                            <div class="psnid">PSN ID: dima54321</div>-->
-    <!--                                                            <div class="psnid">GameTag: dima54321</div>-->
+                                                                <img title="play" class="userAvatar" border="0" src="{{ message.author.avatar.url }}" />
+                                                                <div class="postUserGroup">{{ message.author.groups.first }}</div>
+                                                                {% if message.author.psn_id %}
+                                                                    <div class="psnid">PSN ID: {{ message.author.psn_id }}</div>
+                                                                {% endif %}
+                                                                {% if message.author.psn_id %}
+                                                                    <div class="psnid">GameTag: {{ message.author.gametag_id }}</div>
+                                                                {% endif %}
+                                                                {% if message.author.psn_id %}
+                                                                    <div class="psnid">Nintendo ID: {{ message.author.nintendo_id }}</div>
+                                                                {% endif %}
+                                                                {% if message.author.psn_id %}
+                                                                    <div class="psnid">Steam: {{ message.author.steam_id }}</div>
+                                                                {% endif %}
                                                             </td>
                                                             <td class="posttdMessage" valign="top">
                                                                 {{ message.content|strip_p_tags|safe }}

@@ -107,7 +107,9 @@ class ForumTopicDetailView(DetailView, PostMethodCommentForm):
 
         # Получаем все сообщения, связанные с топиком
         topic = self.get_object()
-        messages = topic.messages.all().order_by('created_at')  # сортируем по дате создания
+        messages = topic.messages.all().select_related(
+            'author'  # Подгружаем данные пользователя через внешний ключ
+        ).order_by('created_at')  # сортируем по дате создания
 
         # Пагинация
         paginator = Paginator(messages, self.paginate_by)
