@@ -17,6 +17,10 @@ class PostMethodCommentForm:
         form = ForumMessageForm(request.POST, author=request.user, topic_object=object_item)
         if form.is_valid():
             form.save()
+            subsection = object_item.subsection
+            subsection.message_count += 1
+            subsection.save()
+
             return redirect('forum_topic_detail', pk=object_item.id)  # Перенаправление на ту же страницу
 
         context = self.get_context_data(object=object_item)
@@ -55,7 +59,7 @@ class ForumTopicListView(ListView):
     model = ForumTopic
     template_name = 'forum/topic_list.html'
     context_object_name = 'topic_list'
-    paginate_by = 51
+    paginate_by = 5
 
     def get_queryset(self):
         subsection_id = self.kwargs.get('subsection_id')
