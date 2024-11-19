@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'reviews',
     'forum',
     'core',
+    'links',
+    'publ',
     'django_summernote',
     'django_prose_editor',
 ]

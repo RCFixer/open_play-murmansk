@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+
+{% block title %}{{link.title}} - PLAYSTATION и XBOX в Мурманске{% endblock %}
+
+{% block content %}
+    <hr>
+    <table border="0" width="100%" cellspacing="1" cellpadding="2" class="eBlock">
+    <tbody><tr><td width="90%"><div class="eTitle">{{ link.title }}</div></td><td align="right" style="white-space: nowrap;font:9px;">{{ link.created_at }} </td></tr>
+    <tr>
+    <td colspan="2" class="eMessage">
+
+    <img src="{{ link.image.url }}" border="none" width="200" style="margin: 2px 7px 5px 0px" align="left">
+
+        {{ link.content|safe }}
+    </td></tr>
+    <tr><td class="eDetails1" colspan="2">  Автор: <a href="https://web.archive.org/web/20100308114913/http://www.play-murmansk.ru/index/8-11" target="_blank">{{ link.author }}</a>
+    </td></tr>
+    <tr><td class="eDetails2" colspan="2">
+      Добавлено: {{ link.created_at }}
+      | Просмотров: <b>{{ link.views }}</b>
+   </td></tr>
+    </tbody></table>
+
+    {% include "comments.html" %}
+{% endblock %}

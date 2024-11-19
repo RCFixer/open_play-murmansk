@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+
+{% block title %}Полезные ссылки - PLAYSTATION и XBOX в Мурманске{% endblock %}
+
+{% block content %}
+<td valign="top" style="padding:0px 10px 0px 10px;"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td width="80%"><a class="m" href="https://web.archive.org/web/20100907080651/http://play-murmansk.ru/">Главная</a> » Доска объявлений (<b>119</b>)</td>
+<td align="right" style="white-space: nowrap;"></td>
+</tr>
+</tbody></table>
+<hr>
+    <table border="0" cellspacing="1" cellpadding="0" width="100%" class="catsTable">
+   <tbody>
+   {% for category_link in link_category_list %}
+      <tr>
+         <td style="width:100%" class="catsTd" id="cid1" valign="top"><a href="https://web.archive.org/web/20100907080651/http://play-murmansk.ru/board/1" class="catName">{{ category_link.0 }}</a> <span class="catNumData" style="unicode-bidi:embed;">[59]</span></td>
+      </tr>
+   {% endfor %}
+   </tbody>
+</table>
+<hr>
+<span class="pagesBlockuz1"><b class="swchItemA"><span>1</span></b> <a class="swchItem" href="javascript://" rel="nofollow" onclick="spages('2');return false;"><span>2</span></a> <a class="swchItem" href="javascript://" rel="nofollow" onclick="spages('3');return false;"><span>3</span></a>  <a class="swchItem" href="javascript://" rel="nofollow" onclick="spages('2');return false;"><span>»</span></a></span>
+<hr>
+<div id="myGrid" style="display:none;"><div style="position:fixed;width:100%;text-align:center;padding-top:250px;"><img alt="" src="https://web.archive.org/web/20100907080651im_/http://s28.ucoz.net/img/ma/m/i3.gif" border="0" width="220" height="19"></div></div>
+    <div id="allEntries">
+        {% for links in link_list %}
+        <div><table border="0" cellpadding="0" cellspacing="0" width="100%" class="eBlock"><tbody><tr><td style="padding:3px;">
+
+        <div class="eTitle" style="text-align:left;"><a href="{% url 'link_detail' links.id %}">{{ links.title }}</a></div>
+        <div class="eMessage" style="text-align:left;clear:both;padding-top:2px;padding-bottom:2px;">
+
+        <img src="{{ links.image.url }}" border="none" width="150" style="margin: 2px 7px 5px 0px" align="left">
+
+        {{ links.content|strip_p_tags_for_news_list|safe }}
+        <br>
+
+        </div> <div class="eDetails" style="clear:both;">
+        <a href="https://web.archive.org/web/20100907080651/http://play-murmansk.ru/board/1">{{ links.category }}</a>
+        | <a href="{% url 'link_detail' links.id %}">Комментарии ({{ links.comments_count }})</a>
+        </div></td></tr></tbody></table><br></div>
+    {% endfor %}
+    </div>
+    <hr>
+    {% include "pagination.html" %}
+<hr>
+</td>
+{% endblock %}

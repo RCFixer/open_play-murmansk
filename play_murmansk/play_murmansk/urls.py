@@ -29,6 +29,7 @@ urlpatterns = [
     path('blog/', include('reviews.urls')),
     path('news/', include('news.urls')),
     path('forum/', include('forum.urls')),
+    path('links/', include('links.urls')),
 ]
 
 if settings.DEBUG:
