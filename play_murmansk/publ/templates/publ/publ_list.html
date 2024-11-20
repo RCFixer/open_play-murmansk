@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+
+{% block title %}Отзывы Об Играх - PLAYSTATION и XBOX в Мурманске{% endblock %}
+
+{% block content %}
+    <p></p>
+    <div id="myGrid" style="display:none;">
+       <div style="position:fixed;width:100%;text-align:center;padding-top:250px;"><img alt="" src="20110828124907im_/http://s28.ucoz.net/img/ma/m/i3.gif" border="0" width="220" height="19"></div>
+    </div>
+    <script type="text/javascript">function spages(p){if (1){document.location.href='http'+'://play-murmansk.ru/news/'+p; return;}try{document.getElementById('myGrid').style.cssText = 'position:absolute; z-index:8; top:0;left:0; display:block; background: url(\'http://s28.ucoz.net/img/fr/g.gif\'); text-align:center; width:'+document.body.scrollWidth+'px; height:'+document.body.scrollHeight+'px;';}catch(e){}_uPostForm('',{url:'http'+'://play-murmansk.ru/index/0-0-0-'+p+'-'+Math.floor(Math.random()*1e8)});}</script>
+    <div id="allEntries">
+
+        {% for publ in publ_list %}
+        <div>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="eBlock"><tbody><tr><td style="padding:3px;">
+
+            <div class="eTitle" style="text-align:left;"><a href="{% url 'publ_detail' publ.id %}">{{ publ.title }}</a></div>
+
+            <div class="eMessage" style="text-align:left;clear:both;padding-top:2px;padding-bottom:2px;">
+
+
+            {{ publ.short_content|strip_p_tags_for_news_list|safe }}
+            <a href="{% url 'publ_detail' publ.id %}">Читать статью полностью &gt;&gt;&gt;</a>
+
+            </div>
+            <div class="eDetails" style="clear:both;">
+
+            Просмотров: {{ publ.views }} |
+            Добавил: <a href="https://web.archive.org/web/20100908022644/http://play-murmansk.ru/index/8-335" target="_blank">{{ publ.author }}</a> |
+            Дата: <span title="19:11">{{ publ.created_at }}</span>
+
+            | <a href="{% url 'publ_detail' publ.id %}">Комментарии ({{ publ.comments_count }})</a>
+            </div></td></tr></tbody></table><br></div>
+    {% endfor %}
+
+        {% include "pagination.html" %}
+    </div>
+
+{% endblock %}
