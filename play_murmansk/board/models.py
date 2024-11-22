@@ -2,16 +2,17 @@ from django.db import models
 from django.conf import settings
 from django_prose_editor.sanitized import SanitizedProseEditorField
 from django.contrib.contenttypes.fields import GenericRelation
+from django.utils.translation import gettext_lazy as _
 
 from core.models import CommonComment
 
 
 class AdCategory(models.TextChoices):
-    SELL = 'ПРОДАМ'
-    BUY = 'КУПЛЮ'
-    EXCHANGE = 'ОБМЕНЯЮ'
-    VARIOUS = 'РАЗНОЕ'
-    SERVICES = 'УСЛУГИ'
+    SELL = 'SELL', _('ПРОДАМ')
+    BUY = 'BUY', _('КУПЛЮ')
+    EXCHANGE = 'EXCHANGE', _('ОБМЕНЯЮ')
+    VARIOUS = 'VARIOUS', _('РАЗНОЕ')
+    SERVICES = 'SERVICES', _('УСЛУГИ')
 
 class Ad(models.Model):
     title = models.CharField(max_length=255)

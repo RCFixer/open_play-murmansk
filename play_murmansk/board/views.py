@@ -1,23 +1,45 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.db.models import Count
+from django.urls import reverse
 
 from .models import Ad, AdCategory
 from core.views import ViewsCount, PostInfoSaturation, PostMethodCommentForm
+from .forms import AdForm
 
 class BoardListView(ListView):
     model = Ad
     template_name = 'board/board_list.html'
     context_object_name = 'board_list'
+    paginate_by = 10
 
     def get_queryset(self):
+        # Получение категории из запроса
+        category_filter = self.request.GET.get('category')
         queryset = Ad.objects.annotate(
             comments_count=Count('comments')
-        ).order_by('-id')
-        return queryset
+        )
+
+        # Фильтрация по категории, если указана
+        if category_filter:
+            queryset = queryset.filter(category=category_filter)
+
+        return queryset.order_by('-id')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        # Список категорий с подсчётом записей в каждой категории
+        category_counts = Ad.objects.values('category').annotate(
+            count=Count('id')
+        )
+
+        # Преобразование в словарь
+        category_counts_dict = {item['category']: item['count'] for item in category_counts}
+
+        # Добавление в контекст
+        context['board_category_counts'] = category_counts_dict
+        # Список всех категорий
         context['board_category_list'] = AdCategory.choices
+        # Текущая категория для отображения
         return context
 
 class BoardDetailView(ViewsCount, DetailView, PostMethodCommentForm):
@@ -35,12 +57,16 @@ class BoardDetailView(ViewsCount, DetailView, PostMethodCommentForm):
 
 class BoardCreateView(CreateView):
     model = Ad
-    fields = ['title', 'content', 'image', 'category']
+    form_class = AdForm
     template_name = 'board/board_form.html'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+    def get_success_url(self):
+        # Перенаправление на детальную страницу созданного объявления
+        return reverse('board_detail', kwargs={'pk': self.object.pk})
 
 class BoardUpdateView(UpdateView):
     model = Ad
