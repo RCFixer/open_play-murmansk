@@ -1,7 +1,9 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.db.models import Count
+from django.urls import reverse
 
 from .models import Review
+from .forms import ReviewForm
 from core.views import ViewsCount, PostInfoSaturation, PostMethodCommentForm
 
 class ReviewListView(ListView):
@@ -36,12 +38,16 @@ class ReviewDetailView(ViewsCount, DetailView, PostMethodCommentForm):
 
 class ReviewCreateView(CreateView):
     model = Review
-    fields = ['title', 'content', 'image']
+    form_class = ReviewForm
     template_name = 'reviews/review_form.html'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+    def get_success_url(self):
+        # Перенаправление на детальную страницу созданного объявления
+        return reverse('review_detail', kwargs={'pk': self.object.pk})
 
 class ReviewUpdateView(UpdateView):
     model = Review

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Создать обзор - PLAYSTATION и XBOX в Мурманске{% endblock %}
+
+{% block content %}
+<style>
+  form div {
+    margin-bottom: 20px;
+}
+</style>
+<h2>Создать обзор</h2>
+<form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.errors }} {# Always makes sense #}
+            {{ form.media }}  {# This is the important line! #}
+            {{ form.as_div }}
+            <button type="submit" class="commSbmFl">Создать</button>
+        </form>
+{% endblock %}
