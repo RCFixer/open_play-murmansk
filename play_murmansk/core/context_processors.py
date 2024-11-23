@@ -2,6 +2,7 @@ from core.models import CommonComment, Advertisement, UpcomingGame
 from forum.models import ForumTopic
 from reviews.models import Review
 from board.models import Ad
+from .forms import CustomAuthenticationForm
 
 def latest_comments(request):
     latest_comments_list = CommonComment.objects.order_by('-id')[:20]
@@ -26,3 +27,9 @@ def load_ads(request):
 def upcoming_game(request):
     latest_upcoming_game = UpcomingGame.objects.last()
     return {'latest_upcoming_game': latest_upcoming_game}
+
+def login_form_processor(request):
+    """
+    Контекстный процессор для добавления формы авторизации.
+    """
+    return {'login_form': CustomAuthenticationForm()}

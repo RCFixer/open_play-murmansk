@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.forms import AuthenticationForm
+
 from .models import CommonComment
 
 class CommonCommentForm(forms.ModelForm):
@@ -22,3 +24,19 @@ class CommonCommentForm(forms.ModelForm):
         if commit:
             comment.save()
         return comment
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': "loginField",
+                                                             'type': "text",
+                                                             'name': "user",
+                                                             'value': "",
+                                                             'size': "20",
+                                                             'style': "width:100%;",
+                                                             'maxlength': "50"}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': "loginField",
+                                                             'type': "password",
+                                                             'name': "password",
+                                                             'size': "20",
+                                                             'style': "width:100%;",
+                                                             'maxlength': "15"}))

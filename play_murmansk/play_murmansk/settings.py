@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'publ',
     'django_summernote',
     'django_prose_editor',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -79,6 +80,7 @@ TEMPLATES = [
                 'core.context_processors.latest_boards',
                 'core.context_processors.load_ads',
                 'core.context_processors.upcoming_game',
+                'core.context_processors.login_form_processor',
             ],
         },
     },
@@ -153,3 +155,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

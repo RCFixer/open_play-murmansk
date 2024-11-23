@@ -8,49 +8,63 @@
                   <tr>
                      <td valign="top" class="column">
                         <!--U1CLEFTER1Z--><!-- <block10> -->
-                        <table border="0" cellpadding="0" cellspacing="0" class="boxTable"></table>
                         <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
                            <tbody>
-                              <tr>
-                                 <td class="boxTitle"><b>Добро пожаловать!</b></td>
-                              </tr>
-                              <tr>
-                                 <td class="boxContent">
-                                    <div class="boxText">
-                                       <!-- <bc> -->
-                                       <div id="blk549174" style="border:1px solid #CCCCCC;position:absolute;z-index:82;background:url('20110828124907im_/http://s28.ucoz.net/img/fr/g.gif');display:none;"></div>
-                                       <form id="frmLg549174" action="/web/20110828124907/http://play-murmansk.ru/index/sub/" method="post" style="margin:0" onsubmit="sendFrm549174();return false;">
-                                          <table border="0" cellspacing="1" cellpadding="0" width="100%">
-                                             <tbody>
-                                                <tr>
-                                                   <td width="20%" nowrap="nowrap">Логин:</td>
-                                                   <td><input class="loginField" type="text" name="user" value="" size="20" style="width:100%;" maxlength="50"></td>
-                                                </tr>
-                                                <tr>
-                                                   <td>Пароль:</td>
-                                                   <td><input class="loginField" type="password" name="password" size="20" style="width:100%" maxlength="15"></td>
-                                                </tr>
-                                             </tbody>
-                                          </table>
-                                          <table border="0" cellspacing="1" cellpadding="0" width="100%">
-                                             <tbody>
-                                                <tr>
-                                                   <td nowrap=""><input id="remsitePage1" type="checkbox" name="rem" value="1" checked=""><label for="remsitePage1">запомнить</label> </td>
-                                                   <td align="right" valign="top"><input class="loginButton" name="sbm" type="submit" value="Вход"></td>
-                                                </tr>
-                                                <tr>
-                                                   <td colspan="2">
-                                                      <div style="font-size:7pt;text-align:center;"><a class="m" href="javascript://" rel="nofollow" onclick="new _uWnd('Prm','Напоминание пароля',300,130,{autosize:1,closeonesc:1},{url:'/index/5'});return false;">Забыл пароль</a> · <a class="m" href="20110828124907/http://play-murmansk.ru/index/3">Регистрация</a></div>
-                                                   </td>
-                                                </tr>
-                                             </tbody>
-                                          </table>
-                                          <input type="hidden" name="a" value="2"><input type="hidden" name="ajax" value="1"><input type="hidden" name="rnd" value="174">
-                                       </form>
-                                       <!-- </bc> -->
-                                    </div>
-                                 </td>
-                              </tr>
+                              {% if user.is_authenticated %}
+                              <tr><td class="boxTitle"><b><font size="3pt">{{ user.username }}</font></b></td></tr>
+                              <tr><td class="boxContent" align="center"><div class="boxText">
+                              <img class="userAvatar" title="{{ user.username }}" src="{{ user.avatar.url }}" border="0" width="64">
+                               <br><br>
+                              <!-- <br>
+                              Пожалуйста зарегистрируйтесь или авторизуйтесь! -->
+                              <form method="post" action="{% url 'logout' %}">
+                                  {% csrf_token %}
+                                  <button class="loginButton" type="submit">Logout</button>
+                              </form>
+                              </div></td></tr>
+
+                               {% else %}
+
+                                 <tr>
+                                    <td class="boxContent">
+                                       <div class="boxText">
+                                          <!-- <bc> -->
+                                          <div id="blk549174" style="border:1px solid #CCCCCC;position:absolute;z-index:82;background:url('20110828124907im_/http://s28.ucoz.net/img/fr/g.gif');display:none;"></div>
+                                   <form method="post" action="{% url 'login' %}">
+                                       {% csrf_token %}
+                                      <table border="0" cellspacing="1" cellpadding="0" width="100%">
+                                          <tbody>
+                                             <tr>
+                                                <td width="20%" nowrap="nowrap">Логин:</td>
+                                                <td>{{ login_form.username }}</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Пароль:</td>
+                                                <td>{{ login_form.password }}</td>
+                                             </tr>
+<!--                                                         <button type="submit">Login</button>-->
+                                          </tbody>
+                                       </table>
+                                      <table border="0" cellspacing="1" cellpadding="0" width="100%">
+                                          <tbody>
+                                             <tr>
+                                                <td align="right" valign="top"><input class="loginButton" name="sbm" type="submit" value="Вход"></td>
+                                             </tr>
+                                             <tr>
+                                                <td colspan="2">
+                                                   <div style="font-size:7pt;text-align:center;"> <a class="m" href="20110828124907/http://play-murmansk.ru/index/3">Регистрация</a></div>
+                                                </td>
+                                             </tr>
+                                          </tbody>
+                                       </table>
+                                   </form>
+                                 </div>
+                           </td>
+                        </tr>
+                               {% endif %}
+                        <input type="hidden" name="a" value="2"><input type="hidden" name="ajax" value="1"><input type="hidden" name="rnd" value="174">
+                     </form>
+                     <!-- </bc> -->
                            </tbody>
                         </table>
                         <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
