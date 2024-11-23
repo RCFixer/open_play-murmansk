@@ -39,7 +39,13 @@
                                                         <tr>
                                                             <td class="postTdInfo" valign="top">
                                                                 <img title="play" class="userAvatar" border="0" src="{{ message.author.avatar.url }}" />
-                                                                <div class="postUserGroup">{{ message.author.groups.first }}</div>
+                                                                {% if message.author.is_superuser %}
+                                                                    <div class="postUserGroup">Администратор</div>
+                                                                {% elif message.author.is_staff %}
+                                                                    <div class="postUserGroup">Модератор</div>
+                                                                {% else %}
+                                                                    <div class="postUserGroup">Игрок</div>
+                                                                {% endif %}
                                                                 {% if message.author.psn_id %}
                                                                     <div class="psnid">PSN ID: {{ message.author.psn_id }}</div>
                                                                 {% endif %}
