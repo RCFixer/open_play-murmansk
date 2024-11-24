@@ -62,7 +62,11 @@
                                        <li><a href="{% url 'publ_list' %}" target="_self">Полезные Статьи</a></li>
                                     </ul>
                                  </li>
-                                 <li><a href="20110828124907/http://play-murmansk.ru/index/3">Регистрация</a></li>
+                                 {% if user.is_authenticated %}
+                                    <li><a href="{% url 'profile' %}">Мой профиль</a></li>
+                                 {% else %}
+                                    <li><a href="{% url 'register' %}">Регистрация</a></li>
+                                 {% endif %}
                               </ul>
                            </div>
                         </div>

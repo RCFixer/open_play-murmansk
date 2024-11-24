@@ -10,7 +10,9 @@
     <tr>
     <td colspan="2" class="eMessage">
 
-    <img src="{{ news.image.url }}" border="none" width="200" style="margin: 2px 7px 5px 0px" align="left">
+    {% if news.image %}
+        <img src="{{ news.image.url }}" border="none" width="200" style="margin: 2px 7px 5px 0px" align="left">
+    {% endif %}
 
         {{ news.content|safe }}
     </td></tr>

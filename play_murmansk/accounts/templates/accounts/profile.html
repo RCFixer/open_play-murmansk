@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Мой рофиль - PLAYSTATION и XBOX в Мурманске{% endblock %}
+
+{% block content %}
+    <h2>Привет, {{ user.username }}!</h2>
+    <p>PSN: {{ user.psn_id }}</p>
+    <p>GameTag: {{ user.gametag_id }}</p>
+    <p>Nintendo ID: {{ user.nintendo_id }}</p>
+    <p>Steam: {{ user.steam_id }}</p>
+    <a href="{% url 'update_profile' %}" style="button-style">Обновление профиля</a>
+{% endblock %}

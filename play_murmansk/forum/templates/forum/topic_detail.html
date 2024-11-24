@@ -38,7 +38,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="postTdInfo" valign="top">
-                                                                <img title="play" class="userAvatar" border="0" src="{{ message.author.avatar.url }}" />
+                                                                <img title="{{ message.author }}" class="userAvatar" border="0" src="{{ message.author.avatar.url }}" width="64" />
                                                                 {% if message.author.is_superuser %}
                                                                     <div class="postUserGroup">Администратор</div>
                                                                 {% elif message.author.is_staff %}
@@ -49,13 +49,13 @@
                                                                 {% if message.author.psn_id %}
                                                                     <div class="psnid">PSN ID: {{ message.author.psn_id }}</div>
                                                                 {% endif %}
-                                                                {% if message.author.psn_id %}
+                                                                {% if message.author.gametag_id %}
                                                                     <div class="psnid">GameTag: {{ message.author.gametag_id }}</div>
                                                                 {% endif %}
-                                                                {% if message.author.psn_id %}
+                                                                {% if message.author.nintendo_id %}
                                                                     <div class="psnid">Nintendo ID: {{ message.author.nintendo_id }}</div>
                                                                 {% endif %}
-                                                                {% if message.author.psn_id %}
+                                                                {% if message.author.steam_id %}
                                                                     <div class="psnid">Steam: {{ message.author.steam_id }}</div>
                                                                 {% endif %}
                                                             </td>

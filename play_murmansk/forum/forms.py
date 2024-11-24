@@ -15,7 +15,6 @@ class ForumMessageForm(forms.ModelForm):
         comment = super().save(commit=False)
         comment.author = self.author
         comment.topic = self.topic
-        comment.author = self.author
 
         if commit:
             comment.save()

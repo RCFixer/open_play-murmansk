@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from django.template.defaultfilters import default
 from django_prose_editor.sanitized import SanitizedProseEditorField
 
 class ForumSection(models.Model):

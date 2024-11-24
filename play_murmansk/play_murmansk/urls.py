@@ -35,6 +35,7 @@ urlpatterns = [
     path('forum/', include('forum.urls')),
     path('links/', include('links.urls')),
     path('publ/', include('publ.urls')),
+    path('accounts/', include('accounts.urls')),
 ]
 
 if settings.DEBUG:
