@@ -36,6 +36,7 @@ urlpatterns = [
     path('links/', include('links.urls')),
     path('publ/', include('publ.urls')),
     path('accounts/', include('accounts.urls')),
+    path('core/', include('core.urls')),
 ]
 
 if settings.DEBUG:

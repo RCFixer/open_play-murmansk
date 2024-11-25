@@ -80,6 +80,9 @@
                                                                                     />
                                                                                 </a>
                                                                             </td>
+                                                                            {% if user.is_staff %}
+                                                                                <button class="delete-comment" data-comment-id="{{ message.id }}">Удалить</button>
+                                                                            {% endif %}
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
@@ -126,5 +129,50 @@
     <br />
 </div>
 
+<script>
+    document.querySelectorAll('.delete-comment').forEach(button => {
+    button.addEventListener('click', function() {
+        const commentId = this.dataset.commentId;
+        if (confirm('Вы точно хотите удалить этот комментарий?')) {
+            fetch(`/forum/message/${commentId}/delete/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken') // Убедитесь, что CSRF-токен включён
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                    // Удалить элемент комментария из DOM
+                    document.querySelector(`#comment-${commentId}`).remove();
+                } else if (data.error) {
+                    alert('Ошибка: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Не удалось удалить комментарий.');
+            });
+        }
+    });
+});
+
+// Функция для получения CSRF-токена
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
 
 {% endblock %}

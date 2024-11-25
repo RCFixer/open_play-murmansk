@@ -1,5 +1,9 @@
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import redirect
+from django.http import JsonResponse
+from django.views import View
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.shortcuts import get_object_or_404
 
 from .models import CommonComment
 from core.forms import CommonCommentForm
@@ -62,3 +66,23 @@ class PostMethodCommentForm:
         context = self.get_context_data(object=object_item)
         context['form'] = form
         return self.render_to_response(context)
+
+
+class CommentDeleteView(UserPassesTestMixin, View):
+    def test_func(self):
+        """
+        Проверяет, является ли пользователь staff.
+        """
+        return self.request.user.is_staff
+
+    def post(self, request, *args, **kwargs):
+        """
+        Удаляет комментарий и возвращает JSON-ответ.
+        """
+        if not self.test_func():
+            return JsonResponse({'error': 'Permission denied'}, status=403)
+
+        comment_id = self.kwargs.get('pk')
+        comment = get_object_or_404(CommonComment, pk=comment_id)
+        comment.delete()
+        return JsonResponse({'message': 'Комментарий удалён'})

@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (
     ForumSectionListView, ForumTopicListView, ForumTopicDetailView,
-    ForumMessageUpdateView, ForumMessageDeleteView
+    ForumMessageUpdateView, ForumCommentDeleteView
 )
 
 urlpatterns = [
@@ -9,5 +9,5 @@ urlpatterns = [
     path('<int:subsection_id>/topic/', ForumTopicListView.as_view(), name='forum_topic_list'),
     path('topic/<int:pk>/', ForumTopicDetailView.as_view(), name='forum_topic_detail'),
     path('message/<int:pk>/update/', ForumMessageUpdateView.as_view(), name='forum_message_update'),
-    path('message/<int:pk>/delete/', ForumMessageDeleteView.as_view(), name='forum_message_delete'),
+    path('message/<int:pk>/delete/', ForumCommentDeleteView.as_view(), name='forum_message_delete'),
 ]

@@ -10,7 +10,12 @@
             <div id="comEnt{{ comment.id }}"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="cBlock1"><tbody><tr><td style="padding:3px;">
     <div class="cDate" style="float:right;font:7pt;"><span>{{ comment.created_at }}</span> </div>
     <div class="cTop" style="text-align:left;">
-        <b><span style="padding-left:10px; color: black;" >{{ comment.author }}</span></b> {{ comment.created_at }}
+        <b><span style="padding-left:10px; color: black;" >{{ comment.author }}</span></b>
+        {% if user.is_staff %}
+            <button class="delete-comment" data-comment-id="{{ comment.id }}">Удалить</button>
+        {% endif %}
+        {{ comment.created_at }}
+
 
     </div>
     <div class="cMessage" style="color:black;text-align:left;clear:both;padding-left:10px;padding-top:0px;padding-bottom:2px; ">{{ comment.content|strip_p_tags|safe}}</div>
@@ -39,3 +44,49 @@
     {% else %}
         <div align="center" class="commReg">Добавлять комментарии могут только зарегистрированные пользователи.<br>[ <a class="m" href="https://web.archive.org/web/20100907171046/http://play-murmansk.ru/index/3">Регистрация</a> | <a class="m" href="javascript://" rel="nofollow" onclick="new _uWnd('LF',' ',-250,-110,{autosize:0,closeonesc:1,resize:1},{url:'/index/40'});return false;">Вход</a> ]</div>
     {% endif %}
+
+<script>
+    document.querySelectorAll('.delete-comment').forEach(button => {
+    button.addEventListener('click', function() {
+        const commentId = this.dataset.commentId;
+        if (confirm('Вы точно хотите удалить этот комментарий?')) {
+            fetch(`/core/comments/${commentId}/delete/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken') // Убедитесь, что CSRF-токен включён
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                    // Удалить элемент комментария из DOM
+                    document.querySelector(`#comment-${commentId}`).remove();
+                } else if (data.error) {
+                    alert('Ошибка: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Не удалось удалить комментарий.');
+            });
+        }
+    });
+});
+
+// Функция для получения CSRF-токена
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>

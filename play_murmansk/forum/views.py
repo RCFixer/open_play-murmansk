@@ -1,8 +1,12 @@
 from django.shortcuts import redirect
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, UpdateView
 from django.db.models import OuterRef, Subquery, Count
 from django.db import models
 from django.core.paginator import Paginator
+from django.http import JsonResponse
+from django.views import View
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.shortcuts import get_object_or_404
 
 from .models import ForumSection, ForumSubsection, ForumTopic, ForumMessage
 from .forms import ForumMessageForm
@@ -131,7 +135,25 @@ class ForumMessageUpdateView(UpdateView):
     fields = ['content']
     template_name = 'forum/message_form.html'
 
-class ForumMessageDeleteView(DeleteView):
-    model = ForumMessage
-    template_name = 'forum/message_confirm_delete.html'
-    success_url = '/forum/'
+
+class ForumCommentDeleteView(UserPassesTestMixin, View):
+    def test_func(self):
+        """
+        Проверяет, является ли пользователь staff.
+        """
+        return self.request.user.is_staff
+
+    def post(self, request, *args, **kwargs):
+        """
+        Удаляет комментарий и возвращает JSON-ответ.
+        """
+        if not self.test_func():
+            return JsonResponse({'error': 'Permission denied'}, status=403)
+
+        comment_id = self.kwargs.get('pk')
+        comment = get_object_or_404(ForumMessage, pk=comment_id)
+        topic_subsection = comment.topic.subsection
+        topic_subsection.message_count -= 1
+        topic_subsection.save()
+        comment.delete()
+        return JsonResponse({'message': 'Сообщение удалено'})
