@@ -3,20 +3,8 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django_prose_editor.sanitized import SanitizedProseEditorField
-
-class OnlineUser(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    last_seen = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.user.username
-
-class Guest(models.Model):
-    session_key = models.CharField(max_length=40, unique=True)
-    last_seen = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.session_key
+from django.utils.timezone import now
+from accounts.models import CustomUser
 
 class CommonComment(models.Model):
     object_id = models.PositiveIntegerField()
@@ -59,3 +47,11 @@ class UpcomingGame(models.Model):
     class Meta:
         verbose_name = 'Ждем и Верим'
         verbose_name_plural = 'Ждем и Верим'
+
+class UserActivity(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True)
+    session_key = models.CharField(max_length=40, null=True, blank=True)
+    last_activity = models.DateTimeField(default=now)
+
+    def __str__(self):
+        return f"{self.user if self.user else 'Guest'} - {self.last_activity}"

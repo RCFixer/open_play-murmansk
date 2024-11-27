@@ -59,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'core.middleware.ActivityMiddleware',
 ]
 
 ROOT_URLCONF = 'play_murmansk.urls'
@@ -81,6 +82,7 @@ TEMPLATES = [
                 'core.context_processors.load_ads',
                 'core.context_processors.upcoming_game',
                 'core.context_processors.login_form_processor',
+                'core.context_processors.get_recent_activity',
             ],
         },
     },

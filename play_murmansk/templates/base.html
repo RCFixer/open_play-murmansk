@@ -77,10 +77,12 @@
                               <tr>
                                  <td class="boxContent" align="center">
                                     <div class="boxText">
-                                       <div class="tOnline" id="onl1">Сейчас на сайте <b>9</b></div>
-                                       <div class="gOnline" id="onl2">Гостей <b>2</b></div>
-                                       <div class="uOnline" id="onl3">Участников <b>7</b></div>
-                                       <a class="groupUser" href="20110828124907/http://play-murmansk.ru/index/8-1127" target="_blank">death</a>, <a class="groupUser" href="20110828124907/http://play-murmansk.ru/index/8-2908" target="_blank">play4</a>, <a class="groupUser" href="20110828124907/http://play-murmansk.ru/index/8-3131" target="_blank">KINGpunk</a>, <a class="groupOther2" href="20110828124907/http://play-murmansk.ru/index/8-41" target="_blank">U1</a>, <a class="groupVerify" href="20110828124907/http://play-murmansk.ru/index/8-2460" target="_blank">misterdonald</a>, <a class="groupUser" href="20110828124907/http://play-murmansk.ru/index/8-2478" target="_blank">look</a>, <a class="groupOther2" href="20110828124907/http://play-murmansk.ru/index/8-2405" target="_blank">Adskiy</a>
+                                       <div class="tOnline" id="onl1">Сейчас на сайте <b>{{ total_users_count }}</b></div>
+                                       <div class="gOnline" id="onl2">Гостей <b>{{ active_guests }}</b></div>
+                                       <div class="uOnline" id="onl3">Участников <b>{{ active_users|length }}</b></div>
+                                       {% for active_user in active_users %}
+                                          <span class="groupUser" style="color: #CC6600">{{ active_user.user__username }}</span>{% if not forloop.last %}, {% endif %}
+                                       {% endfor %}
                                     </div>
                                  </td>
                               </tr>
