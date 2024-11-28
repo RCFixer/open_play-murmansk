@@ -1,6 +1,8 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.db.models import Count
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 from .models import Ad, AdCategory
 from core.views import ViewsCount, PostInfoSaturation, PostMethodCommentForm
@@ -55,6 +57,7 @@ class BoardDetailView(ViewsCount, DetailView, PostMethodCommentForm):
 
         return context
 
+@method_decorator(login_required, name='dispatch')
 class BoardCreateView(CreateView):
     model = Ad
     form_class = AdForm
@@ -67,13 +70,3 @@ class BoardCreateView(CreateView):
     def get_success_url(self):
         # Перенаправление на детальную страницу созданного объявления
         return reverse('board_detail', kwargs={'pk': self.object.pk})
-
-class BoardUpdateView(UpdateView):
-    model = Ad
-    fields = ['title', 'content', 'image', 'category']
-    template_name = 'board/board_form.html'
-
-class BoardDeleteView(DeleteView):
-    model = Ad
-    template_name = 'board/board_confirm_delete.html'
-    success_url = '/board/'

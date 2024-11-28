@@ -5,9 +5,17 @@
 
 {% block content %}
     <p></p>
-    <div id="myGrid" style="display:none;">
-       <div style="position:fixed;width:100%;text-align:center;padding-top:250px;"><img alt="" src="20110828124907im_/http://s28.ucoz.net/img/ma/m/i3.gif" border="0" width="220" height="19"></div>
-    </div>
+    {% if user.is_authenticated %}
+        <table width="100%">
+        <tbody>
+        <tr>
+            <td align="left" width="80%"></td>
+            <td align="right" width="20%" class="loginButton" style="font-size:7pt;text-align:center;"> <a class="m" href="{% url 'review_create' %}">Добавить статью</a></td>
+        </tr>
+        </tbody>
+            </table>
+            <br>
+    {% endif %}
     <div id="allEntries">
 
         {% for review in review_list %}

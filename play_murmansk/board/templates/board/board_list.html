@@ -8,6 +8,9 @@
 <tbody><tr>
 <td width="80%"><a class="m" href="https://web.archive.org/web/20100907080651/http://play-murmansk.ru/">Главная</a> » Доска объявлений (<b>119</b>)</td>
 <td align="right" style="white-space: nowrap;"></td>
+{% if user.is_authenticated %}
+    <td class="loginButton" style="font-size:7pt;text-align:center;"> <a class="m" href="{% url 'board_create' %}">Добавить объявление</a></td>
+{% endif %}
 </tr>
 </tbody></table>
 <hr>

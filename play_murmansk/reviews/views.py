@@ -1,6 +1,8 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.db.models import Count
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 from .models import Review
 from .forms import ReviewForm
@@ -36,6 +38,7 @@ class ReviewDetailView(ViewsCount, DetailView, PostMethodCommentForm):
 
         return context
 
+@method_decorator(login_required, name='dispatch')
 class ReviewCreateView(CreateView):
     model = Review
     form_class = ReviewForm
@@ -49,12 +52,3 @@ class ReviewCreateView(CreateView):
         # Перенаправление на детальную страницу созданного объявления
         return reverse('review_detail', kwargs={'pk': self.object.pk})
 
-class ReviewUpdateView(UpdateView):
-    model = Review
-    fields = ['title', 'content', 'image']
-    template_name = 'reviews/review_form.html'
-
-class ReviewDeleteView(DeleteView):
-    model = Review
-    template_name = 'reviews/review_confirm_delete.html'
-    success_url = '/reviews/'

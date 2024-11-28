@@ -43,13 +43,3 @@ class NewsCreateView(CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-
-class NewsUpdateView(UpdateView):
-    model = News
-    fields = ['title', 'content', 'image', 'source']
-    template_name = 'news/news_form.html'
-
-class NewsDeleteView(DeleteView):
-    model = News
-    template_name = 'news/news_confirm_delete.html'
-    success_url = '/news/'

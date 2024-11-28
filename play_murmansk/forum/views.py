@@ -139,11 +139,6 @@ class ForumTopicDetailView(DetailView, PostMethodCommentForm):
         context['messages'] = page_obj.object_list  # Сообщения для текущей страницы
         return context
 
-class ForumMessageUpdateView(UpdateView):
-    model = ForumMessage
-    fields = ['content']
-    template_name = 'forum/message_form.html'
-
 
 class ForumCommentDeleteView(UserPassesTestMixin, View):
     def test_func(self):
