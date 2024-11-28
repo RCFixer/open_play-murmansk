@@ -68,8 +68,12 @@ class ForumTopicListView(ListView):
     def get_queryset(self):
         subsection_id = self.kwargs.get('subsection_id')
 
-        # Фильтруем темы по subsection_id
-        queryset = ForumTopic.objects.filter(subsection_id=subsection_id)
+        # Если subsection_id указан, фильтруем по нему
+        if subsection_id:
+            queryset = ForumTopic.objects.filter(subsection_id=subsection_id)
+        else:
+            # Если subsection_id нет, берем все записи
+            queryset = ForumTopic.objects.all()
 
         # Добавляем количество сообщений в каждой теме
         queryset = queryset.annotate(
@@ -86,8 +90,12 @@ class ForumTopicListView(ListView):
             last_message_time=Subquery(last_message_subquery.values('created_at'))
         ).order_by('-id')
 
+        pinned_topics = []
+
         # Разделяем queryset на две части
-        pinned_topics = queryset.filter(is_pinned=True).order_by('-id')
+        if subsection_id:
+            pinned_topics = queryset.filter(is_pinned=True).order_by('-id')
+
         unpinned_topics = queryset.filter(is_pinned=False).order_by('-id')
 
         # Сохраняем pinned_topics для передачи в контекст
@@ -98,6 +106,7 @@ class ForumTopicListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['subsection_id'] = self.kwargs.get('subsection_id')
+        context['subsection'] = ForumSubsection.objects.filter(id=self.kwargs.get('subsection_id')).first()
         context['pinned_topics'] = self.pinned_topics
         context['current_topics'] = len(self.pinned_topics) + len(context['topic_list'])
         context['all_topics'] = len(self.pinned_topics) + len(self.object_list)

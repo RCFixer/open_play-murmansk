@@ -19,7 +19,11 @@
                             <tr>
                                 <td class="gTableTop" colspan="7">
                                     <div style="float: right;" class="gTopCornerRight"></div>
-                                    ИГРЫ, общие для всех консолей
+                                    {% if subsection %}
+                                        {{ subsection.title }}
+                                    {% else %}
+                                        Ленточный вариант форума
+                                    {% endif %}
                                 </td>
                             </tr>
                             <tr>
