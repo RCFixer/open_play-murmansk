@@ -4,9 +4,9 @@
 {% block title %}Полезные ссылки - PLAYSTATION и XBOX в Мурманске{% endblock %}
 
 {% block content %}
-<td valign="top" style="padding:0px 10px 0px 10px;"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr>
-<td width="80%"><a class="m" href="https://web.archive.org/web/20100907080651/http://play-murmansk.ru/">Главная</a> » Доска объявлений (<b>119</b>)</td>
+<td width="80%"><a class="m" href="/">Главная</a> » Доска объявлений (<b>{{ link_list|length }}</b>)</td>
 <td align="right" style="white-space: nowrap;"></td>
 </tr>
 </tbody></table>
@@ -45,5 +45,4 @@
     <hr>
     {% include "pagination.html" %}
 <hr>
-</td>
 {% endblock %}
