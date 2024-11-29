@@ -6,7 +6,7 @@
 {% block content %}
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr>
-<td width="80%"><a class="m" href="https://web.archive.org/web/20100907080651/http://play-murmansk.ru/">Главная</a> » Доска объявлений (<b>119</b>)</td>
+<td width="80%"><a class="m" href="/">Главная</a> » Доска объявлений (<b>{{ board_list|length }}</b>)</td>
 <td align="right" style="white-space: nowrap;"></td>
 {% if user.is_authenticated %}
     <td class="loginButton" style="font-size:7pt;text-align:center;"> <a class="m" href="{% url 'board_create' %}">Добавить объявление</a></td>
@@ -38,7 +38,7 @@
         <br>
 
         </div> <div class="eDetails" style="clear:both;">
-        <a href="https://web.archive.org/web/20100907080651/http://play-murmansk.ru/board/1">{{ boards.get_category_display }}</a> |
+        <a href="{% url 'boards' %}?category={{ boards.category }}">{{ boards.get_category_display }}</a> |
         Просмотров: {{ boards.views }} |
         Дата: {{ boards.created_at }}
 

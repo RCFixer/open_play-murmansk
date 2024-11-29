@@ -43,11 +43,11 @@
                                                 <td class="forumPostTd" align="center">{{ subsection.message_count }}</td>
                                                 <td class="forumLastPostTd">
                                                     {% if subsection.last_message_created_at %}
-                                                        <a title="К последнему сообщению" class="forumLastPostLink" href="https://web.archive.org/web/20100908055530/http://play-murmansk.ru/forum/2-284-0-17">{{ subsection.last_message_created_at }}</a>
+                                                        <a title="К последнему сообщению" class="forumLastPostLink">{{ subsection.last_message_created_at }}</a>
                                                     <br />
-                                                    Тема: <a class="forumLastPostLink" href="https://web.archive.org/web/20100908055530/http://play-murmansk.ru/forum/2-284-1">{{ subsection.last_message_topic_title }}</a><br />
+                                                    Тема: <a class="forumLastPostLink">{{ subsection.last_message_topic_title }}</a><br />
                                                     Сообщение от:
-                                                    <span class="lastPostUser"><a class="lastPostUserLink" href="https://web.archive.org/web/20100908055530/http://play-murmansk.ru/index/8-0-aLive2012" target="_blank">{{ subsection.last_message_author_username }}</a></span>
+                                                    <span class="lastPostUser"><a class="lastPostUserLink">{{ subsection.last_message_author_username }}</a></span>
                                                     {% else %}
                                                         <p>Нет сообщений</p>
                                                     {% endif %}

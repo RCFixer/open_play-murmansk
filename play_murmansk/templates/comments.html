@@ -42,7 +42,7 @@
             <button type="submit" class="commSbmFl">Отправить</button>
         </form>
     {% else %}
-        <div align="center" class="commReg">Добавлять комментарии могут только зарегистрированные пользователи.<br>[ <a class="m" href="https://web.archive.org/web/20100907171046/http://play-murmansk.ru/index/3">Регистрация</a> | <a class="m" href="javascript://" rel="nofollow" onclick="new _uWnd('LF',' ',-250,-110,{autosize:0,closeonesc:1,resize:1},{url:'/index/40'});return false;">Вход</a> ]</div>
+        <div align="center" class="commReg">Добавлять комментарии могут только зарегистрированные пользователи.<br>[ <a class="m" href="{% url 'register' %}">Регистрация</a> | <a class="m" href="{% url 'login' %}" >Вход</a> ]</div>
     {% endif %}
 
 <script>
