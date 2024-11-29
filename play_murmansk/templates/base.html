@@ -1,5 +1,6 @@
 {% extends "index.html" %}
 {% load static %}
+{% load custom_filters %}
 {% block center %}
 <div id="centerBlock1">
             <!-- Body -->
@@ -182,7 +183,7 @@
                                              <table border="0" cellpadding="2" cellspacing="1" width="100%" class="infTable">
                                                 <tbody>
                                                    <tr>
-                                                      <td class="infTitle" colspan="2"> <span style="font-size: 7pt" ;=""> {{ board.category }} от {{ board.author }} </span>  <br> <a class="ma" href="20110828124907/http://play-murmansk.ru/board/">{{ board.title }}</a></td>
+                                                      <td class="infTitle" colspan="2"> <span style="font-size: 7pt" ;=""> {{ board.category|translate_category }} от {{ board.author }} </span>  <br> <a class="ma" href="20110828124907/http://play-murmansk.ru/board/">{{ board.title }}</a></td>
                                                    </tr>
                                                 </tbody>
                                              </table>

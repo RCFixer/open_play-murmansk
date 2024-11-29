@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import Count
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required

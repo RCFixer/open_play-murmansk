@@ -15,3 +15,14 @@ def strip_p_tags_for_news_list(value):
 @register.filter
 def get_item(dictionary, key):
     return dictionary.get(key[0])
+
+@register.filter
+def translate_category(key):
+    categories = {
+        'SELL': 'ПРОДАМ',
+        'BUY': 'КУПЛЮ',
+        'EXCHANGE': 'ОБМЕНЯЮ',
+        'VARIOUS': 'РАЗНОЕ',
+        'SERVICES': 'УСЛУГИ',
+    }
+    return categories.get(key, None)

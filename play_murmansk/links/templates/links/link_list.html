@@ -15,14 +15,11 @@
    <tbody>
    {% for category_link in link_category_list %}
       <tr>
-         <td style="width:100%" class="catsTd" id="cid1" valign="top"><a href="https://web.archive.org/web/20100907080651/http://play-murmansk.ru/board/1" class="catName">{{ category_link.0 }}</a> <span class="catNumData" style="unicode-bidi:embed;">[59]</span></td>
+         <td style="width:100%" class="catsTd" id="cid1" valign="top"><a href="{% url 'links' %}?category={{ category_link.0 }}" class="catName">{{ category_link.0 }}</a> <span class="catNumData" style="unicode-bidi:embed;">[{{ link_category_counts|get_item:category_link|default:0 }}]</span></td>
       </tr>
    {% endfor %}
    </tbody>
 </table>
-<hr>
-<span class="pagesBlockuz1"><b class="swchItemA"><span>1</span></b> <a class="swchItem" href="javascript://" rel="nofollow" onclick="spages('2');return false;"><span>2</span></a> <a class="swchItem" href="javascript://" rel="nofollow" onclick="spages('3');return false;"><span>3</span></a>  <a class="swchItem" href="javascript://" rel="nofollow" onclick="spages('2');return false;"><span>»</span></a></span>
-<hr>
 <div id="myGrid" style="display:none;"><div style="position:fixed;width:100%;text-align:center;padding-top:250px;"><img alt="" src="https://web.archive.org/web/20100907080651im_/http://s28.ucoz.net/img/ma/m/i3.gif" border="0" width="220" height="19"></div></div>
     <div id="allEntries">
         {% for links in link_list %}
@@ -42,7 +39,5 @@
         </div></td></tr></tbody></table><br></div>
     {% endfor %}
     </div>
-    <hr>
     {% include "pagination.html" %}
-<hr>
 {% endblock %}
