@@ -5,7 +5,7 @@ from .models import UserActivity
 from core.models import CommonComment, Advertisement, UpcomingGame
 from forum.models import ForumTopic
 from reviews.models import Review
-from board.models import Ad
+from board.models import Board
 from .forms import CustomAuthenticationForm
 from .utils import clean_old_user_activity
 
@@ -22,7 +22,7 @@ def latest_reviews(request):
     return {'latest_reviews': latest_reviews_list}
 
 def latest_boards(request):
-    latest_boards_list = Ad.objects.order_by('-id')[:10]
+    latest_boards_list = Board.objects.order_by('-id')[:10]
     return {'latest_boards': latest_boards_list}
 
 def load_ads(request):

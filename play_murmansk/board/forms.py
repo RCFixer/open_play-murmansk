@@ -1,9 +1,9 @@
 from django import forms
-from .models import Ad
+from .models import Board
 
-class AdForm(forms.ModelForm):
+class BoardForm(forms.ModelForm):
     class Meta:
-        model = Ad
+        model = Board
         fields = ['title', 'content', 'image', 'category']
         labels = {
             'title': 'Заголовок объявления',

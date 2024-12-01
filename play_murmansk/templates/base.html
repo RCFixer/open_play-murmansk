@@ -115,7 +115,7 @@
                                        {% for forum_topic in latest_forum_topics %}
                                           <ul class="uz">
                                              <li class="menus1">
-                                                <div align="left"> <span style="font-size: 8pt" ;="">  <a class="ma" href="/web/20110828124907/http://play-murmansk.ru/forum/25-330-0-17">{{ forum_topic.title }}</a> </span> <br> <span style="font-size: 7pt" ;=""> {{ forum_topic.created_at }} от <a class="uLPost" href="/web/20110828124907/http://play-murmansk.ru/index/8-0-%28o%29ne" target="_blank">{{ forum_topic.author }}</a> </span> </div>
+                                                <div align="left"> <span style="font-size: 8pt" ;="">  <a class="ma" href="{% url 'forum_topic_detail' forum_topic.id %}">{{ forum_topic.title }}</a> </span> <br> <span style="font-size: 7pt" ;=""> {{ forum_topic.created_at }} от <a class="uLPost" href="" target="_blank">{{ forum_topic.author }}</a> </span> </div>
                                              </li>
                                           </ul>
                                        {% endfor %}
@@ -148,7 +148,7 @@
                                        {% for last_comment in latest_comments %}
                                           <ul class="uz">
                                              <li class="menus1">
-                                                <div align="left"> <span style="font-size: 8pt" ;=""> <a class="ma" href="/web/20110828124907/http://play-murmansk.ru/board/2-1-0-4068">{{ last_comment.content_object.title }}</a> </span> <br> <span style="font-size: 7pt" ;=""> {{ last_comment.created_at }} от {{ last_comment.author }} </span> </div>
+                                                <div align="left"> <span style="font-size: 8pt" ;=""> <a class="ma" href="{% url last_comment.content_type.name|get_object_detail_url last_comment.content_object.id %}">{{ last_comment.content_object.title }}</a> </span> <br> <span style="font-size: 7pt" ;=""> {{ last_comment.created_at }} от {{ last_comment.author }} </span> </div>
                                              </li>
                                           </ul>
                                        {% endfor %}

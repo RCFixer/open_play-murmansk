@@ -26,3 +26,9 @@ def translate_category(key):
         'SERVICES': 'УСЛУГИ',
     }
     return categories.get(key, None)
+
+@register.filter
+def get_object_detail_url(key):
+    # if key == 'ad':
+    #     key = 'board'
+    return f'{key}_detail'

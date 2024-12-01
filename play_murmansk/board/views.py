@@ -4,12 +4,12 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-from .models import Ad, AdCategory
+from .models import Board, BoardCategory
 from core.views import ViewsCount, PostInfoSaturation, PostMethodCommentForm
-from .forms import AdForm
+from .forms import BoardForm
 
 class BoardListView(ListView):
-    model = Ad
+    model = Board
     template_name = 'board/board_list.html'
     context_object_name = 'board_list'
     paginate_by = 10
@@ -17,7 +17,7 @@ class BoardListView(ListView):
     def get_queryset(self):
         # Получение категории из запроса
         category_filter = self.request.GET.get('category')
-        queryset = Ad.objects.annotate(
+        queryset = Board.objects.annotate(
             comments_count=Count('comments')
         )
 
@@ -30,7 +30,7 @@ class BoardListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Список категорий с подсчётом записей в каждой категории
-        category_counts = Ad.objects.values('category').annotate(
+        category_counts = Board.objects.values('category').annotate(
             count=Count('id')
         )
 
@@ -40,27 +40,27 @@ class BoardListView(ListView):
         # Добавление в контекст
         context['board_category_counts'] = category_counts_dict
         # Список всех категорий
-        context['board_category_list'] = AdCategory.choices
+        context['board_category_list'] = BoardCategory.choices
         # Текущая категория для отображения
         return context
 
 class BoardDetailView(ViewsCount, DetailView, PostMethodCommentForm):
-    model = Ad
+    model = Board
     template_name = 'board/board_detail.html'
     context_object_name = 'board'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        post = PostInfoSaturation(self.object, self.request, Ad)
+        post = PostInfoSaturation(self.object, self.request, Board)
         context.update(post.get_context_data())
 
         return context
 
 @method_decorator(login_required, name='dispatch')
 class BoardCreateView(CreateView):
-    model = Ad
-    form_class = AdForm
+    model = Board
+    form_class = BoardForm
     template_name = 'board/board_form.html'
 
     def form_valid(self, form):

@@ -7,8 +7,7 @@ django.setup()
 
 from django.contrib.auth.models import Group, Permission
 from django.contrib.auth import get_user_model
-from board.models import Ad, AdCategory
-from core.models import OnlineUser, Guest
+from board.models import Board, BoardCategory
 from forum.models import ForumSection, ForumSubsection, ForumTopic, ForumMessage
 from news.models import News
 from reviews.models import Review
@@ -25,7 +24,7 @@ ad1 = Ad.objects.create(
     title='Продам PS5',
     content='Продам PS5 в отличном состоянии.',
     image='board/ps5.jpg',
-    category=AdCategory.SELL,
+    category=BoardCategory.SELL,
     author=user1
 )
 
@@ -33,7 +32,7 @@ ad2 = Ad.objects.create(
     title='Продам Xbox Series X',
     content='Продам Xbox в отличном состоянии.',
     image='board/xbox.jpg',
-    category=AdCategory.SELL,
+    category=BoardCategory.SELL,
     author=user1
 )
 
@@ -41,13 +40,10 @@ ad3 = Ad.objects.create(
     title='Продам Xbox Series S',
     content='Продам Xbox S в отличном состоянии.',
     image='board/xboxs.jpg',
-    category=AdCategory.SELL,
+    category=BoardCategory.SELL,
     author=user1
 )
 
-# Создаем объекты для модуля core
-OnlineUser.objects.create(user=user1)
-Guest.objects.create(session_key='guest_session_1')
 
 # Создаем объекты для модуля forum
 section1 = ForumSection.objects.create(title='Раздел 1')
