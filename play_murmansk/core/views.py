@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.views import View
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import get_object_or_404
+from PIL import Image
 
 from .models import CommonComment
 from core.forms import CommonCommentForm
@@ -86,3 +87,22 @@ class CommentDeleteView(UserPassesTestMixin, View):
         comment = get_object_or_404(CommonComment, pk=comment_id)
         comment.delete()
         return JsonResponse({'message': 'Комментарий удалён'})
+
+
+class CompressImage:
+
+    def save(self, *args, **kwargs):
+        # Сначала вызовем метод родителя, чтобы сохранить оригинальное изображение
+        super().save(*args, **kwargs)
+
+        # Теперь откроем сохранённое изображение и изменим его размеры
+        img_path = self.image.path
+        with Image.open(img_path) as img:
+            # Укажите желаемое разрешение
+            max_resolution = (300, 300)  # Ширина x Высота
+
+            # Сжимаем изображение
+            img.thumbnail(max_resolution)
+
+            # Сохраняем изображение (перезаписываем файл)
+            img.save(img_path)

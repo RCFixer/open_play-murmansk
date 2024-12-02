@@ -4,6 +4,7 @@ from django_prose_editor.sanitized import SanitizedProseEditorField
 from django.contrib.contenttypes.fields import GenericRelation
 
 from core.models import CommonComment
+from core.views import CompressImage
 
 
 class LinkCategory(models.TextChoices):
@@ -11,7 +12,7 @@ class LinkCategory(models.TextChoices):
     OFFICIALLY = 'Официально'
     GOOD_TO_KNOW = 'Полезно'
 
-class Link(models.Model):
+class Link(CompressImage, models.Model):
     title = models.CharField(max_length=255)
     content = SanitizedProseEditorField(config = {"types": ["strong", "em", "sub", "sup", "link", "underline",
                                                             "strikethrough"],

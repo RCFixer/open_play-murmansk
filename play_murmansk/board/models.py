@@ -5,6 +5,7 @@ from django.contrib.contenttypes.fields import GenericRelation
 from django.utils.translation import gettext_lazy as _
 
 from core.models import CommonComment
+from core.views import CompressImage
 
 
 class BoardCategory(models.TextChoices):
@@ -14,7 +15,7 @@ class BoardCategory(models.TextChoices):
     VARIOUS = 'VARIOUS', _('РАЗНОЕ')
     SERVICES = 'SERVICES', _('УСЛУГИ')
 
-class Board(models.Model):
+class Board(CompressImage, models.Model):
     title = models.CharField(max_length=255)
     content = SanitizedProseEditorField(config = {"types": ["strong", "em", "sub", "sup", "link", "underline",
                                                             "strikethrough"],

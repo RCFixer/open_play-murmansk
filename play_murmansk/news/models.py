@@ -2,9 +2,12 @@ from django.db import models
 from django.conf import settings
 from django_prose_editor.sanitized import SanitizedProseEditorField
 from django.contrib.contenttypes.fields import GenericRelation
-from core.models import CommonComment
 
-class News(models.Model):
+from core.models import CommonComment
+from core.views import CompressImage
+
+
+class News(CompressImage, models.Model):
     title = models.CharField(max_length=255)
     content = SanitizedProseEditorField(config = {"types": ["strong", "em", "sub", "sup", "link", "underline",
                                                             "strikethrough"],
