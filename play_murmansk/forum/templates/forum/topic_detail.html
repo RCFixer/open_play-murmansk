@@ -11,10 +11,19 @@
         <tbody>
             <tr>
                 <td valign="top" style="padding: 0px 5px 0px 5px;">
-
+                    <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr>
+                                <td align="right" class="frmBtns">
+                                    <div id="frmButns83">
+                                        <a href="{% url 'create_topic' %}" target="_blank"><img src="{% static 'images/t_new.gif' %}" title="Создать новую тему" alt="Создать новую тему"></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     {% include "forum_pagination.html" %}
                     <br>
-
                     <div class="gDivLeft">
                         <div class="gDivRight">
                             <table class="gTable" border="0" width="100%" cellspacing="1" cellpadding="0">

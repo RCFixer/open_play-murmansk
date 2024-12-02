@@ -1,5 +1,5 @@
 from django import forms
-from .models import ForumMessage
+from .models import ForumMessage, ForumTopic
 
 class ForumMessageForm(forms.ModelForm):
     class Meta:
@@ -19,3 +19,9 @@ class ForumMessageForm(forms.ModelForm):
         if commit:
             comment.save()
         return comment
+
+
+class ForumTopicForm(forms.ModelForm):
+    class Meta:
+        model = ForumTopic
+        fields = ['subsection', 'title', 'description']

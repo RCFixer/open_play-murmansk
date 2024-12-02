@@ -1,5 +1,5 @@
 from django.shortcuts import redirect
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import OuterRef, Subquery, Count
 from django.db import models
 from django.core.paginator import Paginator
@@ -7,9 +7,11 @@ from django.http import JsonResponse
 from django.views import View
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
+
 
 from .models import ForumSection, ForumSubsection, ForumTopic, ForumMessage
-from .forms import ForumMessageForm
+from .forms import ForumMessageForm, ForumTopicForm
 
 
 class PostMethodCommentForm:
@@ -161,3 +163,29 @@ class ForumCommentDeleteView(UserPassesTestMixin, View):
         topic_subsection.save()
         comment.delete()
         return JsonResponse({'message': 'Сообщение удалено'})
+
+
+class ForumTopicCreateView(CreateView):
+    model = ForumTopic
+    form_class = ForumTopicForm
+    template_name = 'forum/topic_start.html'
+    success_url = reverse_lazy('all_topics_list')
+
+    def form_valid(self, form):
+        # Устанавливаем автора темы перед сохранением
+        form.instance.author = self.request.user
+        response = super().form_valid(form)
+
+        # Создаем сообщение, связанное с темой
+        ForumMessage.objects.create(
+            topic=self.object,
+            author=self.request.user,
+            content=self.request.POST.get('message_content', '')  # Сообщение из формы
+        )
+        return response
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if 'message_form' not in context:
+            context['message_form'] = ForumMessageForm()
+        return context
