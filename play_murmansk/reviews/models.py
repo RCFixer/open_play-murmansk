@@ -14,7 +14,7 @@ class Review(CompressImage, models.Model):
                                                   "history": True,
                                                   "typographic": True,})
     content = models.TextField()
-    image = models.ImageField(upload_to='reviews/')
+    image = models.ImageField(blank=True, null=True, upload_to='reviews/')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     views = models.PositiveIntegerField(default=0)

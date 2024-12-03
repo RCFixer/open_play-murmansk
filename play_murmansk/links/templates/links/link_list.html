@@ -28,8 +28,9 @@
         <div class="eTitle" style="text-align:left;"><a href="{% url 'link_detail' links.id %}">{{ links.title }}</a></div>
         <div class="eMessage" style="text-align:left;clear:both;padding-top:2px;padding-bottom:2px;">
 
-        <img src="{{ links.image.url }}" border="none" width="150" style="margin: 2px 7px 5px 0px" align="left">
-
+        {% if links.image %}
+            <img src="{{ links.image.url }}" border="none" width="150" style="margin: 2px 7px 5px 0px" align="left">
+        {% endif %}
         {{ links.content|strip_p_tags_for_news_list|safe }}
         <br>
 

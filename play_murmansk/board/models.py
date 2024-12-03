@@ -21,7 +21,7 @@ class Board(CompressImage, models.Model):
                                                             "strikethrough"],
                                                   "history": True,
                                                   "typographic": True,})
-    image = models.ImageField(upload_to='board/')
+    image = models.ImageField(blank=True, null=True, upload_to='board/')
     category = models.CharField(max_length=10, choices=BoardCategory.choices)
     views = models.PositiveIntegerField(default=0)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

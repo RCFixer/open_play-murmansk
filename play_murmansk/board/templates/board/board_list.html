@@ -31,9 +31,9 @@
 
         <div class="eTitle" style="text-align:left;"><a href="{% url 'board_detail' boards.id %}">{{ boards.title }}</a></div>
         <div class="eMessage" style="text-align:left;clear:both;padding-top:2px;padding-bottom:2px;">
-
-        <img src="{{ boards.image.url }}" border="none" width="150" style="margin: 2px 7px 5px 0px" align="left">
-
+        {% if boards.image %}
+            <img src="{{ boards.image.url }}" border="none" width="150" style="margin: 2px 7px 5px 0px" align="left">
+        {% endif %}
         {{ boards.content|strip_p_tags_for_news_list|safe }}
         <br>
 

@@ -18,7 +18,7 @@ class Link(CompressImage, models.Model):
                                                             "strikethrough"],
                                                   "history": True,
                                                   "typographic": True,})
-    image = models.ImageField(upload_to='link/')
+    image = models.ImageField(blank=True, null=True, upload_to='link/')
     category = models.CharField(max_length=128, choices=LinkCategory.choices)
     views = models.PositiveIntegerField(default=0)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

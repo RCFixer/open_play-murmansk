@@ -95,14 +95,15 @@ class CompressImage:
         # Сначала вызовем метод родителя, чтобы сохранить оригинальное изображение
         super().save(*args, **kwargs)
 
-        # Теперь откроем сохранённое изображение и изменим его размеры
-        img_path = self.image.path
-        with Image.open(img_path) as img:
-            # Укажите желаемое разрешение
-            max_resolution = (300, 300)  # Ширина x Высота
+        if self.image:
+            # Теперь откроем сохранённое изображение и изменим его размеры
+            img_path = self.image.path
+            with Image.open(img_path) as img:
+                # Укажите желаемое разрешение
+                max_resolution = (300, 300)  # Ширина x Высота
 
-            # Сжимаем изображение
-            img.thumbnail(max_resolution)
+                # Сжимаем изображение
+                img.thumbnail(max_resolution)
 
             # Сохраняем изображение (перезаписываем файл)
             img.save(img_path)

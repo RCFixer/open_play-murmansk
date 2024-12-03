@@ -10,11 +10,13 @@
     <tr>
     <td colspan="2" class="eMessage">
 
-    <img src="{{ board.image.url }}" border="none" width="200" style="margin: 2px 7px 5px 0px" align="left" <="" a="">
+        {% if boards.image %}
+            <img src="{{ boards.image.url }}" border="none" width="150" style="margin: 2px 7px 5px 0px" align="left">
+        {% endif %}
 
         {{ board.content|safe }}
     </td></tr>
-    <tr><td class="eDetails1" colspan="2">  Автор: <span>{{ board.author }}</span>  | Чтобы связаться с автором объявления, нажмите на его ник.
+    <tr><td class="eDetails1" colspan="2">  Автор: <span>{{ board.author }}</span>
     </td></tr>
     <tr><td class="eDetails2" colspan="2">
       Добавлено: {{ board.created_at }}
