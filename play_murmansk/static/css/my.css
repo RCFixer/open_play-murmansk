@@ -387,3 +387,75 @@
 .button-style:hover, .button-style:focus {
   background: #e2e2f2; /* Эффект при наведении — дополнительное оформление */
 }
+
+
+.ucoz-style-form {
+    width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #555;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #333, #222);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    font-family: Arial, sans-serif;
+    color: #fff;
+}
+
+.ucoz-style-form h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.ucoz-style-form textarea,
+.ucoz-style-form input[type="text"],
+.ucoz-style-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #666;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    background: #444;
+    color: #fff;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    resize: none;
+}
+
+.ucoz-style-form textarea:focus,
+.ucoz-style-form input[type="text"]:focus,
+.ucoz-style-form select:focus {
+    border-color: #BF3A00;
+    outline: none;
+    box-shadow: 0 0 5px rgba(191, 58, 0, 0.8);
+    background: #555;
+}
+
+.ucoz-style-form button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background: #BF3A00;
+    border: 1px solid #BF3A00;
+    border-radius: 5px;
+    cursor: pointer;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.ucoz-style-form button:hover {
+    background: #a03200;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.ucoz-style-form button:active {
+    background: #8a2b00;
+    box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.ucoz-style-form label {
+    color: #fff;
+}

@@ -4,7 +4,7 @@
 
 {% block content %}
     <h2>Обновление профиля</h2>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" class="ucoz-style-form">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" style="commSbmFl">Сохранить изменения</button>
