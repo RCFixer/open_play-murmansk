@@ -1,4 +1,4 @@
-.cuzadpn {position:absolute;top:0;left:0;width:100%;background:#D7D7D7 url('/web/20110129084245im_/http://s28.ucoz.net/.s/img/wd/3/abbg.gif') repeat-x; height:24px;} div > div.cuzadpn {position:fixed;}
+.cuzadpn {position:absolute;top:0;left:0;width:100%; height:24px;} div > div.cuzadpn {position:fixed;}
 #uzadmp {padding-left:4px}
 .cuzadpn, .cuzadpn td {font:normal normal normal 8pt/normal Tahoma,'ms sans serif',Arial !important;color:#000000 !important;}
 .cuzadpn form {padding:0;margin:0;}
@@ -113,7 +113,7 @@
 .myWinCont legend {padding-bottom:2px;padding-left:3px;padding-right:3px; font-size:10px; color:#4D4F53;}
 .myWinCont fieldset {border:1px solid #C2C5CA; padding:2px 5px; margin-bottom:3px;}
 .myWinCont ul {list-style:none; margin: 0 0 0 3px; padding-left: 0px;}
-.myWinCont li {margin:2px 0 2px 0; padding: 0 0 0 14px; background: url('/web/20110129084245im_/http://s28.ucoz.net/.s/img/wd/3/li.png') no-repeat 0 2px;}
+.myWinCont li {margin:2px 0 2px 0; padding: 0 0 0 14px;}
 .myWinCont .fHelp {font-size:7pt;color:#8A8A8A;}
 .myWinLoad {margin:0;width:31px;height:31px;background:url('../images/ajax.gif') no-repeat 0 0;}
 .myWinLoadS {margin:0;width:16px;height:16px;background:url('../images/ajaxs.gif') no-repeat 0 0;}
@@ -214,7 +214,7 @@
 #gcatalog .ghead { height:24px; line-height:24px; padding-left: 5px; background: #E1E2E3 url(../images/cmp-bg.gif) repeat-x 0 0 }
 #gcatalog .gitem { width:47%; min-width:200px; float:left; margin:2px; padding:3px; text-decoration:none; font-size:12px; border: #9f9f9f 1px solid; -moz-border-radius: 3px; -webkit-border-radius: 3px; background-color:transparent }
 #gcatalog .gitem:hover, #gcatalog a.gsel {  background-color:#EAEBEC; border: #1f1f1f 1px solid; color:#000 }
-#gcatalog .gitem img { background: url(/web/20110129084245im_/http://s28.ucoz.net/.s/img/icon/ajsml.gif) no-repeat 8px 8px; width:32px; height:32px; border: 1px solid #999999; float:left; margin-right:6px }
+#gcatalog .gitem img { width:32px; height:32px; border: 1px solid #999999; float:left; margin-right:6px }
 #gcatalog .gname { font-size:12px; padding-bottom:3px }
 #gcatalog .gpage { padding:2px 5px 2px 5px; border-left:1px solid #C2C5CA; border-top:1px solid #C2C5CA; border-bottom:1px solid #C2C5CA;}
 #ggoods { overflow:hidden }

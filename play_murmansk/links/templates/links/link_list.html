@@ -20,7 +20,7 @@
    {% endfor %}
    </tbody>
 </table>
-<div id="myGrid" style="display:none;"><div style="position:fixed;width:100%;text-align:center;padding-top:250px;"><img alt="" src="https://web.archive.org/web/20100907080651im_/http://s28.ucoz.net/img/ma/m/i3.gif" border="0" width="220" height="19"></div></div>
+<div id="myGrid" style="display:none;"><div style="position:fixed;width:100%;text-align:center;padding-top:250px;"></div></div>
     <div id="allEntries">
         {% for links in link_list %}
         <div><table border="0" cellpadding="0" cellspacing="0" width="100%" class="eBlock"><tbody><tr><td style="padding:3px;">
@@ -34,7 +34,7 @@
         <br>
 
         </div> <div class="eDetails" style="clear:both;">
-        <a href="https://web.archive.org/web/20100907080651/http://play-murmansk.ru/board/1">{{ links.category }}</a>
+        <a href="{% url 'links' %}?category={{ links.category }}">{{ links.category }}</a>
         | <a href="{% url 'link_detail' links.id %}">Комментарии ({{ links.comments_count }})</a>
         </div></td></tr></tbody></table><br></div>
     {% endfor %}

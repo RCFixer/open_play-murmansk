@@ -30,7 +30,7 @@
                                     <td class="boxContent">
                                        <div class="boxText">
                                           <!-- <bc> -->
-                                          <div id="blk549174" style="border:1px solid #CCCCCC;position:absolute;z-index:82;background:url('20110828124907im_/http://s28.ucoz.net/img/fr/g.gif');display:none;"></div>
+                                          <div id="blk549174" style="border:1px solid #CCCCCC;position:absolute;z-index:82;display:none;"></div>
                                    <form method="post" action="{% url 'login' %}">
                                        {% csrf_token %}
                                       <table border="0" cellspacing="1" cellpadding="0" width="100%">
@@ -162,7 +162,7 @@
                               <tr>
                                  <td class="boxContent">
                                     <div class="boxText">
-                                       <a href="20110828124907/http://www.facebook.com/pages/Play-murmansk/183621118324929"><img src="20110828124907im_/http://s005.radikal.ru/i209/1101/0b/b4336b8a5ec3.jpg" border="none" width="200"></a>
+                                       <img border="none" width="200">
                                        <br>
                                     </div>
                                  </td>
@@ -183,7 +183,7 @@
                                              <table border="0" cellpadding="2" cellspacing="1" width="100%" class="infTable">
                                                 <tbody>
                                                    <tr>
-                                                      <td class="infTitle" colspan="2"> <span style="font-size: 7pt" ;=""> {{ board.category|translate_category }} от {{ board.author }} </span>  <br> <a class="ma" href="20110828124907/http://play-murmansk.ru/board/">{{ board.title }}</a></td>
+                                                      <td class="infTitle" colspan="2"> <span style="font-size: 7pt"> {{ board.category|translate_category }} от {{ board.author }} </span>  <br> <a class="ma" href="{% url 'board_detail' board.id %}">{{ board.title }}</a></td>
                                                    </tr>
                                                 </tbody>
                                              </table>
@@ -191,7 +191,7 @@
                                        </ul>
                                        {% endfor %}
                                     </div>
-                                    <div align="center"><a class="m" href="20110828124907/http://play-murmansk.ru/board/"><span style="color:#CC6600">[Все Объявления]</span></a></div>
+                                    <div align="center"><a class="m" href="{% url 'boards' %}"><span style="color:#CC6600">[Все Объявления]</span></a></div>
                                  </td>
                               </tr>
                            </tbody>
@@ -212,12 +212,12 @@
                                        {% for review in latest_reviews %}
                                           <ul class="uz">
                                              <li class="menus">
-                                                <div align="left"><a class="ma" href="/web/20110828124907/http://play-murmansk.ru/blog/2011-08-08-63">{{ review.title }}</a> от {{ review.author }}<br>  </div>
+                                                <div align="left"><a class="ma" href="{% url 'review_detail' review.id %}">{{ review.title }}</a> от {{ review.author }}<br>  </div>
                                              </li>
                                           </ul>
                                        {% endfor %}
                                     </div>
-                                    <div align="center"><a class="m" href="20110828124907/http://play-murmansk.ru/blog/"><span style="color:#CC6600">[Все Отзывы]</span></a></div>
+                                    <div align="center"><a class="m" href="{% url 'review_list' %}"><span style="color:#CC6600">[Все Отзывы]</span></a></div>
                                  </td>
                               </tr>
                            </tbody>
@@ -244,7 +244,7 @@
                                           <br>
                                           <br>
                                           </span>
-                                          <a class="m" href="20110828124907/http://play-murmansk.ru/forum/7-118-1"><span style="color:#CC6600">[Иногда даже меняю пластинки]</span></a>
+                                          <a class="m" href=""><span style="color:#CC6600">[Иногда даже меняю пластинки]</span></a>
                                        </div>
                                     </div>
                                  </td>
