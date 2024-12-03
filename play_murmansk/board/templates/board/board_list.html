@@ -40,7 +40,7 @@
         </div> <div class="eDetails" style="clear:both;">
         <a href="{% url 'boards' %}?category={{ boards.category }}">{{ boards.get_category_display }}</a> |
         Просмотров: {{ boards.views }} |
-        Дата: {{ boards.created_at }}
+        Дата: {{ boards.created_at|date:"d-m-Y" }}
 
         | <a href="{% url 'board_detail' boards.id %}">Комментарии ({{ boards.comments_count }})</a> | Чтобы связаться с автором объявления, просмотрите его, нажав на заголовок.
         </div></td></tr></tbody></table><br></div>

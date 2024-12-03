@@ -16,7 +16,7 @@
              <tbody>
                 <tr>
                    <td style="padding:3px;">
-                      <div class="cDate" style="float:right;font:7pt;"><span title="12:55">{{ news.created_at }}</span></div>
+                      <div class="cDate" style="float:right;font:7pt;"><span title="12:55">{{ news.created_at|date:"d-m-Y" }}</span></div>
                        <div class="eTitle" style="text-align:left;"><a href="{% url 'news_detail' news.id %}">{{ news.title }}</a></div>
                       <div class="eMessage" style="clear:both;padding-top:7px;padding-bottom:2px;">
                           {% if news.image %}

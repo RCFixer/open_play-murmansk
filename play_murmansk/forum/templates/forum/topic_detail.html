@@ -42,7 +42,7 @@
                                                         <tr>
                                                             <td width="23%" class="postTdTop" align="center"><span class="postUser">{{ message.author }}</span></td>
                                                             <td class="postTdTop">
-                                                                {{ message.created_at }}
+                                                                {{ message.created_at|date:"d-m-Y" }}
                                                             </td>
                                                         </tr>
                                                         <tr>

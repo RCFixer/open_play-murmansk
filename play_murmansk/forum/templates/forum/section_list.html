@@ -43,7 +43,7 @@
                                                 <td class="forumPostTd" align="center">{{ subsection.message_count }}</td>
                                                 <td class="forumLastPostTd">
                                                     {% if subsection.last_message_created_at %}
-                                                        <a title="К последнему сообщению" class="forumLastPostLink" href="">{{ subsection.last_message_created_at }}</a>
+                                                        <a title="К последнему сообщению" class="forumLastPostLink" href="">{{ subsection.last_message_created_at|date:"d-m-Y" }}</a>
                                                     <br />
                                                     Тема: <a class="forumLastPostLink" href="">{{ subsection.last_message_topic_title }}</a><br />
                                                     Сообщение от:

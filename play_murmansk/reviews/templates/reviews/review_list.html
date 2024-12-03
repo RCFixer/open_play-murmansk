@@ -37,7 +37,7 @@
 
             Просмотров: {{ review.views }} |
             Добавил: {{ review.author }}
-            Дата: {{ review.created_at }}
+            Дата: {{ review.created_at|date:"d-m-Y" }}
 
             | <a href="{% url 'review_detail' review.id %}">Комментарии ({{ review.comments_count }})</a>
             </div></td></tr></tbody></table><br></div>

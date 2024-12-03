@@ -6,7 +6,7 @@
 {% block content %}
     <hr>
     <table border="0" width="100%" cellspacing="1" cellpadding="2" class="eBlock">
-    <tbody><tr><td width="90%"><div class="eTitle">{{ board.title }}</div></td><td align="right" style="white-space: nowrap;font:9px;">{{ board.created_at }} </td></tr>
+    <tbody><tr><td width="90%"><div class="eTitle">{{ board.title }}</div></td><td align="right" style="white-space: nowrap;font:9px;">{{ board.created_at|date:"d-m-Y" }} </td></tr>
     <tr>
     <td colspan="2" class="eMessage">
 
@@ -19,7 +19,7 @@
     <tr><td class="eDetails1" colspan="2">  Автор: <span>{{ board.author }}</span>
     </td></tr>
     <tr><td class="eDetails2" colspan="2">
-      Добавлено: {{ board.created_at }}
+      Добавлено: {{ board.created_at|date:"d-m-Y" }}
       | Просмотров: <b>{{ board.views }}</b>
    </td></tr>
     </tbody></table>

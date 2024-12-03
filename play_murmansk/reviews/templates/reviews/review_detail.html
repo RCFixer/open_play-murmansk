@@ -6,7 +6,7 @@
 {% block content %}
     <hr>
     <table border="0" width="100%" cellspacing="1" cellpadding="2" class="eBlock">
-    <tbody><tr><td width="90%"><div class="eTitle">{{ review.title }}</div></td><td align="right" style="white-space: nowrap;font:9px;">{{ review.created_at }} </td></tr>
+    <tbody><tr><td width="90%"><div class="eTitle">{{ review.title }}</div></td><td align="right" style="white-space: nowrap;font:9px;">{{ review.created_at|date:"d-m-Y" }} </td></tr>
     <tr>
     <td colspan="2" class="eMessage">
         {{ review.content|safe }}

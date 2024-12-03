@@ -27,7 +27,7 @@
 
             Просмотров: {{ publ.views }} |
             Добавил: <a href="">{{ publ.author }}</a> |
-            Дата: <span title="19:11">{{ publ.created_at }}</span>
+            Дата: <span title="19:11">{{ publ.created_at|date:"d-m-Y" }}</span>
 
             | <a href="{% url 'publ_detail' publ.id %}">Комментарии ({{ publ.comments_count }})</a>
             </div></td></tr></tbody></table><br></div>
