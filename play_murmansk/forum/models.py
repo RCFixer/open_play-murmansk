@@ -19,9 +19,9 @@ class ForumSubsection(models.Model):
         return self.title
 
 class ForumTopic(models.Model):
-    subsection = models.ForeignKey(ForumSubsection, on_delete=models.CASCADE, related_name='topics')
-    title = models.CharField(max_length=255)
-    description = models.CharField(max_length=255, blank=True, null=True)
+    subsection = models.ForeignKey(ForumSubsection, on_delete=models.CASCADE, related_name='topics', verbose_name='Подраздел')
+    title = models.CharField(max_length=255, verbose_name='Название темы обсуждения')
+    description = models.CharField(max_length=255, blank=True, null=True, verbose_name='Короткое описание')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     is_pinned = models.BooleanField(default=False)
