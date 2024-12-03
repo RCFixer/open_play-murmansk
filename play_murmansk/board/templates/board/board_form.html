@@ -9,7 +9,7 @@
 }
 </style>
 <h2>Создать объявление</h2>
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" class="ucoz-style-form">
             {% csrf_token %}
             {{ form.errors }} {# Always makes sense #}
             {{ form.media }}  {# This is the important line! #}
