@@ -10,8 +10,8 @@
     <tr>
     <td colspan="2" class="eMessage">
 
-        {% if boards.image %}
-            <img src="{{ boards.image.url }}" border="none" width="150" style="margin: 2px 7px 5px 0px" align="left">
+        {% if board.image %}
+            <img src="{{ board.image.url }}" border="none" width="150" style="margin: 2px 7px 5px 0px" align="left">
         {% endif %}
 
         {{ board.content|safe }}

@@ -12,18 +12,22 @@ class CustomUser(AbstractUser):
     nintendo_id = models.CharField(max_length=50, blank=True, null=True, verbose_name='Nintendo ID')
     steam_id = models.CharField(max_length=50, blank=True, null=True, verbose_name='Steam ID')
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, update_image=True, **kwargs):
         # Сначала вызовем метод родителя, чтобы сохранить оригинальное изображение
         super().save(*args, **kwargs)
 
         # Теперь откроем сохранённое изображение и изменим его размеры
-        img_path = self.avatar.path
-        with Image.open(img_path) as img:
-            # Укажите желаемое разрешение
-            max_resolution = (200, 200)  # Ширина x Высота
+        try:
+            if update_image and self.avatar:
+                img_path = self.avatar.path
+                with Image.open(img_path) as img:
+                    # Укажите желаемое разрешение
+                    max_resolution = (200, 200)  # Ширина x Высота
 
-            # Сжимаем изображение
-            img.thumbnail(max_resolution)
+                    # Сжимаем изображение
+                    img.thumbnail(max_resolution)
 
-            # Сохраняем изображение (перезаписываем файл)
-            img.save(img_path)
+                    # Сохраняем изображение (перезаписываем файл)
+                    img.save(img_path)
+        except AttributeError:
+            pass

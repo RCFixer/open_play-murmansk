@@ -11,21 +11,25 @@ from accounts.models import CustomUser
 
 class CompressImage:
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, update_image=True, **kwargs):
         # Сначала вызовем метод родителя, чтобы сохранить оригинальное изображение
         super().save(*args, **kwargs)
 
         # Теперь откроем сохранённое изображение и изменим его размеры
-        img_path = self.image.path
-        with Image.open(img_path) as img:
-            # Укажите желаемое разрешение
-            max_resolution = (500, 500)  # Ширина x Высота
+        try:
+            if update_image and self.image:
+                img_path = self.image.path
+                with Image.open(img_path) as img:
+                    # Укажите желаемое разрешение
+                    max_resolution = (500, 500)  # Ширина x Высота
 
-            # Сжимаем изображение
-            img.thumbnail(max_resolution)
+                    # Сжимаем изображение
+                    img.thumbnail(max_resolution)
 
-            # Сохраняем изображение (перезаписываем файл)
-            img.save(img_path)
+                    # Сохраняем изображение (перезаписываем файл)
+                    img.save(img_path)
+        except AttributeError:
+            pass
 
 
 class CommonComment(models.Model):

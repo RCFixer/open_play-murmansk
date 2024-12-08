@@ -24,7 +24,7 @@ class ViewsCount:
         obj = super().get_object(queryset)
 
         obj.views += 1
-        obj.save()
+        obj.save(update_image=False)
 
         return obj
 
@@ -91,19 +91,22 @@ class CommentDeleteView(UserPassesTestMixin, View):
 
 class CompressImage:
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, update_image=True, **kwargs):
         # Сначала вызовем метод родителя, чтобы сохранить оригинальное изображение
         super().save(*args, **kwargs)
 
-        if self.image:
-            # Теперь откроем сохранённое изображение и изменим его размеры
-            img_path = self.image.path
-            with Image.open(img_path) as img:
-                # Укажите желаемое разрешение
-                max_resolution = (300, 300)  # Ширина x Высота
+        try:
+            if update_image and self.image:
+                # Теперь откроем сохранённое изображение и изменим его размеры
+                img_path = self.image.path
+                with Image.open(img_path) as img:
+                    # Укажите желаемое разрешение
+                    max_resolution = (300, 300)  # Ширина x Высота
 
-                # Сжимаем изображение
-                img.thumbnail(max_resolution)
+                    # Сжимаем изображение
+                    img.thumbnail(max_resolution)
 
-            # Сохраняем изображение (перезаписываем файл)
-            img.save(img_path)
+                # Сохраняем изображение (перезаписываем файл)
+                img.save(img_path)
+        except AttributeError:
+            pass

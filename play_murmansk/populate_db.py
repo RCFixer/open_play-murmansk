@@ -5,7 +5,6 @@ import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'play_murmansk.settings')
 django.setup()
 
-from django.contrib.auth.models import Group, Permission
 from django.contrib.auth import get_user_model
 from board.models import Board, BoardCategory
 from forum.models import ForumSection, ForumSubsection, ForumTopic, ForumMessage
@@ -20,7 +19,7 @@ user1 = User.objects.create_user(username='user1', password='password1', email='
 user2 = User.objects.create_user(username='user2', password='password2', email='user2@example.com')
 
 # Создаем объекты для модуля board
-ad1 = Ad.objects.create(
+ad1 = Board.objects.create(
     title='Продам PS5',
     content='Продам PS5 в отличном состоянии.',
     image='board/ps5.jpg',
@@ -28,7 +27,7 @@ ad1 = Ad.objects.create(
     author=user1
 )
 
-ad2 = Ad.objects.create(
+ad2 = Board.objects.create(
     title='Продам Xbox Series X',
     content='Продам Xbox в отличном состоянии.',
     image='board/xbox.jpg',
@@ -36,7 +35,7 @@ ad2 = Ad.objects.create(
     author=user1
 )
 
-ad3 = Ad.objects.create(
+ad3 = Board.objects.create(
     title='Продам Xbox Series S',
     content='Продам Xbox S в отличном состоянии.',
     image='board/xboxs.jpg',
