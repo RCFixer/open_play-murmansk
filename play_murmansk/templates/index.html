@@ -5,6 +5,8 @@
       <link rel="stylesheet" type="text/css" href="{% static 'css/iconochive.css' %}">
       <link rel="stylesheet" type="text/css" href="{% static 'css/layer3.css' %}">
       <link rel="stylesheet" type="text/css" href="{% static 'css/my.css' %}">
+      <link type="image/x-icon" href="{% static 'images/favicon.gif' %}" rel="shortcut icon">
+      <link type="Image/x-icon" href="{% static 'images/favicon.gif' %}" rel="icon">
       <title>{% block title %}{% endblock %}</title>
    </head>
    <body>
@@ -85,10 +87,21 @@
          <table border="0" cellpadding="10px" cellspacing="0" width="100%" id="footer">
             <tbody>
                <tr>
-                  <td align="right" valign="bottom"><img src="{% static 'images/liveinternet.gif' %}"></td>
+                  <td align="right" valign="bottom">
+                     <!--LiveInternet counter--><a href="https://www.liveinternet.ru/click"
+                                                target="_blank"><img id="licnt7619" width="88" height="31" style="border:0"
+                                                title="LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня"
+                                                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                                                alt=""/></a><script>(function(d,s){d.getElementById("licnt7619").src=
+                                                "https://counter.yadro.ru/hit?t19.6;r"+escape(d.referrer)+
+                                                ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+                                                (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+                                                ";h"+escape(d.title.substring(0,150))+";"+Math.random()})
+                                                (document,screen)</script><!--/LiveInternet-->
+                  </td>
                   <td width="780" align="center" valign="center"><a class="m" href="">-</a> © <a class="m" href="/">play-murmansk.ru</a> 2009-2013, 2024 </td>
                   <td align="left" valign="bottom">
-                     <!-- "' --><span class="pboCYPVr"><a href=""><img style="margin:0;padding:0;border:0;width:80px;height:15px;" src="{% static 'images/21.gif' %}" alt="Создать сайт бесплатно" title="Создать сайт бесплатно"></a></span>
+                     <!-- "' --><span class="pboCYPVr"><a href="https://github.com/RCFixer/open_play-murmansk" target="_blank"><img style="margin:0;padding:0;border:0;width:80px;height:15px;" src="{% static 'images/django_powered.png' %}" alt="Исходный код проекта" title="Исходный код проекта"></a></span>
                   </td>
                </tr>
             </tbody>

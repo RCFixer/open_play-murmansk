@@ -137,7 +137,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 # Путь к директории со статическими файлами
-STATIC_URL = '/staticfiles/' #
+STATIC_URL = '/staticfiles/' # АЙ-АЙ-АЙ так делать! Костыль из-за хостинга sweb.
 
 # Список директорий, где Django будет искать статические файлы
 STATICFILES_DIRS = [
