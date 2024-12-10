@@ -182,6 +182,10 @@ class ForumTopicCreateView(CreateView):
             author=self.request.user,
             content=self.request.POST.get('message_content', '')  # Сообщение из формы
         )
+        topic_subsection = self.object.subsection
+        topic_subsection.message_count += 1
+        topic_subsection.topic_count += 1
+        topic_subsection.save()
         return response
 
     def get_context_data(self, **kwargs):
