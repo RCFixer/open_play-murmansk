@@ -1,43 +1,52 @@
-from django.utils.timezone import now, timedelta
 from django.db.models import F, Max
+from django.utils.timezone import now, timedelta
 
-from .models import UserActivity
-from core.models import CommonComment, Advertisement, UpcomingGame
+from board.models import Board
+from core.models import Advertisement, CommonComment, UpcomingGame
 from forum.models import ForumTopic
 from reviews.models import Review
-from board.models import Board
+
 from .forms import CustomAuthenticationForm
+from .models import UserActivity
 from .utils import clean_old_user_activity
 
+
 def latest_comments(request):
-    latest_comments_list = CommonComment.objects.order_by('-id')[:20]
-    return {'latest_comments': latest_comments_list}
+    latest_comments_list = CommonComment.objects.order_by("-id")[:20]
+    return {"latest_comments": latest_comments_list}
+
 
 def latest_forum_topics(request):
-    latest_forum_topics_list = ForumTopic.objects.order_by('-id')[:20]
-    return {'latest_forum_topics': latest_forum_topics_list}
+    latest_forum_topics_list = ForumTopic.objects.order_by("-id")[:20]
+    return {"latest_forum_topics": latest_forum_topics_list}
+
 
 def latest_reviews(request):
-    latest_reviews_list = Review.objects.order_by('-id')[:7]
-    return {'latest_reviews': latest_reviews_list}
+    latest_reviews_list = Review.objects.order_by("-id")[:7]
+    return {"latest_reviews": latest_reviews_list}
+
 
 def latest_boards(request):
-    latest_boards_list = Board.objects.order_by('-id')[:10]
-    return {'latest_boards': latest_boards_list}
+    latest_boards_list = Board.objects.order_by("-id")[:10]
+    return {"latest_boards": latest_boards_list}
+
 
 def load_ads(request):
     advertisements = Advertisement.objects.all()
-    return {'advertisements': advertisements}
+    return {"advertisements": advertisements}
+
 
 def upcoming_game(request):
     latest_upcoming_game = UpcomingGame.objects.last()
-    return {'latest_upcoming_game': latest_upcoming_game}
+    return {"latest_upcoming_game": latest_upcoming_game}
+
 
 def login_form_processor(request):
     """
     Контекстный процессор для добавления формы авторизации.
     """
-    return {'login_form': CustomAuthenticationForm()}
+    return {"login_form": CustomAuthenticationForm()}
+
 
 def get_recent_activity(request):
     thirty_minutes_ago = now() - timedelta(minutes=10)
@@ -58,16 +67,20 @@ def get_recent_activity(request):
     # А этот ужас посвящается SQLite
     # Уникальные активные пользователи
     active_users = list(
-        UserActivity.objects.filter(last_activity__gte=thirty_minutes_ago, user__isnull=False)
-        .values('user', 'user__username', 'user__email')
-        .annotate(last_activity=Max('last_activity'))
+        UserActivity.objects.filter(
+            last_activity__gte=thirty_minutes_ago, user__isnull=False
+        )
+        .values("user", "user__username", "user__email")
+        .annotate(last_activity=Max("last_activity"))
     )
 
     # Уникальные активные гости
     active_guests = (
-        UserActivity.objects.filter(last_activity__gte=thirty_minutes_ago, user__isnull=True)
-        .values('session_key')  # Группируем по session_key
-        .annotate(last_activity=Max('last_activity'))  # Берем последнее обновление
+        UserActivity.objects.filter(
+            last_activity__gte=thirty_minutes_ago, user__isnull=True
+        )
+        .values("session_key")  # Группируем по session_key
+        .annotate(last_activity=Max("last_activity"))  # Берем последнее обновление
         .count()
     )
 

@@ -15,16 +15,40 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Link',
+            name="Link",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255)),
-                ('content', models.TextField()),
-                ('image', models.ImageField(upload_to='link/')),
-                ('category', models.CharField(choices=[('Интернет-магазины', 'Online Stores'), ('Официально', 'Officially'), ('Полезно', 'Good To Know')], max_length=128)),
-                ('views', models.PositiveIntegerField(default=0)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=255)),
+                ("content", models.TextField()),
+                ("image", models.ImageField(upload_to="link/")),
+                (
+                    "category",
+                    models.CharField(
+                        choices=[
+                            ("Интернет-магазины", "Online Stores"),
+                            ("Официально", "Officially"),
+                            ("Полезно", "Good To Know"),
+                        ],
+                        max_length=128,
+                    ),
+                ),
+                ("views", models.PositiveIntegerField(default=0)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "author",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

@@ -14,28 +14,29 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
+
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.urls import include, path
 
 from news.views import NewsListView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('summernote/', include('django_summernote.urls')),
-    path('captcha/', include('captcha.urls')),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('', NewsListView.as_view(), name='index'),
-    path('board/', include('board.urls')),
-    path('blog/', include('reviews.urls')),
-    path('news/', include('news.urls')),
-    path('forum/', include('forum.urls')),
-    path('links/', include('links.urls')),
-    path('publ/', include('publ.urls')),
-    path('accounts/', include('accounts.urls')),
-    path('core/', include('core.urls')),
+    path("admin/", admin.site.urls),
+    path("summernote/", include("django_summernote.urls")),
+    path("captcha/", include("captcha.urls")),
+    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path("", NewsListView.as_view(), name="index"),
+    path("board/", include("board.urls")),
+    path("blog/", include("reviews.urls")),
+    path("news/", include("news.urls")),
+    path("forum/", include("forum.urls")),
+    path("links/", include("links.urls")),
+    path("publ/", include("publ.urls")),
+    path("accounts/", include("accounts.urls")),
+    path("core/", include("core.urls")),
 ]
 
 if settings.DEBUG:

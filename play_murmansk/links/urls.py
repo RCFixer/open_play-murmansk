@@ -1,9 +1,8 @@
 from django.urls import path
-from .views import (
-    LinkListView, LinkDetailView
-)
+
+from .views import LinkDetailView, LinkListView
 
 urlpatterns = [
-    path('', LinkListView.as_view(), name='links'),
-    path('<int:pk>/', LinkDetailView.as_view(), name='link_detail')
+    path("", LinkListView.as_view(), name="links"),
+    path("<int:pk>/", LinkDetailView.as_view(), name="link_detail"),
 ]

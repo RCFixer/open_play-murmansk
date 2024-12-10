@@ -1,50 +1,88 @@
 {% extends "base.html" %}
 {% load custom_filters %}
-
 {% block title %}Продам Куплю Обменяю - PLAYSTATION и XBOX в Мурманске{% endblock %}
-
 {% block content %}
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tbody><tr>
-<td width="80%"><a class="m" href="/">Главная</a> » Доска объявлений (<b>{{ board_list|length }}</b>)</td>
-<td align="right" style="white-space: nowrap;"></td>
-{% if user.is_authenticated %}
-    <td class="loginButton" style="font-size:7pt;text-align:center;"> <a class="m" href="{% url 'board_create' %}">Добавить объявление</a></td>
-{% endif %}
-</tr>
-</tbody></table>
-<hr>
-    <table border="0" cellspacing="1" cellpadding="0" width="100%" class="catsTable">
-   <tbody>
-   {% for category_board in board_category_list %}
-      <tr>
-         <td style="width:100%" class="catsTd" id="cid1" valign="top"><a href="{% url 'boards' %}?category={{ category_board.0 }}" class="catName">{{ category_board.1 }}</a> <span class="catNumData" style="unicode-bidi:embed;">[{{ board_category_counts|get_item:category_board|default:0 }}]</span></td>
-      </tr>
-   {% endfor %}
-   </tbody>
-</table>
-{% include "pagination.html" %}
-<div id="myGrid" style="display:none;"><div style="position:fixed;width:100%;text-align:center;padding-top:250px;"></div></div>
+        <tbody>
+            <tr>
+                <td width="80%">
+                    <a class="m" href="/">Главная</a> » Доска объявлений (<b>{{ board_list|length }}</b>)
+                </td>
+                <td align="right" style="white-space: nowrap;"></td>
+                {% if user.is_authenticated %}
+                    <td class="loginButton" style="font-size:7pt;text-align:center;">
+                        <a class="m" href="{% url 'board_create' %}">Добавить объявление</a>
+                    </td>
+                {% endif %}
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <table border="0"
+           cellspacing="1"
+           cellpadding="0"
+           width="100%"
+           class="catsTable">
+        <tbody>
+            {% for category_board in board_category_list %}
+                <tr>
+                    <td style="width:100%" class="catsTd" id="cid1" valign="top">
+                        <a href="{% url 'boards' %}?category={{ category_board.0 }}"
+                           class="catName">{{ category_board.1 }}</a> <span class="catNumData" style="unicode-bidi:embed;">[{{ board_category_counts|get_item:category_board|default:0 }}]</span>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% include "pagination.html" %}
+    <div id="myGrid" style="display:none;">
+        <div style="position:fixed;
+                    width:100%;
+                    text-align:center;
+                    padding-top:250px"></div>
+    </div>
     <div id="allEntries">
         {% for boards in board_list %}
-        <div><table border="0" cellpadding="0" cellspacing="0" width="100%" class="eBlock"><tbody><tr><td style="padding:3px;">
-
-        <div class="eTitle" style="text-align:left;"><a href="{% url 'board_detail' boards.id %}">{{ boards.title }}</a></div>
-        <div class="eMessage" style="text-align:left;clear:both;padding-top:2px;padding-bottom:2px;">
-        {% if boards.image %}
-            <img src="{{ boards.image.url }}" border="none" width="150" style="margin: 2px 7px 5px 0px" align="left">
-        {% endif %}
-        {{ boards.content|strip_p_tags_for_news_list|safe }}
-        <br>
-
-        </div> <div class="eDetails" style="clear:both;">
-        <a href="{% url 'boards' %}?category={{ boards.category }}">{{ boards.get_category_display }}</a> |
-        Просмотров: {{ boards.views }} |
-        Дата: {{ boards.created_at|date:"d-m-Y" }}
-
-        | <a href="{% url 'board_detail' boards.id %}">Комментарии ({{ boards.comments_count }})</a>
-        </div></td></tr></tbody></table><br></div>
-    {% endfor %}
+            <div>
+                <table border="0"
+                       cellpadding="0"
+                       cellspacing="0"
+                       width="100%"
+                       class="eBlock">
+                    <tbody>
+                        <tr>
+                            <td style="padding:3px;">
+                                <div class="eTitle" style="text-align:left;">
+                                    <a href="{% url 'board_detail' boards.id %}">{{ boards.title }}</a>
+                                </div>
+                                <div class="eMessage"
+                                     style="text-align:left;
+                                            clear:both;
+                                            padding-top:2px;
+                                            padding-bottom:2px">
+                                    {% if boards.image %}
+                                        <img src="{{ boards.image.url }}"
+                                             border="none"
+                                             width="150"
+                                             style="margin: 2px 7px 5px 0px"
+                                             align="left">
+                                    {% endif %}
+                                    {{ boards.content|strip_p_tags_for_news_list|safe }}
+                                    <br>
+                                </div>
+                                <div class="eDetails" style="clear:both;">
+                                    <a href="{% url 'boards' %}?category={{ boards.category }}">{{ boards.get_category_display }}</a> |
+                                    Просмотров: {{ boards.views }} |
+                                    Дата: {{ boards.created_at|date:"d-m-Y" }}
+                                    | <a href="{% url 'board_detail' boards.id %}">Комментарии ({{ boards.comments_count }})</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+            </div>
+        {% endfor %}
     </div>
     {% include "pagination.html" %}
 {% endblock %}

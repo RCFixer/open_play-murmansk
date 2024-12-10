@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import ForumSection, ForumSubsection, ForumTopic, ForumMessage
+
+from .models import ForumMessage, ForumSection, ForumSubsection, ForumTopic
 
 admin.site.register(ForumSection)
 admin.site.register(ForumSubsection)

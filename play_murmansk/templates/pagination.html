@@ -1,24 +1,24 @@
 <!-- Пагинация -->
 {% if is_paginated %}
-    <div class="catPages1" align="center" style="clear: both;" id="pagesBlock1">
-            {% if page_obj.has_previous %}
-                <a class="swchItem" href="?page={{ page_obj.previous_page_number }}"><span>«</span></a>
-                <a class="swchItem" href="?page=1">1</a>
-                <span class="swchItemDots"><span>...</span></span>
+    <div class="catPages1"
+         align="center"
+         style="clear: both"
+         id="pagesBlock1">
+        {% if page_obj.has_previous %}
+            <a class="swchItem" href="?page={{ page_obj.previous_page_number }}"><span>«</span></a>
+            <a class="swchItem" href="?page=1">1</a>
+            <span class="swchItemDots"><span>...</span></span>
+        {% endif %}
+        <span class="current">
+            <b class="swchItemA"><span>{{ page_obj.number }}</span></b>
+        </span>
+        {% if page_obj.has_next %}
+            <span class="swchItemDots"><span>...</span></span>
+            <a class="swchItem" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+            {% if page_obj.next_page_number < page_obj.paginator.num_pages %}
+                <a class="swchItem" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
             {% endif %}
-
-            <span class="current">
-                <b class="swchItemA"><span>{{ page_obj.number }}</span></b>
-            </span>
-
-
-            {% if page_obj.has_next %}
-                <span class="swchItemDots"><span>...</span></span>
-                <a class="swchItem" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
-                {% if page_obj.next_page_number < page_obj.paginator.num_pages %}
-                    <a class="swchItem" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
-                {% endif %}
-                <a class="swchItem" href="?page={{ page_obj.next_page_number }}"><span>»</span></a>
-            {% endif %}
+            <a class="swchItem" href="?page={{ page_obj.next_page_number }}"><span>»</span></a>
+        {% endif %}
     </div>
 {% endif %}

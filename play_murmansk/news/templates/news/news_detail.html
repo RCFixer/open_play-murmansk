@@ -1,31 +1,40 @@
 {% extends "base.html" %}
 {% load custom_filters %}
-
-{% block title %}{{news.title}} - PLAYSTATION и XBOX в Мурманске{% endblock %}
-
+{% block title %}{{ news.title }} - PLAYSTATION и XBOX в Мурманске{% endblock %}
 {% block content %}
     <hr>
-    <table border="0" width="100%" cellspacing="1" cellpadding="2" class="eBlock">
-    <tbody><tr><td width="90%"><div class="eTitle">{{ news.title }}</div></td><td align="right" style="white-space: nowrap;font:9px;">{{ news.created_at|date:"d-m-Y" }} </td></tr>
-    <tr>
-    <td colspan="2" class="eMessage">
-
-    {% if news.image %}
-        <img src="{{ news.image.url }}" border="none" width="200" style="margin: 2px 7px 5px 0px" align="left">
-    {% endif %}
-
-        {{ news.content|safe }}
-    </td></tr>
-    <tr><td colspan="2" class="eDetails">
-
-    <a class="userblack" href="{{ news.source }}">Источник</a> |
-
-
-    Просмотров: {{ news.views }} |
-    Добавил: <span class="userblack" >{{ news.author }}</span>
-
-     </td></tr>
-    </tbody></table>
-
+    <table border="0"
+           width="100%"
+           cellspacing="1"
+           cellpadding="2"
+           class="eBlock">
+        <tbody>
+            <tr>
+                <td width="90%">
+                    <div class="eTitle">{{ news.title }}</div>
+                </td>
+                <td align="right" style="white-space: nowrap;font:9px;">{{ news.created_at|date:"d-m-Y" }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="eMessage">
+                    {% if news.image %}
+                        <img src="{{ news.image.url }}"
+                             border="none"
+                             width="200"
+                             style="margin: 2px 7px 5px 0px"
+                             align="left">
+                    {% endif %}
+                    {{ news.content|safe }}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="eDetails">
+                    <a class="userblack" href="{{ news.source }}">Источник</a> |
+                    Просмотров: {{ news.views }} |
+                    Добавил: <span class="userblack">{{ news.author }}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     {% include "comments.html" %}
 {% endblock %}

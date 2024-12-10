@@ -1,73 +1,76 @@
 {% extends "index.html" %}
 {% load static %}
-
 {% block title %}PLAYSTATION и XBOX в Мурманске - Форум{% endblock %}
-
 {% block center %}
-<div id="centerBlock1">
-    <!-- Body -->
-    <table border="0" cellpadding="0" height="30" cellspacing="0" width="1000px" align="center">
-        <tbody>
-            <tr>
-                <td valign="top" style="padding: 0px 5px 0px 5px;">
-                    {% for section in section_list %}
-                        <div class="gDivLeft">
-                            <div class="gDivRight">
-                                <table border="0" width="100%" bgcolor="#FFFFFF" cellspacing="1" cellpadding="0" class="gTable">
-                                    <tbody>
-
-                                        <tr>
-                                            <td class="gTableTop" colspan="5">
-                                                <div style="float: right;" class="gTopCornerRight"></div>
-                                                {{ section.title }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="5%" class="gTableSubTop">&nbsp;</td>
-                                            <td class="gTableSubTop">Форум</td>
-                                            <td width="8%" class="gTableSubTop" align="center">Темы</td>
-                                            <td width="8%" class="gTableSubTop" align="center">Ответы</td>
-                                            <td width="30%" class="gTableSubTop">Обновления</td>
-                                        </tr>
-                                        {% for subsection in section.subsections.all %}
+    <div id="centerBlock1">
+        <!-- Body -->
+        <table border="0"
+               cellpadding="0"
+               height="30"
+               cellspacing="0"
+               width="1000px"
+               align="center">
+            <tbody>
+                <tr>
+                    <td valign="top" style="padding: 0px 5px 0px 5px;">
+                        {% for section in section_list %}
+                            <div class="gDivLeft">
+                                <div class="gDivRight">
+                                    <table border="0"
+                                           width="100%"
+                                           bgcolor="#FFFFFF"
+                                           cellspacing="1"
+                                           cellpadding="0"
+                                           class="gTable">
+                                        <tbody>
                                             <tr>
-                                                <td class="forumIcoTd" align="center">
-                                                </td>
-                                                <td class="forumNameTd">
-                                                    <a class="forum" href="{% url 'forum_topic_list' subsection.id %}">{{ subsection.title }}</a>
-                                                    {% if subsection.description %}
-                                                        <div class="forumDescr">{{ subsection.description }}</div>
-                                                    {% endif %}
-                                                </td>
-                                                <td class="forumThreadTd" align="center">{{ subsection.topic_count }}</td>
-                                                <td class="forumPostTd" align="center">{{ subsection.message_count }}</td>
-                                                <td class="forumLastPostTd">
-                                                    {% if subsection.last_message_created_at %}
-                                                        <a title="К последнему сообщению" class="forumLastPostLink" href="">{{ subsection.last_message_created_at|date:"d-m-Y" }}</a>
-                                                    <br />
-                                                    Тема: <a class="forumLastPostLink" href="">{{ subsection.last_message_topic_title }}</a><br />
-                                                    Сообщение от:
-                                                    <span class="lastPostUser"><a class="lastPostUserLink" href="">{{ subsection.last_message_author_username }}</a></span>
-                                                    {% else %}
-                                                        <p>Нет сообщений</p>
-                                                    {% endif %}
+                                                <td class="gTableTop" colspan="5">
+                                                    <div style="float: right;" class="gTopCornerRight"></div>
+                                                    {{ section.title }}
                                                 </td>
                                             </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
+                                            <tr>
+                                                <td width="5%" class="gTableSubTop">&nbsp;</td>
+                                                <td class="gTableSubTop">Форум</td>
+                                                <td width="8%" class="gTableSubTop" align="center">Темы</td>
+                                                <td width="8%" class="gTableSubTop" align="center">Ответы</td>
+                                                <td width="30%" class="gTableSubTop">Обновления</td>
+                                            </tr>
+                                            {% for subsection in section.subsections.all %}
+                                                <tr>
+                                                    <td class="forumIcoTd" align="center"></td>
+                                                    <td class="forumNameTd">
+                                                        <a class="forum" href="{% url 'forum_topic_list' subsection.id %}">{{ subsection.title }}</a>
+                                                        {% if subsection.description %}<div class="forumDescr">{{ subsection.description }}</div>{% endif %}
+                                                    </td>
+                                                    <td class="forumThreadTd" align="center">{{ subsection.topic_count }}</td>
+                                                    <td class="forumPostTd" align="center">{{ subsection.message_count }}</td>
+                                                    <td class="forumLastPostTd">
+                                                        {% if subsection.last_message_created_at %}
+                                                            <a title="К последнему сообщению" class="forumLastPostLink" href="">{{ subsection.last_message_created_at|date:"d-m-Y" }}</a>
+                                                            <br />
+                                                            Тема: <a class="forumLastPostLink" href="">{{ subsection.last_message_topic_title }}</a>
+                                                            <br />
+                                                            Сообщение от:
+                                                            <span class="lastPostUser"><a class="lastPostUserLink" href="">{{ subsection.last_message_author_username }}</a></span>
+                                                        {% else %}
+                                                            <p>Нет сообщений</p>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                        <div class="gDivBottomLeft"></div>
-                        <div class="gDivBottomCenter"></div>
-                        <div class="gDivBottomRight"></div>
-                        <br />
-
-                    {% endfor %}
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
+                            <div class="gDivBottomLeft"></div>
+                            <div class="gDivBottomCenter"></div>
+                            <div class="gDivBottomRight"></div>
+                            <br />
+                        {% endfor %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

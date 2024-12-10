@@ -1,17 +1,18 @@
 from django import forms
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.contenttypes.models import ContentType
 
 from .models import CommonComment
+
 
 class CommonCommentForm(forms.ModelForm):
     class Meta:
         model = CommonComment
-        fields = ['content']
+        fields = ["content"]
 
     def __init__(self, *args, **kwargs):
-        self.author = kwargs.pop('author', None)
-        self.content_object = kwargs.pop('content_object', None)
+        self.author = kwargs.pop("author", None)
+        self.content_object = kwargs.pop("content_object", None)
         super().__init__(*args, **kwargs)
 
     def save(self, commit=True):
@@ -27,16 +28,28 @@ class CommonCommentForm(forms.ModelForm):
 
 
 class CustomAuthenticationForm(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={'class': "loginField",
-                                                             'type': "text",
-                                                             'name': "user",
-                                                             'value': "",
-                                                             'size': "20",
-                                                             'style': "width:100%;",
-                                                             'maxlength': "50"}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': "loginField",
-                                                             'type': "password",
-                                                             'name': "password",
-                                                             'size': "20",
-                                                             'style': "width:100%;",
-                                                             'maxlength': "15"}))
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "class": "loginField",
+                "type": "text",
+                "name": "user",
+                "value": "",
+                "size": "20",
+                "style": "width:100%;",
+                "maxlength": "50",
+            }
+        )
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "loginField",
+                "type": "password",
+                "name": "password",
+                "size": "20",
+                "style": "width:100%;",
+                "maxlength": "15",
+            }
+        )
+    )

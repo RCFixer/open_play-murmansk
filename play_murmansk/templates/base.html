@@ -2,271 +2,352 @@
 {% load static %}
 {% load custom_filters %}
 {% block center %}
-<div id="centerBlock1">
-            <!-- Body -->
-            <table border="0" cellpadding="0" cellspacing="0" width="1000px" align="center">
-               <tbody>
-                  <tr>
-                     <td valign="top" class="column">
+    <div id="centerBlock1">
+        <!-- Body -->
+        <table border="0"
+               cellpadding="0"
+               cellspacing="0"
+               width="1000px"
+               align="center">
+            <tbody>
+                <tr>
+                    <td valign="top" class="column">
                         <!--U1CLEFTER1Z--><!-- <block10> -->
                         <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
-                           <tbody>
-                              {% if user.is_authenticated %}
-                                 <tr><td class="boxTitle"><b><font size="3pt">{{ user.username }}</font></b></td></tr>
-                                 <tr><td class="boxContent" align="center"><div class="boxText">
-                                 <img class="userAvatar" title="{{ user.username }}" src="{{ user.avatar.url }}" border="0" width="64">
-                                  <br><br>
-                                 <!-- <br>
+                            <tbody>
+                                {% if user.is_authenticated %}
+                                    <tr>
+                                        <td class="boxTitle">
+                                            <b><font size="3pt">{{ user.username }}</font></b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="boxContent" align="center">
+                                            <div class="boxText">
+                                                <img class="userAvatar"
+                                                     title="{{ user.username }}"
+                                                     src="{{ user.avatar.url }}"
+                                                     border="0"
+                                                     width="64">
+                                                <br>
+                                                <br>
+                                                <!-- <br>
                                  Пожалуйста зарегистрируйтесь или авторизуйтесь! -->
-                                 <form method="post" action="{% url 'logout' %}">
-                                     {% csrf_token %}
-                                     <button class="loginButton" type="submit">Logout</button>
-                                 </form>
-                                 </div></td></tr>
-
-                               {% else %}
-
-                                 <tr>
-                                    <td class="boxContent">
-                                       <div class="boxText">
-                                          <!-- <bc> -->
-                                          <div id="blk549174" style="border:1px solid #CCCCCC;position:absolute;z-index:82;display:none;"></div>
-                                   <form method="post" action="{% url 'login' %}">
-                                       {% csrf_token %}
-                                      <table border="0" cellspacing="1" cellpadding="0" width="100%">
-                                          <tbody>
-                                             <tr>
-                                                <td width="20%" nowrap="nowrap">Логин:</td>
-                                                <td>{{ login_form.username }}</td>
-                                             </tr>
-                                             <tr>
-                                                <td>Пароль:</td>
-                                                <td>{{ login_form.password }}</td>
-                                             </tr>
-<!--                                                         <button type="submit">Login</button>-->
-                                          </tbody>
-                                       </table>
-                                      <table border="0" cellspacing="1" cellpadding="0" width="100%">
-                                          <tbody>
-                                             <tr>
-                                                <td align="right" valign="top"><input class="loginButton" name="sbm" type="submit" value="Вход"></td>
-                                             </tr>
-                                             <tr>
-                                                <td colspan="2">
-                                                   <div style="font-size:7pt;text-align:center;"> <a class="m" href="{% url 'register' %}">Регистрация</a></div>
-                                                </td>
-                                             </tr>
-                                          </tbody>
-                                       </table>
-                                   </form>
-                                 </div>
-                           </td>
-                        </tr>
-                               {% endif %}
-                        <input type="hidden" name="a" value="2"><input type="hidden" name="ajax" value="1"><input type="hidden" name="rnd" value="174">
-                     </form>
-                     <!-- </bc> -->
-                           </tbody>
-                        </table>
-                        <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
-                           <tbody>
-                              <tr>
-                                 <td class="boxTitle">
+                                                <form method="post" action="{% url 'logout' %}">
+                                                    {% csrf_token %}
+                                                    <button class="loginButton" type="submit">Logout</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td class="boxContent">
+                                            <div class="boxText">
+                                                <!-- <bc> -->
+                                                <div id="blk549174"
+                                                     style="border:1px solid #CCCCCC;
+                                                            position:absolute;
+                                                            z-index:82;
+                                                            display:none"></div>
+                                                <form method="post" action="{% url 'login' %}">
+                                                    {% csrf_token %}
+                                                    <table border="0" cellspacing="1" cellpadding="0" width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td width="20%" nowrap="nowrap">Логин:</td>
+                                                                <td>{{ login_form.username }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Пароль:</td>
+                                                                <td>{{ login_form.password }}</td>
+                                                            </tr>
+                                                            <!--                                                         <button type="submit">Login</button>-->
+                                                        </tbody>
+                                                    </table>
+                                                    <table border="0" cellspacing="1" cellpadding="0" width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td align="right" valign="top">
+                                                                    <input class="loginButton" name="sbm" type="submit" value="Вход">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    <div style="font-size:7pt;text-align:center;">
+                                                                        <a class="m" href="{% url 'register' %}">Регистрация</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                <input type="hidden" name="a" value="2">
+                                <input type="hidden" name="ajax" value="1">
+                                <input type="hidden" name="rnd" value="174">
+                            </form>
+                            <!-- </bc> -->
+                        </tbody>
+                    </table>
+                    <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
+                        <tbody>
+                            <tr>
+                                <td class="boxTitle">
                                     <b>Эй, Кто Здесь?</b>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td class="boxContent" align="center">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="boxContent" align="center">
                                     <div class="boxText">
-                                       <div class="tOnline" id="onl1">Сейчас на сайте <b>{{ total_users_count }}</b></div>
-                                       <div class="gOnline" id="onl2">Гостей <b>{{ active_guests }}</b></div>
-                                       <div class="uOnline" id="onl3">Участников <b>{{ active_users|length }}</b></div>
-                                       {% for active_user in active_users %}
-                                          <span class="groupUser" style="color: #CC6600">{{ active_user.user__username }}</span>{% if not forloop.last %}, {% endif %}
-                                       {% endfor %}
+                                        <div class="tOnline" id="onl1">
+                                            Сейчас на сайте <b>{{ total_users_count }}</b>
+                                        </div>
+                                        <div class="gOnline" id="onl2">
+                                            Гостей <b>{{ active_guests }}</b>
+                                        </div>
+                                        <div class="uOnline" id="onl3">
+                                            Участников <b>{{ active_users|length }}</b>
+                                        </div>
+                                        {% for active_user in active_users %}
+                                            <span class="groupUser" style="color: #CC6600">{{ active_user.user__username }}</span>
+                                            {% if not forloop.last %},{% endif %}
+                                        {% endfor %}
                                     </div>
-                                 </td>
-                              </tr>
-                           </tbody>
-                        </table>
-                        <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
-                           <tbody>
-                              <tr></tr>
-                              <tr>
-                                 <td class="boxContent">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
+                        <tbody>
+                            <tr></tr>
+                            <tr>
+                                <td class="boxContent">
                                     <div class="boxText">
-                                       {% for advertisement in advertisements %}
-                                       <a href="{{ advertisement.link }}" target=_blank><img src="{{ advertisement.image.url }}" border="none" width="200"></a><br>
-                                       <br>
-                                       {% endfor %}
+                                        {% for advertisement in advertisements %}
+                                            <a href="{{ advertisement.link }}" target=_blank>
+                                                <img src="{{ advertisement.image.url }}" border="none" width="200">
+                                            </a>
+                                            <br>
+                                            <br>
+                                        {% endfor %}
                                     </div>
-                                 </td>
-                              </tr>
-                           </tbody>
-                        </table>
-                        <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
-                           <tbody>
-                              <tr>
-                                 <td class="boxTitle"><b>Последние Темы Форума</b></td>
-                              </tr>
-                              <tr>
-                                 <td class="boxContent">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
+                        <tbody>
+                            <tr>
+                                <td class="boxTitle">
+                                    <b>Последние Темы Форума</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="boxContent">
                                     <div class="boxText">
-                                       {% for forum_topic in latest_forum_topics %}
-                                          <ul class="uz">
-                                             <li class="menus1">
-                                                <div align="left"> <span style="font-size: 8pt" ;="">  <a class="ma" href="{% url 'forum_topic_detail' forum_topic.id %}">{{ forum_topic.title }}</a> </span> <br> <span style="font-size: 7pt" ;=""> {{ forum_topic.created_at|date:"d-m-Y" }} от <a class="uLPost" href="" target="_blank">{{ forum_topic.author }}</a> </span> </div>
-                                             </li>
-                                          </ul>
-                                       {% endfor %}
+                                        {% for forum_topic in latest_forum_topics %}
+                                            <ul class="uz">
+                                                <li class="menus1">
+                                                    <div align="left">
+                                                        <span style="font-size: 8pt" ;="">  <a class="ma" href="{% url 'forum_topic_detail' forum_topic.id %}">{{ forum_topic.title }}</a> </span>
+                                                        <br>
+                                                        <span style="font-size: 7pt" ;=""> {{ forum_topic.created_at|date:"d-m-Y" }} от <a class="uLPost" href="" target="_blank">{{ forum_topic.author }}</a> </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        {% endfor %}
                                     </div>
-                                    <div align="center"><a class="m" href="{% url 'all_topics_list' %}"><span style="color:#CC6600">[Последние Темы Форума]</span></a></div>
-                                 </td>
-                              </tr>
-                           </tbody>
-                        </table>
-                        <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
-                           <tbody>
-                              <tr>
-                                 <td class="boxTitle"><b>Ждем и Верим</b></td>
-                              </tr>
-                              <tr>
-                                 <td class="boxContent">
-                                    <div class="boxText" align="center"><img src="{{ latest_upcoming_game.image.url }}" style="width: 200px"><br><br><b><span style="color:#CC6600">{{ latest_upcoming_game.game_title }}</span></b><br>{{ latest_upcoming_game.release_date }} </div>
-                                 </td>
-                              </tr>
-                           </tbody>
-                        </table>
-                        <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
-                           <tbody>
-                              <tr>
-                                 <td class="boxTitle"><b>Последние Комментарии</b></td>
-                              </tr>
-                              <tr>
-                                 <td class="boxContent">
-                                    <div class="boxText">
-                                       {% for last_comment in latest_comments %}
-                                          <ul class="uz">
-                                             <li class="menus1">
-                                                <div align="left"> <span style="font-size: 8pt" ;=""> <a class="ma" href="{% url last_comment.content_type.name|get_object_detail_url last_comment.content_object.id %}">{{ last_comment.content_object.title }}</a> </span> <br> <span style="font-size: 7pt" ;=""> {{ last_comment.created_at|date:"d-m-Y" }} от {{ last_comment.author }} </span> </div>
-                                             </li>
-                                          </ul>
-                                       {% endfor %}
+                                    <div align="center">
+                                        <a class="m" href="{% url 'all_topics_list' %}"><span style="color:#CC6600">[Последние Темы Форума]</span></a>
                                     </div>
-                                 </td>
-                              </tr>
-                           </tbody>
-                        </table>
-                        <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
-                           <tbody>
-                              <tr>
-                                 <td class="boxContent">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
+                        <tbody>
+                            <tr>
+                                <td class="boxTitle">
+                                    <b>Ждем и Верим</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="boxContent">
+                                    <div class="boxText" align="center">
+                                        <img src="{{ latest_upcoming_game.image.url }}" style="width: 200px">
+                                        <br>
+                                        <br>
+                                        <b><span style="color:#CC6600">{{ latest_upcoming_game.game_title }}</span></b>
+                                        <br>
+                                        {{ latest_upcoming_game.release_date }}
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
+                        <tbody>
+                            <tr>
+                                <td class="boxTitle">
+                                    <b>Последние Комментарии</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="boxContent">
                                     <div class="boxText">
-                                       <!-- Put this script tag to the <head> of your page -->
-<script type="text/javascript" src="https://vk.com/js/api/openapi.js?168"></script>
-
-<!-- Put this div tag to the place, where the Group block will be -->
-<div id="vk_groups"></div>
-<script type="text/javascript">
+                                        {% for last_comment in latest_comments %}
+                                            <ul class="uz">
+                                                <li class="menus1">
+                                                    <div align="left">
+                                                        <span style="font-size: 8pt" ;=""> <a class="ma"
+    href="{% url last_comment.content_type.name|get_object_detail_url last_comment.content_object.id %}">{{ last_comment.content_object.title }}</a> </span>
+                                                        <br>
+                                                        <span style="font-size: 7pt" ;="">{{ last_comment.created_at|date:"d-m-Y" }} от {{ last_comment.author }}</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        {% endfor %}
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
+                        <tbody>
+                            <tr>
+                                <td class="boxContent">
+                                    <div class="boxText">
+                                        <!-- Put this script tag to the <head> of your page -->
+                                        <script type="text/javascript" src="https://vk.com/js/api/openapi.js?168"></script>
+                                        <!-- Put this div tag to the place, where the Group block will be -->
+                                        <div id="vk_groups"></div>
+                                        <script type="text/javascript">
   VK.Widgets.Group("vk_groups", {mode: 3, width: 200, height: 400, color1: "333", color2: "fff", color3: "CC6600"}, 40254602);
-</script>
-                                       <br>
+                                        </script>
+                                        <br>
                                     </div>
-                                 </td>
-                              </tr>
-                           </tbody>
-                        </table>
-                        <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
-                           <tbody>
-                              <tr>
-                                 <td class="boxTitle"><b>Последние Объявления</b></td>
-                              </tr>
-                              <tr>
-                                 <td class="boxContent">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
+                        <tbody>
+                            <tr>
+                                <td class="boxTitle">
+                                    <b>Последние Объявления</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="boxContent">
                                     <div class="boxText">
-                                       {% for board in latest_boards %}
-                                       <ul class="uz">
-                                          <li class="menus2">
-                                             <table border="0" cellpadding="2" cellspacing="1" width="100%" class="infTable">
-                                                <tbody>
-                                                   <tr>
-                                                      <td class="infTitle" colspan="2"> <span style="font-size: 7pt"> {{ board.category|translate_category }} от {{ board.author }} </span>  <br> <a class="ma" href="{% url 'board_detail' board.id %}">{{ board.title }}</a></td>
-                                                   </tr>
-                                                </tbody>
-                                             </table>
-                                          </li>
-                                       </ul>
-                                       {% endfor %}
+                                        {% for board in latest_boards %}
+                                            <ul class="uz">
+                                                <li class="menus2">
+                                                    <table border="0"
+                                                           cellpadding="2"
+                                                           cellspacing="1"
+                                                           width="100%"
+                                                           class="infTable">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="infTitle" colspan="2">
+                                                                    <span style="font-size: 7pt">{{ board.category|translate_category }} от {{ board.author }}</span>
+                                                                    <br>
+                                                                    <a class="ma" href="{% url 'board_detail' board.id %}">{{ board.title }}</a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </li>
+                                            </ul>
+                                        {% endfor %}
                                     </div>
-                                    <div align="center"><a class="m" href="{% url 'boards' %}"><span style="color:#CC6600">[Все Объявления]</span></a></div>
-                                 </td>
-                              </tr>
-                           </tbody>
-                        </table>
-                        <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
-                           <tbody>
-                              <tr>
-                                 <td class="boxTitle">
+                                    <div align="center">
+                                        <a class="m" href="{% url 'boards' %}"><span style="color:#CC6600">[Все Объявления]</span></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
+                        <tbody>
+                            <tr>
+                                <td class="boxTitle">
                                     <b>
-                                       Последние Отзывы
-                                       <blink></blink>
+                                        Последние Отзывы
+                                        <blink></blink>
                                     </b>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td class="boxContent">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="boxContent">
                                     <div class="boxText">
-                                       {% for review in latest_reviews %}
-                                          <ul class="uz">
-                                             <li class="menus">
-                                                <div align="left"><a class="ma" href="{% url 'review_detail' review.id %}">{{ review.title }}</a> от {{ review.author }}<br>  </div>
-                                             </li>
-                                          </ul>
-                                       {% endfor %}
+                                        {% for review in latest_reviews %}
+                                            <ul class="uz">
+                                                <li class="menus">
+                                                    <div align="left">
+                                                        <a class="ma" href="{% url 'review_detail' review.id %}">{{ review.title }}</a> от {{ review.author }}
+                                                        <br>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        {% endfor %}
                                     </div>
-                                    <div align="center"><a class="m" href="{% url 'review_list' %}"><span style="color:#CC6600">[Все Отзывы]</span></a></div>
-                                 </td>
-                              </tr>
-                           </tbody>
-                        </table>
-                        <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
-                           <tbody>
-                              <tr>
-                                 <td class="boxTitle"><b>Нарушаем Тишину</b></td>
-                              </tr>
-                              <tr>
-                                 <td class="boxContent">
+                                    <div align="center">
+                                        <a class="m" href="{% url 'review_list' %}"><span style="color:#CC6600">[Все Отзывы]</span></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table border="0" cellpadding="0" cellspacing="0" class="boxTable">
+                        <tbody>
+                            <tr>
+                                <td class="boxTitle">
+                                    <b>Нарушаем Тишину</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="boxContent">
                                     <div class="boxText">
-                                       <div align="center">
-                                          <script>
+                                        <div align="center">
+                                            <script>
                                              function openWindow()
                                              {
                                               muzWindow = open("https://music.yandex.ru/iframe/playlist/yamusic-top/1008", "newWindow", "width=350,height=330, status=no, toolbar=no, menubar=no");
                                              }
-                                          </script>
-                                          <span style="font-size: 7pt" ;="">
-                                          Плеер с Музыкой<br>
-                                          Откроется в Маленьком Окошке<br><br>
-                                          <a href="#" onclick="openWindow()"><img src="{% static 'images/player.jpg' %}" border="none"></a>
-                                          <br>
-                                          <br>
-                                          </span>
-                                          <a class="m" href=""><span style="color:#CC6600">[Иногда даже меняю пластинки]</span></a>
-                                       </div>
+                                            </script>
+                                            <span style="font-size: 7pt" ;="">
+                                                Плеер с Музыкой
+                                                <br>
+                                                Откроется в Маленьком Окошке
+                                                <br>
+                                                <br>
+                                                <a href="#" onclick="openWindow()">
+                                                    <img src="{% static 'images/player.jpg' %}" border="none">
+                                                </a>
+                                                <br>
+                                                <br>
+                                            </span>
+                                            <a class="m" href="{% url 'forum_topic_detail' 3 %}"><span style="color:#CC6600">[Иногда даже меняю пластинки]</span></a>
+                                        </div>
                                     </div>
-                                 </td>
-                              </tr>
-                           </tbody>
-                        </table>
-                        <!--/U1CLEFTER1Z-->
-                     </td>
-                     <td valign="top" style="padding:0px 10px 0px 10px;">
-                        {% block content %}
-                       {% endblock %}
-                     </td>
-                  </tr>
-               </tbody>
-            </table>
-            <!-- /Body -->
-         </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!--/U1CLEFTER1Z-->
+                </td>
+                <td valign="top" style="padding:0px 10px 0px 10px;">
+                    {% block content %}{% endblock %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- /Body -->
+</div>
 {% endblock %}

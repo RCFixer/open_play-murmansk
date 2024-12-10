@@ -1,144 +1,150 @@
 {% extends "index.html" %}
 {% load static %}
 {% load custom_filters %}
-
 {% block title %}PLAYSTATION и XBOX в Мурманске - {{ topic.title }}{% endblock %}
-
 {% block center %}
-<div id="centerBlock1">
-    <!-- Body -->
-    <table border="0" cellpadding="0" height="30" cellspacing="0" width="1000px" align="center">
-        <tbody>
-            <tr>
-                <td valign="top" style="padding: 0px 5px 0px 5px;">
-                    <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                        <tbody>
-                            <tr>
-                                <td align="right" class="frmBtns">
-                                    <div id="frmButns83">
-                                        <a href="{% url 'create_topic' %}" target="_blank"><img src="{% static 'images/t_new.gif' %}" title="Создать новую тему" alt="Создать новую тему"></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    {% include "forum_pagination.html" %}
-                    <br>
-                    <div class="gDivLeft">
-                        <div class="gDivRight">
-                            <table class="gTable" border="0" width="100%" cellspacing="1" cellpadding="0">
-                                <tbody>
-                                    <tr>
-                                        <td class="gTableTop">
-                                            <div style="float: right;" class="gTopCornerRight"></div>
-                                            {{ topic.title }}
-                                        </td>
-                                    </tr>
-                                    {% for message in messages %}
-                                        <tr id="post2693">
-                                            <td class="postFirst">
-                                                <table border="0" width="100%" cellspacing="1" cellpadding="2" class="postTable">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td width="23%" class="postTdTop" align="center"><span class="postUser">{{ message.author }}</span></td>
-                                                            <td class="postTdTop">
-                                                                {{ message.created_at|date:"d-m-Y" }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="postTdInfo" valign="top">
-                                                                <img title="{{ message.author }}" class="userAvatar" border="0" src="{{ message.author.avatar.url }}" width="64" />
-                                                                {% if message.author.is_superuser %}
-                                                                    <div class="postUserGroup">Администратор</div>
-                                                                {% elif message.author.is_staff %}
-                                                                    <div class="postUserGroup">Модератор</div>
-                                                                {% else %}
-                                                                    <div class="postUserGroup">Игрок</div>
-                                                                {% endif %}
-                                                                {% if message.author.psn_id %}
-                                                                    <div class="psnid">PSN ID: {{ message.author.psn_id }}</div>
-                                                                {% endif %}
-                                                                {% if message.author.gametag_id %}
-                                                                    <div class="psnid">GameTag: {{ message.author.gametag_id }}</div>
-                                                                {% endif %}
-                                                                {% if message.author.nintendo_id %}
-                                                                    <div class="psnid">Nintendo ID: {{ message.author.nintendo_id }}</div>
-                                                                {% endif %}
-                                                                {% if message.author.steam_id %}
-                                                                    <div class="psnid">Steam: {{ message.author.steam_id }}</div>
-                                                                {% endif %}
-                                                            </td>
-                                                            <td class="posttdMessage" valign="top">
-                                                                {{ message.content|strip_p_tags|safe }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="postBottom" align="center">&nbsp;</td>
-                                                            <td class="postBottom">
-                                                                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td align="right" style="padding-right: 15px;"></td>
-                                                                            <td width="2%" nowrap="" align="right">
-                                                                                <a class="goOnTop" href="javascript:scroll(0,0);">
-                                                                                    <img
-                                                                                        alt=""
-                                                                                        style="margin: 0; padding: 0; border: 0;"
-                                                                                        src="{% static 'images/p_up.gif' %}"
-                                                                                        title="Вверх"
-                                                                                    />
-                                                                                </a>
-                                                                            </td>
-                                                                            {% if user.is_staff %}
-                                                                                <button class="delete-comment" data-comment-id="{{ message.id }}">Удалить</button>
-                                                                            {% endif %}
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+    <div id="centerBlock1">
+        <!-- Body -->
+        <table border="0"
+               cellpadding="0"
+               height="30"
+               cellspacing="0"
+               width="1000px"
+               align="center">
+            <tbody>
+                <tr>
+                    <td valign="top" style="padding: 0px 5px 0px 5px;">
+                        <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                            <tbody>
+                                <tr>
+                                    <td align="right" class="frmBtns">
+                                        <div id="frmButns83">
+                                            <a href="{% url 'create_topic' %}" target="_blank">
+                                                <img src="{% static 'images/t_new.gif' %}"
+                                                     title="Создать новую тему"
+                                                     alt="Создать новую тему">
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        {% include "forum_pagination.html" %}
+                        <br>
+                        <div class="gDivLeft">
+                            <div class="gDivRight">
+                                <table class="gTable"
+                                       border="0"
+                                       width="100%"
+                                       cellspacing="1"
+                                       cellpadding="0">
+                                    <tbody>
+                                        <tr>
+                                            <td class="gTableTop">
+                                                <div style="float: right;" class="gTopCornerRight"></div>
+                                                {{ topic.title }}
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="postSeparator"></td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-
-                            {% if user.is_authenticated %}
-                                <h2>Оставить сообщение</h2>
-                                <form method="post">
-                                    {% csrf_token %}
-                                    {{ form.errors }} {# Always makes sense #}
-                                    {{ form.media }}  {# This is the important line! #}
-                                    {{ form.as_div }}
-                                    <button type="submit" class="commSbmFl">Отправить</button>
-                                </form>
-                            {% else %}
-                                <div align="center" class="commReg">Оставлять сообщения могут только зарегистрированные пользователи.<br>[ <a class="m" href="{% url 'register' %}">Регистрация</a> | <a class="m" href="{% url 'login' %}" >Вход</a> ]</div>
-                            {% endif %}
-
+                                        {% for message in messages %}
+                                            <tr id="post2693">
+                                                <td class="postFirst">
+                                                    <table border="0"
+                                                           width="100%"
+                                                           cellspacing="1"
+                                                           cellpadding="2"
+                                                           class="postTable">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td width="23%" class="postTdTop" align="center">
+                                                                    <span class="postUser">{{ message.author }}</span>
+                                                                </td>
+                                                                <td class="postTdTop">{{ message.created_at|date:"d-m-Y" }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="postTdInfo" valign="top">
+                                                                    <img title="{{ message.author }}"
+                                                                         class="userAvatar"
+                                                                         border="0"
+                                                                         src="{{ message.author.avatar.url }}"
+                                                                         width="64" />
+                                                                    {% if message.author.is_superuser %}
+                                                                        <div class="postUserGroup">Администратор</div>
+                                                                    {% elif message.author.is_staff %}
+                                                                        <div class="postUserGroup">Модератор</div>
+                                                                    {% else %}
+                                                                        <div class="postUserGroup">Игрок</div>
+                                                                    {% endif %}
+                                                                    {% if message.author.psn_id %}<div class="psnid">PSN ID: {{ message.author.psn_id }}</div>{% endif %}
+                                                                    {% if message.author.gametag_id %}<div class="psnid">GameTag: {{ message.author.gametag_id }}</div>{% endif %}
+                                                                    {% if message.author.nintendo_id %}<div class="psnid">Nintendo ID: {{ message.author.nintendo_id }}</div>{% endif %}
+                                                                    {% if message.author.steam_id %}<div class="psnid">Steam: {{ message.author.steam_id }}</div>{% endif %}
+                                                                </td>
+                                                                <td class="posttdMessage" valign="top">{{ message.content|strip_p_tags|safe }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="postBottom" align="center">&nbsp;</td>
+                                                                <td class="postBottom">
+                                                                    <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td align="right" style="padding-right: 15px;"></td>
+                                                                                <td width="2%" nowrap="" align="right">
+                                                                                    <a class="goOnTop" href="javascript:scroll(0,0);">
+                                                                                        <img alt=""
+                                                                                             style="margin: 0;
+                                                                                                    padding: 0;
+                                                                                                    border: 0"
+                                                                                             src="{% static 'images/p_up.gif' %}"
+                                                                                             title="Вверх" />
+                                                                                    </a>
+                                                                                </td>
+                                                                                {% if user.is_staff %}<button class="delete-comment" data-comment-id="{{ message.id }}">Удалить</button>{% endif %}
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="postSeparator"></td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                {% if user.is_authenticated %}
+                                    <h2>Оставить сообщение</h2>
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        {{ form.errors }} {# Always makes sense #}
+                                        {{ form.media }}  {# This is the important line! #}
+                                        {{ form.as_div }}
+                                        <button type="submit" class="commSbmFl">Отправить</button>
+                                    </form>
+                                {% else %}
+                                    <div align="center" class="commReg">
+                                        Оставлять сообщения могут только зарегистрированные пользователи.
+                                        <br>
+                                        [ <a class="m" href="{% url 'register' %}">Регистрация</a> | <a class="m" href="{% url 'login' %}">Вход</a> ]
+                                    </div>
+                                {% endif %}
+                            </div>
                         </div>
-                    </div>
-                    <div class="gDivBottomLeft"></div>
-                    <div class="gDivBottomCenter"></div>
-                    <div class="gDivBottomRight"></div>
-                    <br>
-                    {% include "forum_pagination.html" %}
-
-                    <br />
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <br />
-</div>
-
-<script>
+                        <div class="gDivBottomLeft"></div>
+                        <div class="gDivBottomCenter"></div>
+                        <div class="gDivBottomRight"></div>
+                        <br>
+                        {% include "forum_pagination.html" %}
+                        <br />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+    </div>
+    <script>
     document.querySelectorAll('.delete-comment').forEach(button => {
     button.addEventListener('click', function() {
         const commentId = this.dataset.commentId;
@@ -182,6 +188,5 @@ function getCookie(name) {
     }
     return cookieValue;
 }
-</script>
-
+    </script>
 {% endblock %}

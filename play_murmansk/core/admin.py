@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import CommonComment, Advertisement, UpcomingGame
+
+from .models import Advertisement, CommonComment, UpcomingGame
 
 admin.site.register(CommonComment)
 admin.site.register(Advertisement)

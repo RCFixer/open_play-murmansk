@@ -1,14 +1,16 @@
 from django import forms
+
 from .models import ForumMessage, ForumTopic
+
 
 class ForumMessageForm(forms.ModelForm):
     class Meta:
         model = ForumMessage
-        fields = ['content']
+        fields = ["content"]
 
     def __init__(self, *args, **kwargs):
-        self.author = kwargs.pop('author', None)
-        self.topic = kwargs.pop('topic_object', None)
+        self.author = kwargs.pop("author", None)
+        self.topic = kwargs.pop("topic_object", None)
         super().__init__(*args, **kwargs)
 
     def save(self, commit=True):
@@ -24,4 +26,4 @@ class ForumMessageForm(forms.ModelForm):
 class ForumTopicForm(forms.ModelForm):
     class Meta:
         model = ForumTopic
-        fields = ['subsection', 'title', 'description']
+        fields = ["subsection", "title", "description"]

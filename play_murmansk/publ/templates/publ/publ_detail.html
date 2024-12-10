@@ -1,23 +1,30 @@
 {% extends "base.html" %}
 {% load custom_filters %}
-
-{% block title %}{{publ.title}} - PLAYSTATION и XBOX в Мурманске{% endblock %}
-
+{% block title %}{{ publ.title }} - PLAYSTATION и XBOX в Мурманске{% endblock %}
 {% block content %}
     <hr>
-    <table border="0" width="100%" cellspacing="1" cellpadding="2" class="eBlock">
-    <tbody><tr><td width="90%"><div class="eTitle">{{ publ.title }}</div></td><td align="right" style="white-space: nowrap;font:9px;">{{ publ.created_at|date:"d-m-Y" }} </td></tr>
-    <tr>
-    <td colspan="2" class="eMessage">
-        {{ publ.content|safe }}
-    </td></tr>
-    <tr><td colspan="2" class="eDetails">
-
-    Просмотров: {{ publ.views }} |
-    Добавил: <a class="userblack" href="">{{ publ.author }}</a>
-
-     </td></tr>
-    </tbody></table>
-
+    <table border="0"
+           width="100%"
+           cellspacing="1"
+           cellpadding="2"
+           class="eBlock">
+        <tbody>
+            <tr>
+                <td width="90%">
+                    <div class="eTitle">{{ publ.title }}</div>
+                </td>
+                <td align="right" style="white-space: nowrap;font:9px;">{{ publ.created_at|date:"d-m-Y" }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="eMessage">{{ publ.content|safe }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="eDetails">
+                    Просмотров: {{ publ.views }} |
+                    Добавил: <a class="userblack" href="">{{ publ.author }}</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     {% include "comments.html" %}
 {% endblock %}

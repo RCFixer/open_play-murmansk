@@ -1,43 +1,57 @@
 {% extends "base.html" %}
 {% load custom_filters %}
-
 {% block title %}PLAYSTATION и XBOX в Мурманске - Главная страница{% endblock %}
-
 {% block content %}
     <p></p>
     <div id="myGrid" style="display:none;">
-       <div style="position:fixed;width:100%;text-align:center;padding-top:250px;"></div>
+        <div style="position:fixed;
+                    width:100%;
+                    text-align:center;
+                    padding-top:250px"></div>
     </div>
     <div id="allEntries">
-
         {% for news in news_list %}
-        <div>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="eBlock0">
-             <tbody>
-                <tr>
-                   <td style="padding:3px;">
-                      <div class="cDate" style="float:right;font:7pt;"><span title="12:55">{{ news.created_at|date:"d-m-Y" }}</span></div>
-                       <div class="eTitle" style="text-align:left;"><a href="{% url 'news_detail' news.id %}">{{ news.title }}</a></div>
-                      <div class="eMessage" style="clear:both;padding-top:7px;padding-bottom:2px;">
-                          {% if news.image %}
-                            <img src="{{ news.image.url }}" border="none" width="200" style="margin: 0px 7px 5px 0px" align="left" <="" a="">
-                          {% endif %}
-                          {{ news.content|strip_p_tags_for_news_list|safe }}
-                      </div>
-                      <div class="eDetails" style="clear:both;">
-                         <a class="userblack" href="{{ news.source }}">Источник</a>
-                         | <a href="{% url 'news_detail' news.id %}">Оставляем комментарии ({{ news.comments_count }})</a>
-                      </div>
-                   </td>
-                </tr>
-             </tbody>
-            </table>
-            <br>
+            <div>
+                <table border="0"
+                       cellpadding="0"
+                       cellspacing="0"
+                       width="100%"
+                       class="eBlock0">
+                    <tbody>
+                        <tr>
+                            <td style="padding:3px;">
+                                <div class="cDate" style="float:right;font:7pt;">
+                                    <span title="12:55">{{ news.created_at|date:"d-m-Y" }}</span>
+                                </div>
+                                <div class="eTitle" style="text-align:left;">
+                                    <a href="{% url 'news_detail' news.id %}">{{ news.title }}</a>
+                                </div>
+                                <div class="eMessage"
+                                     style="clear:both;
+                                            padding-top:7px;
+                                            padding-bottom:2px">
+                                    {% if news.image %}
+                                        <img src="{{ news.image.url }}"
+                                             border="none"
+                                             width="200"
+                                             style="margin: 0px 7px 5px 0px"
+                                             align="left"
+                                             None=""
+                                             a="">
+                                    {% endif %}
+                                    {{ news.content|strip_p_tags_for_news_list|safe }}
+                                </div>
+                                <div class="eDetails" style="clear:both;">
+                                    <a class="userblack" href="{{ news.source }}">Источник</a>
+                                    | <a href="{% url 'news_detail' news.id %}">Оставляем комментарии ({{ news.comments_count }})</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
             </div>
-    {% endfor %}
-
+        {% endfor %}
         {% include "pagination.html" %}
     </div>
-
-
 {% endblock %}

@@ -1,135 +1,158 @@
 {% extends "index.html" %}
 {% load static %}
 {% load custom_filters %}
-
 {% block title %}PLAYSTATION и XBOX в Мурманске - Форум{% endblock %}
-
 {% block center %}
-<div id="centerBlock1">
-    <!-- Body -->
-    <table border="0" cellpadding="0" height="30" cellspacing="0" width="1000px" align="center">
-        <tbody>
-    <tr>
-        <td valign="top" style="padding: 0px 5px 0px 5px;">
-            <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                <tbody>
-                    <tr>
-                        <td align="right" class="frmBtns">
-                            <div id="frmButns83">
-                                <a href="{% url 'create_topic' %}" target="_blank"><img src="{% static 'images/t_new.gif' %}" title="Создать новую тему" alt="Создать новую тему"></a>
+    <div id="centerBlock1">
+        <!-- Body -->
+        <table border="0"
+               cellpadding="0"
+               height="30"
+               cellspacing="0"
+               width="1000px"
+               align="center">
+            <tbody>
+                <tr>
+                    <td valign="top" style="padding: 0px 5px 0px 5px;">
+                        <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                            <tbody>
+                                <tr>
+                                    <td align="right" class="frmBtns">
+                                        <div id="frmButns83">
+                                            <a href="{% url 'create_topic' %}" target="_blank">
+                                                <img src="{% static 'images/t_new.gif' %}"
+                                                     title="Создать новую тему"
+                                                     alt="Создать новую тему">
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        {% include "forum_pagination.html" %}
+                        <div class="gDivLeft">
+                            <div class="gDivRight">
+                                <table border="0"
+                                       width="100%"
+                                       bgcolor="#FFFFFF"
+                                       cellspacing="1"
+                                       cellpadding="0"
+                                       class="gTable">
+                                    <tbody>
+                                        <tr>
+                                            <td class="gTableTop" colspan="7">
+                                                <div style="float: right;" class="gTopCornerRight"></div>
+                                                {% if subsection %}
+                                                    {{ subsection.title }}
+                                                {% else %}
+                                                    Ленточный вариант форума
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="8%" colspan="2" class="gTableSubTop">&nbsp;</td>
+                                            <td class="gTableSubTop" align="left">
+                                                <span rel="nofollow" class="topSortLink">Тема</span>
+                                            </td>
+                                            <td width="7%" class="gTableSubTop" align="center">
+                                                <span rel="nofollow" class="topSortLink">Ответы</span>
+                                            </td>
+                                            <td width="14%" class="gTableSubTop" align="center">
+                                                <span rel="nofollow" class="topSortLink">Автор темы</span>
+                                            </td>
+                                            <td width="21%" class="gTableSubTop" align="left">
+                                                <span rel="nofollow" class="topSortLink">Обновления</span>
+                                            </td>
+                                        </tr>
+                                        {% if pinned_topics %}
+                                            <tr>
+                                                <td class="threadsType" colspan="7">Важные темы</td>
+                                            </tr>
+                                        {% endif %}
+                                        {% for pinned_topic in pinned_topics %}
+                                            <tr>
+                                                <td class="threadIcoTd" align="center" width="4%"></td>
+                                                <td class="threadIcoTd" align="center" width="4%">
+                                                    <img alt=""
+                                                         style="margin: 0;
+                                                                padding: 0;
+                                                                vertical-align: middle;
+                                                                border: 0"
+                                                         src="{% static 'images/pinned.gif' %}"
+                                                         title="Важная тема" />
+                                                </td>
+                                                <td class="threadNametd">
+                                                    <a class="threadPinnedLink"
+                                                       href="{% url 'forum_topic_detail' pinned_topic.id %}">{{ pinned_topic.title }}</a>
+                                                    {% if pinned_topic.description %}<div class="threadDescr">{{ pinned_topic.description }}</div>{% endif %}
+                                                </td>
+                                                <td class="threadPostTd" align="center">{{ pinned_topic.message_count }}</td>
+                                                <td class="threadAuthTd" align="center">
+                                                    <span class="threadAuthor"><a class="threadAuthorLink" href="">{{ pinned_topic.author.username }}</a></span>
+                                                </td>
+                                                <td class="threadLastPostTd">
+                                                    <a title="К последнему сообщению" class="forumLastPostLink" href="">{{ pinned_topic.last_message_time }}</a>
+                                                    <br />
+                                                    Сообщение от: <span class="lastPostUser"><a class="lastPostUserLink" href="">{{ pinned_topic.last_message_author }}</a></span>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        <tr>
+                                            <td class="threadsType" colspan="7">Темы форума</td>
+                                        </tr>
+                                        {% for topic in topic_list %}
+                                            <tr>
+                                                <td class="threadIcoTd" align="center" width="4%"></td>
+                                                <td class="threadIcoTd" align="center" width="4%">
+                                                    {% if topic.message_count > 50 %}
+                                                        <img alt=""
+                                                             style="margin: 0;
+                                                                    padding: 0;
+                                                                    vertical-align: middle;
+                                                                    border: 0"
+                                                             src="{% static 'images/hot.gif' %}"
+                                                             title="Горячая тема" />
+                                                    {% else %}
+                                                        <img alt=""
+                                                             style="margin: 0;
+                                                                    padding: 0;
+                                                                    vertical-align: middle;
+                                                                    border: 0"
+                                                             src="{% static 'images/thread.gif' %}"
+                                                             title="Обычная тема" />
+                                                    {% endif %}
+                                                </td>
+                                                <td class="threadNametd">
+                                                    <a class="threadLink" href="{% url 'forum_topic_detail' topic.id %}">{{ topic.title }}</a>
+                                                    {% if topic.description %}<div class="threadDescr">{{ topic.description }}</div>{% endif %}
+                                                </td>
+                                                <td class="threadPostTd" align="center">{{ topic.message_count }}</td>
+                                                <td class="threadAuthTd" align="center">
+                                                    <span class="threadAuthor"><a class="threadAuthorLink" href="">{{ topic.author.username }}</a></span>
+                                                </td>
+                                                <td class="threadLastPostTd">
+                                                    <a title="К последнему сообщению" class="forumLastPostLink" href="">{{ topic.last_message_time }}</a>
+                                                    <br />
+                                                    Сообщение от: <span class="lastPostUser"><a class="lastPostUserLink" href="">{{ topic.last_message_author }}</a></span>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        <tr>
+                                            <td class="threadsDetails" colspan="7">
+                                                В этом форуме <b>{{ all_topics }}</b> тем. На странице показано <b>{{ current_topics }}</b> тем.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            {% include "forum_pagination.html" %}
-            <div class="gDivLeft">
-                <div class="gDivRight">
-                    <table border="0" width="100%" bgcolor="#FFFFFF" cellspacing="1" cellpadding="0" class="gTable">
-                        <tbody>
-                            <tr>
-                                <td class="gTableTop" colspan="7">
-                                    <div style="float: right;" class="gTopCornerRight"></div>
-                                    {% if subsection %}
-                                        {{ subsection.title }}
-                                    {% else %}
-                                        Ленточный вариант форума
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="8%" colspan="2" class="gTableSubTop">&nbsp;</td>
-                                <td class="gTableSubTop" align="left">
-                                    <span rel="nofollow" class="topSortLink">Тема</span>
-                                </td>
-                                <td width="7%" class="gTableSubTop" align="center">
-                                    <span rel="nofollow" class="topSortLink">Ответы</span>
-                                </td>
-                                <td width="14%" class="gTableSubTop" align="center">
-                                    <span rel="nofollow" class="topSortLink">Автор темы</span>
-                                </td>
-                                <td width="21%" class="gTableSubTop" align="left">
-                                    <span rel="nofollow" class="topSortLink">Обновления</span>
-                                </td>
-                            </tr>
-                            {% if pinned_topics %}
-                            <tr>
-                                <td class="threadsType" colspan="7">Важные темы</td>
-                            </tr>
-                            {% endif %}
-                            {% for pinned_topic in pinned_topics %}
-                                <tr>
-                                    <td class="threadIcoTd" align="center" width="4%">
-                                    </td>
-                                    <td class="threadIcoTd" align="center" width="4%">
-                                        <img alt="" style="margin: 0; padding: 0; vertical-align: middle; border: 0;" src="{% static 'images/pinned.gif' %}" title="Важная тема" />
-                                    </td>
-                                    <td class="threadNametd">
-                                        <a class="threadPinnedLink" href="{% url 'forum_topic_detail' pinned_topic.id %}">{{ pinned_topic.title }}</a>
-                                        {% if pinned_topic.description  %}
-                                            <div class="threadDescr">{{ pinned_topic.description }}</div>
-                                        {% endif %}
-                                    </td>
-                                    <td class="threadPostTd" align="center">{{ pinned_topic.message_count }}</td>
-                                    <td class="threadAuthTd" align="center">
-                                        <span class="threadAuthor"><a class="threadAuthorLink" href="">{{ pinned_topic.author.username }}</a></span>
-                                    </td>
-                                    <td class="threadLastPostTd">
-                                        <a title="К последнему сообщению" class="forumLastPostLink" href="">{{ pinned_topic.last_message_time }}</a>
-                                        <br />
-                                        Сообщение от: <span class="lastPostUser"><a class="lastPostUserLink" href="">{{ pinned_topic.last_message_author }}</a></span>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            <tr>
-                                <td class="threadsType" colspan="7">Темы форума</td>
-                            </tr>
-                            {% for topic in topic_list %}
-                                <tr>
-                                    <td class="threadIcoTd" align="center" width="4%">
-                                    </td>
-                                    <td class="threadIcoTd" align="center" width="4%">
-                                        {% if topic.message_count > 50 %}
-                                            <img alt="" style="margin: 0; padding: 0; vertical-align: middle; border: 0;" src="{% static 'images/hot.gif' %}" title="Горячая тема" />
-                                        {% else %}
-                                            <img alt="" style="margin: 0; padding: 0; vertical-align: middle; border: 0;" src="{% static 'images/thread.gif' %}" title="Обычная тема" />
-                                        {% endif %}
-                                    </td>
-                                    <td class="threadNametd">
-                                        <a class="threadLink" href="{% url 'forum_topic_detail' topic.id %}">{{ topic.title }}</a>
-                                        {% if topic.description  %}
-                                            <div class="threadDescr">{{ topic.description }}</div>
-                                        {% endif %}
-                                    </td>
-                                    <td class="threadPostTd" align="center">{{ topic.message_count }}</td>
-                                    <td class="threadAuthTd" align="center">
-                                        <span class="threadAuthor"><a class="threadAuthorLink" href="">{{ topic.author.username }}</a></span>
-                                    </td>
-                                    <td class="threadLastPostTd">
-                                        <a title="К последнему сообщению" class="forumLastPostLink" href="">{{ topic.last_message_time }}</a>
-                                        <br />
-                                        Сообщение от: <span class="lastPostUser"><a class="lastPostUserLink" href="">{{ topic.last_message_author }}</a></span>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            <tr>
-                                <td class="threadsDetails" colspan="7">В этом форуме <b>{{ all_topics }}</b> тем. На странице показано <b>{{ current_topics }}</b> тем.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="gDivBottomLeft"></div>
-            <div class="gDivBottomCenter"></div>
-            <div class="gDivBottomRight"></div>
-            {% include "forum_pagination.html" %}
-
-        </td>
-    </tr>
-</tbody>
-    </table>
-</div>
-
-
-
+                        </div>
+                        <div class="gDivBottomLeft"></div>
+                        <div class="gDivBottomCenter"></div>
+                        <div class="gDivBottomRight"></div>
+                        {% include "forum_pagination.html" %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

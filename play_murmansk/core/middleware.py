@@ -1,6 +1,9 @@
 import datetime
+
 from django.utils.timezone import now
+
 from .models import UserActivity
+
 
 class ActivityMiddleware:
     def __init__(self, get_response):

@@ -1,49 +1,67 @@
 {% extends "base.html" %}
 {% load custom_filters %}
-
 {% block title %}Отзывы Об Играх - PLAYSTATION и XBOX в Мурманске{% endblock %}
-
 {% block content %}
     <p></p>
     {% if user.is_authenticated %}
         <table width="100%">
-        <tbody>
-        <tr>
-            <td align="left" width="80%"></td>
-            <td align="right" width="20%" class="loginButton" style="font-size:7pt;text-align:center;"> <a class="m" href="{% url 'review_create' %}">Добавить статью</a></td>
-        </tr>
-        </tbody>
-            </table>
-            <br>
+            <tbody>
+                <tr>
+                    <td align="left" width="80%"></td>
+                    <td align="right"
+                        width="20%"
+                        class="loginButton"
+                        style="font-size:7pt;
+                               text-align:center">
+                        <a class="m" href="{% url 'review_create' %}">Добавить статью</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
     {% endif %}
     <div id="allEntries">
-
         {% for review in review_list %}
-        <div>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="eBlock"><tbody><tr><td style="padding:3px;">
-
-            <div class="eTitle" style="text-align:left;"><a href="{% url 'review_detail' review.id %}">{{ review.title }}</a></div>
-
-            <div class="eMessage" style="text-align:left;clear:both;padding-top:2px;padding-bottom:2px;">
-
-            {% if review.image %}
-                <img src="{{ review.image.url }}" border="none" width="150" style="margin: 2px 7px 5px 0px" align="left">
-            {% endif %}
-            {{ review.short_content|strip_p_tags_for_news_list|safe }}
-            <a href="{% url 'review_detail' review.id %}">Читать обзор полностью &gt;&gt;&gt;</a>
-
+            <div>
+                <table border="0"
+                       cellpadding="0"
+                       cellspacing="0"
+                       width="100%"
+                       class="eBlock">
+                    <tbody>
+                        <tr>
+                            <td style="padding:3px;">
+                                <div class="eTitle" style="text-align:left;">
+                                    <a href="{% url 'review_detail' review.id %}">{{ review.title }}</a>
+                                </div>
+                                <div class="eMessage"
+                                     style="text-align:left;
+                                            clear:both;
+                                            padding-top:2px;
+                                            padding-bottom:2px">
+                                    {% if review.image %}
+                                        <img src="{{ review.image.url }}"
+                                             border="none"
+                                             width="150"
+                                             style="margin: 2px 7px 5px 0px"
+                                             align="left">
+                                    {% endif %}
+                                    {{ review.short_content|strip_p_tags_for_news_list|safe }}
+                                    <a href="{% url 'review_detail' review.id %}">Читать обзор полностью &gt;&gt;&gt;</a>
+                                </div>
+                                <div class="eDetails" style="clear:both;">
+                                    Просмотров: {{ review.views }} |
+                                    Добавил: {{ review.author }}
+                                    Дата: {{ review.created_at|date:"d-m-Y" }}
+                                    | <a href="{% url 'review_detail' review.id %}">Комментарии ({{ review.comments_count }})</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
             </div>
-            <div class="eDetails" style="clear:both;">
-
-            Просмотров: {{ review.views }} |
-            Добавил: {{ review.author }}
-            Дата: {{ review.created_at|date:"d-m-Y" }}
-
-            | <a href="{% url 'review_detail' review.id %}">Комментарии ({{ review.comments_count }})</a>
-            </div></td></tr></tbody></table><br></div>
-    {% endfor %}
-
+        {% endfor %}
         {% include "pagination.html" %}
     </div>
-
 {% endblock %}

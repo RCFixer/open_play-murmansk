@@ -1,30 +1,42 @@
 <!-- Пагинация -->
 {% if is_paginated %}
-                <table border="0" width="100%" cellspacing="0" cellpadding="0">
-                    <tbody>
-                        <tr>
-                            <td width="50%">
-                                <table class="switches" border="0" cellspacing="1" cellpadding="2">
-                                    <tbody>
-                                        <tr>
-                                            <td class="pagesInfo" style="padding-right: 7px;">Страница <span class="curPage">{{ page_obj.number }}</span> из <span class="numPages">{{ page_obj.paginator.num_pages }}</span></td>
-                                            {% if page_obj.has_previous %}
-                                                <td class="switch" align="center"><a class="switchDigit" href="?page={{ page_obj.previous_page_number }}">«</a></td>
-                                                <td class="switch" align="center"><a class="switchNext" href="?page=1" title="Следующая">1</a></td>
-                                            {% endif %}
-                                                <td class="switchActive" align="center">{{ page_obj.number }}</td>
-                                            {% if page_obj.has_next %}
-                                                <td class="switch" align="center"><a class="switchDigit" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></td>
-                                                {% if page_obj.next_page_number < page_obj.paginator.num_pages %}
-                                                    <td class="switch" align="center"><a class="switchDigit" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a></td>
-                                                {% endif %}
-                                                <td class="switch" align="center"><a class="switchNext" href="?page={{ page_obj.next_page_number }}">»</a></td>
-                                            {% endif %}
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            {% endif %}
+    <table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr>
+                <td width="50%">
+                    <table class="switches" border="0" cellspacing="1" cellpadding="2">
+                        <tbody>
+                            <tr>
+                                <td class="pagesInfo" style="padding-right: 7px;">
+                                    Страница <span class="curPage">{{ page_obj.number }}</span> из <span class="numPages">{{ page_obj.paginator.num_pages }}</span>
+                                </td>
+                                {% if page_obj.has_previous %}
+                                    <td class="switch" align="center">
+                                        <a class="switchDigit" href="?page={{ page_obj.previous_page_number }}">«</a>
+                                    </td>
+                                    <td class="switch" align="center">
+                                        <a class="switchNext" href="?page=1" title="Следующая">1</a>
+                                    </td>
+                                {% endif %}
+                                <td class="switchActive" align="center">{{ page_obj.number }}</td>
+                                {% if page_obj.has_next %}
+                                    <td class="switch" align="center">
+                                        <a class="switchDigit" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+                                    </td>
+                                    {% if page_obj.next_page_number < page_obj.paginator.num_pages %}
+                                        <td class="switch" align="center">
+                                            <a class="switchDigit" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+                                        </td>
+                                    {% endif %}
+                                    <td class="switch" align="center">
+                                        <a class="switchNext" href="?page={{ page_obj.next_page_number }}">»</a>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endif %}

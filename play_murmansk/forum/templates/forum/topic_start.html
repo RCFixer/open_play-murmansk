@@ -1,29 +1,30 @@
 {% extends "index.html" %}
 {% load static %}
 {% load custom_filters %}
-
 {% block title %}PLAYSTATION и XBOX в Мурманске - {{ topic.title }}{% endblock %}
-
 {% block center %}
-<div id="centerBlock1">
-    <!-- Body -->
-    <table border="0" cellpadding="0" height="30" cellspacing="0" width="1000px" align="center">
-        <tbody>
-            <tr>
-                <td valign="top" style="padding: 0px 5px 0px 5px;">
-                    <form method="post" class="ucoz-style-form">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <h3>Сообщение:</h3>
-                        <textarea name="message_content" rows="5" cols="40" required></textarea>
-                        <button type="submit">Создать тему</button>
-                    </form>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <br />
-</div>
-
+    <div id="centerBlock1">
+        <!-- Body -->
+        <table border="0"
+               cellpadding="0"
+               height="30"
+               cellspacing="0"
+               width="1000px"
+               align="center">
+            <tbody>
+                <tr>
+                    <td valign="top" style="padding: 0px 5px 0px 5px;">
+                        <form method="post" class="ucoz-style-form">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <h3>Сообщение:</h3>
+                            <textarea name="message_content" rows="5" cols="40" required></textarea>
+                            <button type="submit">Создать тему</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+    </div>
 {% endblock %}

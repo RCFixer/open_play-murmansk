@@ -1,44 +1,80 @@
 {% extends "base.html" %}
 {% load custom_filters %}
-
 {% block title %}Полезные ссылки - PLAYSTATION и XBOX в Мурманске{% endblock %}
-
 {% block content %}
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tbody><tr>
-<td width="80%"><a class="m" href="/">Главная</a> » Доска объявлений (<b>{{ link_list|length }}</b>)</td>
-<td align="right" style="white-space: nowrap;"></td>
-</tr>
-</tbody></table>
-<hr>
-    <table border="0" cellspacing="1" cellpadding="0" width="100%" class="catsTable">
-   <tbody>
-   {% for category_link in link_category_list %}
-      <tr>
-         <td style="width:100%" class="catsTd" id="cid1" valign="top"><a href="{% url 'links' %}?category={{ category_link.0 }}" class="catName">{{ category_link.0 }}</a> <span class="catNumData" style="unicode-bidi:embed;">[{{ link_category_counts|get_item:category_link|default:0 }}]</span></td>
-      </tr>
-   {% endfor %}
-   </tbody>
-</table>
-<div id="myGrid" style="display:none;"><div style="position:fixed;width:100%;text-align:center;padding-top:250px;"></div></div>
+        <tbody>
+            <tr>
+                <td width="80%">
+                    <a class="m" href="/">Главная</a> » Доска объявлений (<b>{{ link_list|length }}</b>)
+                </td>
+                <td align="right" style="white-space: nowrap;"></td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <table border="0"
+           cellspacing="1"
+           cellpadding="0"
+           width="100%"
+           class="catsTable">
+        <tbody>
+            {% for category_link in link_category_list %}
+                <tr>
+                    <td style="width:100%" class="catsTd" id="cid1" valign="top">
+                        <a href="{% url 'links' %}?category={{ category_link.0 }}"
+                           class="catName">{{ category_link.0 }}</a> <span class="catNumData" style="unicode-bidi:embed;">[{{ link_category_counts|get_item:category_link|default:0 }}]</span>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div id="myGrid" style="display:none;">
+        <div style="position:fixed;
+                    width:100%;
+                    text-align:center;
+                    padding-top:250px"></div>
+    </div>
     <div id="allEntries">
         {% for links in link_list %}
-        <div><table border="0" cellpadding="0" cellspacing="0" width="100%" class="eBlock"><tbody><tr><td style="padding:3px;">
-
-        <div class="eTitle" style="text-align:left;"><a href="{% url 'link_detail' links.id %}">{{ links.title }}</a></div>
-        <div class="eMessage" style="text-align:left;clear:both;padding-top:2px;padding-bottom:2px;">
-
-        {% if links.image %}
-            <img src="{{ links.image.url }}" border="none" width="150" style="margin: 2px 7px 5px 0px" align="left">
-        {% endif %}
-        {{ links.content|strip_p_tags_for_news_list|safe }}
-        <br>
-
-        </div> <div class="eDetails" style="clear:both;">
-        <a href="{% url 'links' %}?category={{ links.category }}">{{ links.category }}</a>
-        | <a href="{% url 'link_detail' links.id %}">Комментарии ({{ links.comments_count }})</a>
-        </div></td></tr></tbody></table><br></div>
-    {% endfor %}
+            <div>
+                <table border="0"
+                       cellpadding="0"
+                       cellspacing="0"
+                       width="100%"
+                       class="eBlock">
+                    <tbody>
+                        <tr>
+                            <td style="padding:3px;">
+                                <div class="eTitle" style="text-align:left;">
+                                    <a href="{% url 'link_detail' links.id %}">{{ links.title }}</a>
+                                </div>
+                                <div class="eMessage"
+                                     style="text-align:left;
+                                            clear:both;
+                                            padding-top:2px;
+                                            padding-bottom:2px">
+                                    {% if links.image %}
+                                        <img src="{{ links.image.url }}"
+                                             border="none"
+                                             width="150"
+                                             style="margin: 2px 7px 5px 0px"
+                                             align="left">
+                                    {% endif %}
+                                    {{ links.content|strip_p_tags_for_news_list|safe }}
+                                    <br>
+                                </div>
+                                <div class="eDetails" style="clear:both;">
+                                    <a href="{% url 'links' %}?category={{ links.category }}">{{ links.category }}</a>
+                                    | <a href="{% url 'link_detail' links.id %}">Комментарии ({{ links.comments_count }})</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+            </div>
+        {% endfor %}
     </div>
     {% include "pagination.html" %}
 {% endblock %}

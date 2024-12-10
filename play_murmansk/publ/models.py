@@ -1,7 +1,7 @@
-from django.db import models
 from django.conf import settings
-from django_prose_editor.sanitized import SanitizedProseEditorField
 from django.contrib.contenttypes.fields import GenericRelation
+from django.db import models
+from django_prose_editor.sanitized import SanitizedProseEditorField
 
 from core.models import CommonComment
 from core.views import CompressImage
@@ -9,12 +9,23 @@ from core.views import CompressImage
 
 class Publication(CompressImage, models.Model):
     title = models.CharField(max_length=255)
-    short_content = SanitizedProseEditorField(config = {"types": ["strong", "em", "sub", "sup", "link", "underline",
-                                                            "strikethrough"],
-                                                  "history": True,
-                                                  "typographic": True,})
+    short_content = SanitizedProseEditorField(
+        config={
+            "types": [
+                "strong",
+                "em",
+                "sub",
+                "sup",
+                "link",
+                "underline",
+                "strikethrough",
+            ],
+            "history": True,
+            "typographic": True,
+        }
+    )
     content = models.TextField()
-    image = models.ImageField(upload_to='publ/', blank=True, null=True)
+    image = models.ImageField(upload_to="publ/", blank=True, null=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     views = models.PositiveIntegerField(default=0)
