@@ -42,7 +42,7 @@
         Просмотров: {{ boards.views }} |
         Дата: {{ boards.created_at|date:"d-m-Y" }}
 
-        | <a href="{% url 'board_detail' boards.id %}">Комментарии ({{ boards.comments_count }})</a> | Чтобы связаться с автором объявления, просмотрите его, нажав на заголовок.
+        | <a href="{% url 'board_detail' boards.id %}">Комментарии ({{ boards.comments_count }})</a>
         </div></td></tr></tbody></table><br></div>
     {% endfor %}
     </div>
