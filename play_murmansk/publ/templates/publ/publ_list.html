@@ -14,13 +14,13 @@
         <div>
             <table border="0" cellpadding="0" cellspacing="0" width="100%" class="eBlock"><tbody><tr><td style="padding:3px;">
 
-            <div class="eTitle" style="text-align:left;"><a href="{% url 'publ_detail' publ.id %}">{{ publ.title }}</a></div>
+            <div class="eTitle" style="text-align:left;"><a href="{% url 'publication_detail' publ.id %}">{{ publ.title }}</a></div>
 
             <div class="eMessage" style="text-align:left;clear:both;padding-top:2px;padding-bottom:2px;">
 
 
             {{ publ.short_content|strip_p_tags_for_news_list|safe }}
-            <a href="{% url 'publ_detail' publ.id %}">Читать статью полностью &gt;&gt;&gt;</a>
+            <a href="{% url 'publication_detail' publ.id %}">Читать статью полностью &gt;&gt;&gt;</a>
 
             </div>
             <div class="eDetails" style="clear:both;">
@@ -29,7 +29,7 @@
             Добавил: <a href="">{{ publ.author }}</a> |
             Дата: <span title="19:11">{{ publ.created_at|date:"d-m-Y" }}</span>
 
-            | <a href="{% url 'publ_detail' publ.id %}">Комментарии ({{ publ.comments_count }})</a>
+            | <a href="{% url 'publication_detail' publ.id %}">Комментарии ({{ publ.comments_count }})</a>
             </div></td></tr></tbody></table><br></div>
     {% endfor %}
 
