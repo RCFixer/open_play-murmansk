@@ -61,26 +61,20 @@ def get_recent_activity(request):
     # Раскоментить когда на Postgre перейду на проде
     # activities = UserActivity.objects.filter(last_activity__gte=thirty_minutes_ago)
     #
-    # active_users = activities.filter(user__isnull=False).distinct('user').count()
+    # active_users = activities.filter(user__isnull=False).values('user__email').distinct('user')
     # active_guests = activities.filter(user__isnull=True).distinct('session_key').count()
 
     # А этот ужас посвящается SQLite
     # Уникальные активные пользователи
     active_users = list(
-        UserActivity.objects.filter(
-            last_activity__gte=thirty_minutes_ago, user__isnull=False
-        )
-        .values("user", "user__username", "user__email")
-        .annotate(last_activity=Max("last_activity"))
+        UserActivity.objects.filter(user__isnull=False)
+        .values("user", "user__username", "user__email") # надо будет приджоинить сюда таблицу users
     )
 
     # Уникальные активные гости
     active_guests = (
-        UserActivity.objects.filter(
-            last_activity__gte=thirty_minutes_ago, user__isnull=True
-        )
-        .values("session_key")  # Группируем по session_key
-        .annotate(last_activity=Max("last_activity"))  # Берем последнее обновление
+        UserActivity.objects.filter(user__isnull=True)
+        .values("session_key")
         .count()
     )
 
